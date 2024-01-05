@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 
 const collectionSchema = new Schema({
-  id,
   name: {
     type: String,
     required: true,
@@ -21,5 +20,5 @@ const collectionSchema = new Schema({
 
 const Collection = model('Collection', collectionSchema);
 
-module.export = Collection;
+module.exports = Collection;
 
