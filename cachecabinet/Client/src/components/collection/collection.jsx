@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { Item } from '../item/item';
 /**
- * @component Collection_One
+ * @component Collection
  * @description Has a list of the Components with a list of the Items
  * @returns A single Collection
  */
-function Collection_One() {
+function Collection() {
   return (
     <Fragment>
       <h2>Collection Name</h2>
@@ -15,5 +15,5 @@ function Collection_One() {
   );
 }
 
-export default Collection_One;
+export default Collection;
 

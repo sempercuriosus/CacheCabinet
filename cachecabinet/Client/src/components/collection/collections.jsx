@@ -13,7 +13,7 @@ import { Fragment } from 'react';
  * @description This will display all of the Collections, with name and description, for a given user.
  * @returns Collection All Component
  */
-function Collection_All() {
+function Collections() {
   return (
     <Fragment>
       <p> Collection_All Display Test </p>
@@ -21,5 +21,5 @@ function Collection_All() {
   );
 }
 
-export default Collection_All;
+export default Collections;
 
