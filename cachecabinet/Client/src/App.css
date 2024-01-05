@@ -1,42 +1,56 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Apply styles to the card container */
+.AddItem {
+  max-width: 400px; 
+  margin: 20px auto; 
+  color: white;
+  padding: 15px; 
+  border: 1px solid #ccc; 
+  background-color: #e4c9b6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.AddItem form input {
+  border: none; 
+  padding: 3px;
 }
 
-.card {
-  padding: 2em;
+/* Style the form elements within the card */
+form {
+  display: flex;
+  flex-direction: column;
 }
 
-.read-the-docs {
-  color: #888;
+.collectionname {
+  color: #0083e0;
+}
+
+/* Style inputs */
+input {
+  margin-bottom: 2px; 
+}
+
+/* Style the button */
+button {
+  margin-top: 15px; 
+  width: 100%; 
+  padding: 10px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+
+/* Style the button on hover for better feedback */
+button:hover {
+  background-color: #92e3fe; 
+}
+
+.imageupload {
+  position: relative;
+  bottom: 22px;
 }
