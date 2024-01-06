@@ -6,8 +6,11 @@ const itemSeeds = require('./itemSeeds.json');
 db.once('open', async () => {
   try {
     console.log('Start Process:', 'Write Seeds');
-    await Collection.create(collectionSeeds);
-    await Item.create(itemSeeds);
+
+    await Collection.insertMany(collectionSeeds);
+
+    await Item.insertMany(itemSeeds);
+
     console.log('End Process:', 'Write Seeds');
   } catch (error) {
     console.error(

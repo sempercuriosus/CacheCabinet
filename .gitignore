@@ -7,3 +7,5 @@
 .LSOverride
 
 node_modules
+
+*.env
