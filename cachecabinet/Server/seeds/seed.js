@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { Collection, Item /*,User */ } = require('../models');
+const { Collection, Item, ItemAssignment /*,User */ } = require('../models');
 const collectionSeeds = require('./collectionSeeds.json');
 const itemSeeds = require('./itemSeeds.json');
 const cleanDB = require('./cleanDB');
@@ -17,6 +17,7 @@ db.once('open', async () => {
 
     await cleanDB('Collection', 'collections');
     await cleanDB('Item', 'items');
+    await cleanDB('ItemAssignment', 'item-assignments');
 
     console.log('>>--- Ending Process', '---> Clean Seeds');
 
@@ -26,11 +27,28 @@ db.once('open', async () => {
 
     // Insert Collection Seed Data
     //
-    await Collection.insertMany(collectionSeeds);
+    const collections = await Collection.insertMany(collectionSeeds);
 
     // Insert Item Seed Data
     //
-    await Item.insertMany(itemSeeds);
+    const items = await Item.insertMany(itemSeeds);
+
+    console.log(ItemAssignment);
+
+    // Create associations between collections and items in the ItemAssignment model
+    for (const collection of collections) {
+      for (const item of items) {
+        // Create ItemAssignment document for each combination
+        const newItemAssignment = new ItemAssignment({
+          collectionId: collection._id,
+          itemId: item._id,
+        });
+
+        await newItemAssignment.save();
+      }
+    }
+
+    console.log(collections, items);
 
     // Insert User Seed Data
     //
