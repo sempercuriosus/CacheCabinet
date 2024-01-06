@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
 
 const itemSchema = new Schema({
   name: {
@@ -25,6 +24,10 @@ const itemSchema = new Schema({
   },
   image: {
     type: String,
+  },
+  forSale: {
+    type: Boolean,
+    default: false,
   },
 });
 
