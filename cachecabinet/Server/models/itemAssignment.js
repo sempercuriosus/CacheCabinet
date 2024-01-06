@@ -1,33 +1,31 @@
 const { Schema, model } = require('mongoose');
 
-const itemAssignment = new Schema({
-  //   userId: {
-  //     type: String,
-  //     required: true,
-  //   },
-  collectionId: {
-    type: String,
-    required: true,
+const itemAssignmentSchema = new Schema(
+  {
+    //   userId: {
+    //     type: String,
+    //     required: true,
+    //   },
+    collectionId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Collection',
+    },
+    itemId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Item',
+    },
+    //   user: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User',
+    //   },
   },
-  itemId: {
-    type: String,
-    required: true,
+  {
+    // Set the collection name using the 'collection' option
+    collection: 'item-assignments', // Specify your desired collection name here
   },
-  collection: {
-    type: Schema.Types.ObjectId,
-    ref: 'Collection',
-  },
-  item: {
-    type: Schema.Types.ObjectId,
-    ref: 'Item',
-  },
-  //   user: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'User',
-  //   },
-});
+);
 
-const ItemAssignment = model('ItemAssignment', itemAssignment);
+const ItemAssignment = model('ItemAssignment', itemAssignmentSchema);
 
 module.exports = ItemAssignment;
 
