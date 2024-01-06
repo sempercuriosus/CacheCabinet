@@ -13,6 +13,7 @@ const itemSchema = new Schema({
   },
   purchasePrice: {
     type: Schema.Types.Decimal128,
+    default: 0.0,
     required: false,
   },
   quantity: {
