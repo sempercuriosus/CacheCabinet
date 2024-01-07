@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Item } from '../item/item';
+
 /**
  * @component Collection
  * @description Has a list of the Components with a list of the Items
@@ -10,7 +10,6 @@ function Collection() {
     <Fragment>
       <h2>Collection Name</h2>
       <h3>Collection description</h3>
-      <Item />
     </Fragment>
   );
 }
