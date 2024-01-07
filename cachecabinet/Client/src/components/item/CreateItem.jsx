@@ -35,55 +35,55 @@ const CreateItem = () => {
 
   return (
     <div className='AddItem'>
-    <h2 className='collectionname'>Sample 1 Collection</h2>
-    <button className='imageupload' type="button" onClick={handleImageUpload}>
-        Upload Image
+      <h2 className='collectionname'>Sample 1 Collection</h2>
+      <button className='imageupload' type="button" onClick={handleImageUpload}>
+          Upload Image
       </button>
-    <form>
-      <div>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Purchase Price"
-          value={purchasePrice}
-          onChange={(e) => setPurchasePrice(e.target.value)}
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Date Added"
-          value={dateAdded}
-          onChange={(e) => setDateAdded(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>For Sale</label>
-        <input
-          type="checkbox"
-          checked={forSale}
-          onChange={() => setForSale(!forSale)}
-        />
-      </div>
-      <button type="button" onClick={handleAddItem}>
-        Add Item
-      </button>
-    </form>
+      <form>
+        <div>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Purchase Price"
+            value={purchasePrice}
+            onChange={(e) => setPurchasePrice(e.target.value)}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Date Added"
+            value={dateAdded}
+            onChange={(e) => setDateAdded(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>For Sale</label>
+          <input
+            type="checkbox"
+            checked={forSale}
+            onChange={() => setForSale(!forSale)}
+          />
+        </div>
+        <button type="button" onClick={handleAddItem}>
+          Add Item
+        </button>
+      </form>
   </div>
   );
 };

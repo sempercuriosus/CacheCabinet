@@ -9,14 +9,15 @@
   color: white;
   padding: 15px; 
   border: 1px solid #ccc; 
-  background-color: #e4c9b6;
+  background-color: #b6b9a4;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   border-radius: 8px;
 }
 
 .AddItem form input {
   border: none; 
-  padding: 3px;
+  padding: 6px;
+  margin-bottom: 2px;
 }
 
 /* Style the form elements within the card */
@@ -26,21 +27,16 @@ form {
 }
 
 .collectionname {
-  color: #0083e0;
-}
-
-/* Style inputs */
-input {
-  margin-bottom: 2px; 
+  color: #f2e4d4;
 }
 
 /* Style the button */
 button {
-  margin-top: 15px; 
+  margin-top: 10px; 
   width: 100%; 
   padding: 10px; 
   border: none; 
-  border-radius: 5px; 
+  border-radius: 10px; 
   cursor: pointer; 
 }
 
@@ -49,6 +45,7 @@ button {
 button:hover {
   background-color: #92e3fe; 
 }
+
 
 .imageupload {
   position: relative;
