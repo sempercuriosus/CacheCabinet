@@ -1,7 +1,8 @@
 const db = require('../config/connection');
-const { Collection, Item, ItemAssignment /*,User */ } = require('../models');
+const { Collection, Item, ItemAssignment, User } = require('../models');
 const collectionSeeds = require('./collectionSeeds.json');
 const itemSeeds = require('./itemSeeds.json');
+const userSeeds = require('./userSeeds.json');
 const cleanDB = require('./cleanDB');
 
 // Connection Established
@@ -51,8 +52,7 @@ db.once('open', async () => {
     console.log(collections, items);
 
     // Insert User Seed Data
-    //
-    // await User.insertMany(userSeeds);
+    await User.insertMany(userSeeds);
 
     console.log('>>--- Ending Process', '---> Write Seeds');
 
