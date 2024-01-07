@@ -1,7 +1,11 @@
-import React from 'react';
+// import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import './App.css'
+import './App.css';
+
+import Collections from './components/collection/collections';
+import Collection from './components/collection/collection';
+import Item from './components/item/item';
 
 import CreateItem from './components/item/CreateItem';
 
@@ -11,21 +15,33 @@ const client = new ApolloClient({
 });
 
 function App() {
-
   return (
     <ApolloProvider client={client}>
       <Router>
-          <Routes>
-            {/* <Route path="/" element={<Login />} />
-            <Route path="/collections" element={<Collections />} />
-            <Route path="/createcollection" element={<CreateCollection />} />
-            <Route path="/viewcollection" element={<Collection />} />
-            <Route path="/viewitems" element={<Item />} /> */}
-            <Route path="/createitem" element={<CreateItem />} />
-          </Routes>
-      </Router >
+        <Routes>
+          {/* <Route path="/" element={<Login />} /> */}
+          <Route
+            path='/collections'
+            element={<Collections />}
+          />
+          {/* <Route path="/createcollection" element={<CreateCollection />} /> */}
+          <Route
+            path='/viewcollection'
+            element={<Collection />}
+          />
+          <Route
+            path='/viewitems'
+            element={<Item />}
+          />
+          <Route
+            path='/createitem'
+            element={<CreateItem />}
+          />
+        </Routes>
+      </Router>
     </ApolloProvider>
   );
 }
 
-export default App
+export default App;
+
