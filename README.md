@@ -1,15 +1,6 @@
 # CacheCabinet
 "Organize Your Life, One Collection at a Time."
 
-## Table of Contents 
-# Description
-# Built With
-# Installation and Dependencies
-# Screenshots
-# Deployment Link
-# Credits
-# License
-
 ## Description
 A simple and effective way to organize your life from the little things to the most important.
 Features:
