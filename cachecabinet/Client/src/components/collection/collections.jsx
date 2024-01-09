@@ -1,4 +1,5 @@
-import { Fragment } from 'react';
+import Collection from './collection';
+
 /*
  * Collection of all Collections, for a user, will need to have
  * auth, when ready
@@ -15,9 +16,11 @@ import { Fragment } from 'react';
  */
 function Collections() {
   return (
-    <Fragment>
-      <p> Collection_All Display Test </p>
-    </Fragment>
+    <div className='content'>
+      {/* this will need some additional logic in place to render all of the collection components for a user. currently this is populating one default example.  */}
+
+      <Collection />
+    </div>
   );
 }
 

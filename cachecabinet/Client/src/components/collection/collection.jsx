@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import colorPalette from '../../utils/colorPalette';
 
 /**
  * @component Collection
@@ -7,10 +7,33 @@ import { Fragment } from 'react';
  */
 function Collection() {
   return (
-    <Fragment>
-      <h2>Collection Name</h2>
-      <h3>Collection description</h3>
-    </Fragment>
+    <div
+      className='card'
+      style={{
+        backgroundColor: colorPalette.IVORY,
+        // height: '300px',
+        maxWidth: '400px',
+      }}>
+      <div className='card-content'>
+        <h2>Collection Name</h2>
+        <h3>Description</h3>
+        <div className='content'>Additional Details?????</div>
+      </div>
+      <footer className='card-footer'>
+        <a
+          href='#'
+          className='card-footer-item has-text-black'
+          style={{ backgroundColor: colorPalette.BABYBLUE }}>
+          View
+        </a>
+        <a
+          href='#'
+          className='card-footer-item has-text-black'
+          style={{ backgroundColor: colorPalette.SAGE }}>
+          Edit
+        </a>
+      </footer>
+    </div>
   );
 }
 
