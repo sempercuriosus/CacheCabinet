@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import './App.css';
 
+import Home from './components/Home/Home';
 import Collections from './components/collection/collections';
 import Collection from './components/collection/collection';
 import Item from './components/item/item';
-
 import CreateItem from './components/item/CreateItem';
+import Footer from './components/Footer/Footer';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -19,7 +20,11 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Routes>
-          {/* <Route path="/" element={<Login />} /> */}
+          {/* <Route path for login and register */}
+          <Route 
+          path='/'
+          element={<Home />}
+          />
           <Route
             path='/collections'
             element={<Collections />}
@@ -39,6 +44,7 @@ function App() {
           />
         </Routes>
       </Router>
+      <Footer />
     </ApolloProvider>
   );
 }
