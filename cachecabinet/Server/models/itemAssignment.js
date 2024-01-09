@@ -17,7 +17,7 @@ const itemAssignmentSchema = new Schema(
   },
   {
     // Set the collection name using the 'collection' option
-    collection: 'item-assignment', // Specify your desired collection name here
+    collection: 'item-assignments', // Specify your desired collection name here
   },
 );
 
