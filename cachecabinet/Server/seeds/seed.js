@@ -42,25 +42,24 @@ db.once('open', async () => {
     //
     const items = await Item.insertMany(itemSeeds);
 
-    console.log(ItemAssignment);
+    // Insert User Seed Data
+    const users = await User.insertMany(userSeeds);
 
     // Create associations between collections and items in the ItemAssignment model
-    for (const collection of collections) {
-      for (const item of items) {
-        // Create ItemAssignment document for each combination
-        const newItemAssignment = new ItemAssignment({
-          collectionId: collection._id,
-          itemId: item._id,
-        });
+    for (const user of users) {
+      for (const collection of collections) {
+        for (const item of items) {
+          // Create ItemAssignment document for each combination
+          const newItemAssignment = new ItemAssignment({
+            userId: user._id,
+            collectionId: collection._id,
+            itemId: item._id,
+          });
 
-        await newItemAssignment.save();
+          await newItemAssignment.save();
+        }
       }
     }
-
-    console.log(collections, items);
-
-    // Insert User Seed Data
-    await User.insertMany(userSeeds);
 
     console.log('>>--- Ending Process', '---> Write Seeds');
 
