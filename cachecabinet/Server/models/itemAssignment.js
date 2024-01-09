@@ -2,10 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const itemAssignmentSchema = new Schema(
   {
-    //   userId: {
-    //     type: String,
-    //     required: true,
-    //   },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
     collectionId: {
       type: Schema.Types.ObjectId,
       ref: 'Collection',
@@ -14,10 +14,6 @@ const itemAssignmentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Item',
     },
-    //   user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User',
-    //   },
   },
   {
     // Set the collection name using the 'collection' option
