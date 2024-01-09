@@ -8,6 +8,7 @@ import Collections from './components/collection/collections';
 import Collection from './components/collection/collection';
 import Item from './components/item/item';
 import CreateItem from './components/item/CreateItem';
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 const client = new ApolloClient({
@@ -18,6 +19,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <Header />
       <Router>
         <Routes>
           {/* <Route path for login and register */}
