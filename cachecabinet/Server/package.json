@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server": "^3.13.0",
     "dotenv": "^16.3.1",
+    "graphql": "^16.8.1",
     "mongoose": "^7.6.7"
   }
 }
