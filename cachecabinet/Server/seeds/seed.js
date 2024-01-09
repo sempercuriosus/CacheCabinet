@@ -26,7 +26,7 @@ db.once('open', async () => {
     await cleanDB('ItemAssignment', 'item-assignments');
 
     console.log('---> Clean Users');
-    await cleanDB('Users', 'users');
+    await cleanDB('User', 'users');
 
     console.log('>>--- Ending Process', '---> Clean Seeds');
 
