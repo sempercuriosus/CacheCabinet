@@ -7,6 +7,7 @@ const CreateItem = () => {
   const [purchasePrice, setPurchasePrice] = useState('');
   const [dateAdded, setDateAdded] = useState('');
   const [forSale, setForSale] = useState(false);
+  const [files, setFiles] = useState([]); //adding for image upload
 
   // Function to handle form submission
   const handleAddItem = () => {
@@ -18,6 +19,7 @@ const CreateItem = () => {
       purchasePrice,
       dateAdded,
       forSale,
+      files //adding for debugging
     });
 
     // Clear the form fields after adding the item
@@ -26,20 +28,40 @@ const CreateItem = () => {
     setPurchasePrice('');
     setDateAdded('');
     setForSale(false);
+    setFiles([]);
   };
 
-  const handleImageUpload = () => {
+  const handleImageUpload = async () => {
     // Logic to handle image upload
-    console.log('Image upload logic goes here');
+    const formData = new FormData();
+    formData.append('file', files[0]); //only one file is selected
+    console.log('Image upload logic goes here', files);
+
+    try {
+      const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+          console.log('Image uploaded successfully!');
+        } else {
+          console.error('Image upload failed.');
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
   };
 
   return (
     <div className='AddItem'>
       <h2 className='collectionname'>Sample 1 Collection</h2>
-      <button className='imageupload' type="button" onClick={handleImageUpload}>
-          Upload Image
-      </button>
       <form>
+      <input type="file" 
+            onChange={(ev) => setFiles(ev.target.files)}/>
+          <button className='imageupload' type="button" onClick={handleImageUpload}>
+          Upload Image
+          </button>
         <div>
           <input
             type="text"
