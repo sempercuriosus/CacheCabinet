@@ -6,6 +6,8 @@ const database = process.env.DB_NAME;
 
 const conn_string = `mongodb+srv://${user}:${password}@cluster0.qcvowdc.mongodb.net/${database}?retryWrites=true&w=majority`;
 
+console.log(conn_string);
+
 mongoose.connect(process.env.MONGODB_URI || conn_string);
 
 module.exports = mongoose.connection;

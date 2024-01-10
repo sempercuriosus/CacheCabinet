@@ -2,13 +2,17 @@
   "name": "cachecabinet",
   "version": "1.0.0",
   "description": "",
-  "main": "server/server.js",
+  "main": "Server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd Server && npm i && cd ../Client && npm i && npm run build",
+    "develop": "concurrently \"cd Server && npm run start\" \"cd Client && npm run dev\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "react-router-dom": "^6.21.1"
   }
 }
