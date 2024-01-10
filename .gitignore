@@ -12,4 +12,4 @@ node_modules
 cachecabinet/Server/package-lock.json
 Server/package-lock.json
 cachecabinet/Client/package-lock.json
-package-lock.json
+cachecabinet/package-lock.json
