@@ -6,16 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed": "node seeds/seed.js"
+    "seed": "node seeds/seed.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.10.0",
     "apollo-server": "^3.13.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "graphql": "^16.8.1",
     "mongoose": "^7.6.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }
