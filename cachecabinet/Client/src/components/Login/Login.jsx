@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 import {useMutation} from '@apollo/client';
 
-import {LOGIN} from '../../schema/Auth';
+import {LOGIN} from '../../utils/auth';
 
 export default function LoginPage()
 {
