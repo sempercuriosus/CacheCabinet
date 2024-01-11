@@ -1,68 +1,49 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-// import { connection } from '/Server/config/connection.js';
-
-import {useMutation} from '@apollo/client';
-
-import {LOGIN} from '../../utils/auth';
-
-export default function LoginPage()
-{
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
-
-    const [goLogin, {loginError, loginData}] = useMutation(LOGIN);
-
-    async function login(ev)
-    {
-        ev.preventDefault();
-
-        goLogin({
-            variables: {
-                username: email,
-                password: password
-            }
-        }).then((res) => {
-            console.log('get back login res.', res);
-            //localStorage.setItem('id_token', res.token);
-        }).catch(() => {})
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../utils/mutations';
+import AuthService from '../../utils/auth';
 
 
-
-        /*
-        const response = await fetch(`${connection.apiUrl}/login`,
-        {
-            method: 'POST',
-            body: JSON.stringify({email, password}),
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
+function Login(props) {
+    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [login] = useMutation(LOGIN_USER);
+  
+    const handleFormSubmit = async (event) => {
+      event.preventDefault();
+      try {
+        const mutationResponse = await login({
+          variables: { email: formState.email, password: formState.password },
         });
-        if (response.ok) {
-            setRedirect(true);
-        } else {
-            alert('incorrect email or password');
-        }
-        */
-
-
-    }
-
-    if (redirect){
-        return <Navigate to={'/'} />
-    }
+        const token = mutationResponse.data.login.token;
+        AuthService.login(token);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+  
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
+    };
     return (
-        <form className="login" onSubmit={login}>
+        <form className="login" onSubmit={handleFormSubmit}>
             <h1>Login</h1>
-            <input type="text" 
-            placeholder="email"
-            value={email}
-            onChange={ev => setEmail(ev.target.value)}></input>
-            <input type="password" 
-            placeholder="password"
-            value={password}
-            onChange={ev => setPassword(ev.target.value)}></input>
+                <input 
+                type="email" 
+                placeholder="email"
+                onChange={handleChange}>
+                </input>
+                <input 
+                type="password" 
+                placeholder="password"
+                onChange={handleChange}>
+                </input>
             <button>Login</button>
         </form>
     );
 }
+
+export default Login;

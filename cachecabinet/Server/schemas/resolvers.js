@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Collection, Item, ItemAssignment } = require('../models');
-const { signToken } = require('../utils/auth');
+const { signToken } = require('../utils/auth')
 
 const resolvers = {
     Query: {
@@ -81,6 +81,7 @@ const resolvers = {
             }
         },
 
+
         addCollection: async (parent, { items }, context) => {
             try {
                 if (context.user) {
@@ -97,6 +98,7 @@ const resolvers = {
         } catch (error) {
             throw new Error('Error adding collection: ' + error.message);
         }
+
     },
 
     createItemAssignment: async (parent, { userId, collectionId, itemId }, context) => {
