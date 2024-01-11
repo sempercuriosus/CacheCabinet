@@ -52,7 +52,7 @@ function App() {
             path='/collections'
             element={<Collections />}
           />
-          <Route path="/createcollection" element={<CreateCollection />} />
+          {/* <Route path="/createcollection" element={<CreateCollection />} /> */}
           <Route
             path='/viewcollection'
             element={<Collection />}
