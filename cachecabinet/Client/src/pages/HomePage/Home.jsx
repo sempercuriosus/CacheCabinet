@@ -1,5 +1,5 @@
-import Login from '../Login/Login';
-import Register from '../Register/Register';
+import Login from '../../components/Login';
+import Register from '../../components/Register';
 
 export default function Home() {
     return (
