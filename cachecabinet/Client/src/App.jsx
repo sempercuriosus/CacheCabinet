@@ -1,15 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-
-import Collections from './components/collection/collections';
-import Collection from './components/collection/collection';
-import Item from './components/item/item';
-import CreateItem from './components/item/CreateItem';
-import Home from './components/Home/Home';
-
-
-
+import { Outlet } from 'react-router-dom';
 import {setContext} from '@apollo/client/link/context';
 
 import {
@@ -45,28 +36,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path='/collections'
-            element={<Collections />}
-          />
-          {/* <Route path="/createcollection" element={<CreateCollection />} /> */}
-          <Route
-            path='/viewcollection'
-            element={<Collection />}
-          />
-          <Route
-            path='/viewitems'
-            element={<Item />}
-          />
-          <Route
-            path='/createitem'
-            element={<CreateItem />}
-          />
-        </Routes>
-      </Router>
+      <Outlet />
     </ApolloProvider>
   );
 }

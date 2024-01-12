@@ -1,4 +1,4 @@
-import colorPalette from '../../utils/colorPalette';
+import colorPalette from '../utils/colorPalette';
 
 /**
  * @component Collection

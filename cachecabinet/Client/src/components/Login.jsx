@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../../utils/mutations';
-import AuthService from '../../utils/auth';
+import { LOGIN_USER } from '../utils/mutations';
+import AuthService from '../utils/auth';
+import { Link } from 'react-router-dom';
 
-function Register(props) {
+
+function Login(props) {
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [addUser] = useMutation(ADD_USER);
+    const [login] = useMutation(LOGIN_USER);
   
     const handleFormSubmit = async (event) => {
       event.preventDefault();
-
-      const mutationResponse = await addUser({
-        variables: {
-          email: formState.email,
-          password: formState.password,
-        },
-      });
-      const token = mutationResponse.data.addUser.token;
-      AuthService.login(token);
+      try {
+        const mutationResponse = await login({
+          variables: { email: formState.email, password: formState.password },
+        });
+        const token = mutationResponse.data.login.token;
+        AuthService.login(token);
+      } catch (e) {
+        console.log(e);
+      }
     };
   
     const handleChange = (event) => {
       const { name, value } = event.target;
-
       setFormState({
         ...formState,
         [name]: value,
       });
-
     };
-  
-
     return (
-        <form className="register" onSubmit={handleFormSubmit}>
-            <h1>Register</h1>
+        <form className="login" onSubmit={handleFormSubmit}>
+            <h1>Login</h1>
                 <input 
                 type="email" 
                 placeholder="email"
@@ -42,13 +40,13 @@ function Register(props) {
                 </input>
                 <input 
                 type="password" 
-                name="password"
                 placeholder="password"
+                name="password"
                 onChange={handleChange}>
                 </input>
-            <button>Register</button>
+                <button type='submit'><Link to='/login'>Login</Link></button>
         </form>
     );
 }
 
-export default Register;
+export default Login;
