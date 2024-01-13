@@ -37,18 +37,20 @@ const typeDefs = `
   }
 
   type UserAssignment{
-  userId: ID
-  collections: [Collection]
-  assignments: [ItemAssignment]
-}
+    userId: ID
+    collections: [Collection]
+    assignments: [ItemAssignment]
+  }
+
+  type CollectionDetails{
+    collectionId:ID
+    items: [Item]
+  }
 
   type Query {
-    getUser: User 
-    getCollections: Collection
-    getCollection: Collection
-    getItems: Item
-    getItem: Item
     getUserAssignments(userId: ID!): UserAssignment
+    getCollection(collectionId: ID!): CollectionDetails
+    getItem: Item
   }
   
   type Mutation {

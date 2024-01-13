@@ -22,8 +22,9 @@ const resolvers = {
 
     getUserAssignments: async (parent, { userId }, context) => {
       console.log('Getting User Assignments!!');
+
       try {
-        // Assuming ItemAssignment has a userId field
+        // Getting the distinct collection ids, by user id
         const distinctCollectionIds = await ItemAssignment.distinct(
           'collectionId',
           { userId },
@@ -54,6 +55,30 @@ const resolvers = {
       } catch (error) {
         console.error('Error fetching assignments:', error);
         throw new Error('Failed to fetch user assignments');
+      }
+    },
+
+    getCollection: async (parent, { collectionId }, context) => {
+      console.log('Getting Collection Details');
+
+      try {
+        // Getting the distinct item ids, by collection id
+        const distinctItemIds = await ItemAssignment.distinct('itemId', {
+          collectionId,
+        });
+
+        const items = await Item.find({
+          _id: { $in: distinctItemIds },
+        }).select('name description');
+
+        console.log(items);
+
+        const collectionItems = { collectionId: collectionId, items: items };
+
+        return collectionItems;
+      } catch (error) {
+        console.error('Error fetching collection details:', error);
+        throw new Error('Failed to fetch collections');
       }
     },
   },
