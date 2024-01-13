@@ -24,14 +24,26 @@ const resolvers = {
       console.log('Getting User Assignments!!');
       try {
         // Assuming ItemAssignment has a userId field
-        const assignments = await ItemAssignment.find({ userId });
+        const distinctCollectionIds = await ItemAssignment.distinct(
+          'collectionId',
+          { userId },
+        );
 
-        // Create an object with unique ids
+        // Fetch the corresponding collection data for the distinct collectionIds
+        const collections = await Collection.find({
+          _id: { $in: distinctCollectionIds },
+        });
+
+        // Create an object with unique ids and collection data
         const userCollections = {
           userId: userId,
-          collectionIds: [
-            ...new Set(assignments.map((obj) => obj.collectionId.toString())),
-          ],
+          collections: collections.map((collection) => ({
+            collectionId: collection._id.toString(),
+            name: collection.name,
+            description: collection.description,
+            // Additional fields from the collectionData if needed
+            // ...
+          })),
         };
 
         if (!userCollections) {

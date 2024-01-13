@@ -38,8 +38,7 @@ const typeDefs = `
 
   type UserAssignment{
   userId: ID
-  collectionIds: [ID]
-  itemIds: [ID]
+  collections: [Collection]
   assignments: [ItemAssignment]
 }
 
