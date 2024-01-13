@@ -2,6 +2,16 @@
     {
         "name": "Example Collection",
         "description": "A collection is a set of related items. Be as specific or general as you want with what you want to store!",
-        "color": "#FF9157"
+        "color": ""
+    },
+    {
+        "name": "Example Collection Too",
+        "description": "A collection is a set of related items. Be as specific or general as you want with what you want to store!",
+        "color": ""
+    },
+    {
+        "name": "Another Collection ",
+        "description": "A collection is a set of related items. Be as specific or general as you want with what you want to store!",
+        "color": ""
     }
 ]
