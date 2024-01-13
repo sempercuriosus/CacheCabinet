@@ -11,17 +11,17 @@ const resolvers = {
     *  Get Assignments 
         By User ID
      
-    *  Get Collections
+    *  Get Collection (containing the items)
         By Collection ID
      
-    *  Get Items 
+    *  Get Item
         By Item ID
     
     * 
      */
 
     getUserAssignments: async (parent, { userId }, context) => {
-      console.log('Getting User Assignments!!');
+      // console.log('Getting User Assignments!!');
 
       try {
         // Getting the distinct collection ids, by user id
@@ -31,27 +31,17 @@ const resolvers = {
         );
 
         // Fetch the corresponding collection data for the distinct collectionIds
-        const collections = await Collection.find({
+        const userCollections = await Collection.find({
           _id: { $in: distinctCollectionIds },
         });
 
-        // Create an object with unique ids and collection data
-        const userCollections = {
-          userId: userId,
-          collections: collections.map((collection) => ({
-            collectionId: collection._id.toString(),
-            name: collection.name,
-            description: collection.description,
-            // Additional fields from the collectionData if needed
-            // ...
-          })),
-        };
+        const collections = { userId: userId, collections: userCollections };
 
-        if (!userCollections) {
+        if (!collections) {
           return [];
         }
 
-        return userCollections;
+        return collections;
       } catch (error) {
         console.error('Error fetching assignments:', error);
         throw new Error('Failed to fetch USER ASSIGNMENTS');
@@ -59,7 +49,7 @@ const resolvers = {
     },
 
     getCollection: async (parent, { collectionId }, context) => {
-      console.log('Getting Collection Details');
+      // console.log('Getting Collection Details');
 
       try {
         // Getting the distinct item ids, by collection id
@@ -67,11 +57,10 @@ const resolvers = {
           collectionId,
         });
 
+        // Getting the item name and description for the cards
         const items = await Item.find({
           _id: { $in: distinctItemIds },
         }).select('name description');
-
-        console.log(items);
 
         const collectionItems = { collectionId: collectionId, items: items };
 
@@ -83,12 +72,11 @@ const resolvers = {
     },
 
     getItem: async (parent, { itemId }, context) => {
-      console.log('Getting Item details');
+      // console.log('Getting Item details');
 
       try {
+        // Getting the Item Details
         const item = await Item.findById(itemId);
-
-        console.log(item);
 
         return item;
       } catch (error) {
