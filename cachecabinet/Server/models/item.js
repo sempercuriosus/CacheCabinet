@@ -16,7 +16,7 @@ const itemSchema = new Schema({
     trim: true,
   },
   purchasePrice: {
-    type: Schema.Types.Decimal128,
+    type: Number,
     default: 0.0,
     required: false,
   },
@@ -26,6 +26,7 @@ const itemSchema = new Schema({
   },
   dateAdded: {
     type: Date,
+    default: Date.now,
   },
   image: {
     type: String,
