@@ -50,7 +50,7 @@ const typeDefs = `
   type Query {
     getUserAssignments(userId: ID!): UserAssignment
     getCollection(collectionId: ID!): CollectionDetails
-    getItem: Item
+    getItem(itemId: ID!): Item
   }
   
   type Mutation {
