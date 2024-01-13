@@ -52,9 +52,27 @@ const typeDefs = `
     getCollection(collectionId: ID!): CollectionDetails
     getItem(itemId: ID!): Item
   }
+
+  input NewCollection{
+    name: String!
+    description: String
+  }
+
+  input NewItem{
+    name: String
+    description: String
+    quantity: Int
+    purchasePrice: Float
+    forSale: Boolean
+    dateAdded: String
+
+  }
   
   type Mutation {
+    login(email: String!, password: String!): Auth
     addUser: User
+    addCollection(userId: ID!, collectionData: NewCollection!): Collection
+    addItem(userId: ID!, collectionId: ID!, itemData: NewItem): Item
   }
 `;
 
