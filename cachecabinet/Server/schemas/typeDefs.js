@@ -10,6 +10,24 @@ const typeDefs = `
     user: User
   }
 
+  type Item {
+    _id: ID!
+    name: String
+    description: String
+    quantity: Int
+    purchasePrice: Float
+    forSale: Boolean
+    dateAdded: String
+    image: String
+  }
+
+  type Collection {
+    _id: ID!
+    name: String
+    description: String
+    color: String
+  }
+
   type ItemAssignment {
     _id: ID!
     userId: ID!
@@ -18,41 +36,26 @@ const typeDefs = `
     collection: String
   }
 
-  type Item {
-    name: String
-    description: String
-    purchasePrice: Float
-    quantity: Int
-    dateAdded: String
-    image: String
-    forSale: Boolean
-  }
-
-  type Collection {
-    name: String
-    description: String
-    color: String
-  }
+  type UserAssignment{
+  userId: ID
+  collectionIds: [ID]
+  itemIds: [ID]
+  assignments: [ItemAssignment]
+}
 
   type Query {
-    users: [User]
-    user(email: String!): User
-    collections: [Collection]
-    searchItems: Item
-    getItemAssignmentByUser: ItemAssignment
-    getItemById: Item
-    getUser: User
-    getItemAssignment: User
+    getUser: User 
+    getCollections: Collection
+    getCollection: Collection
+    getItems: Item
+    getItem: Item
+    getUserAssignments(userId: ID!): UserAssignment
   }
-
+  
   type Mutation {
-    addCollection(items: [String]): Collection
-    createItemAssignment(userId: ID!, collectionId: ID!, itemId: ID!): ItemAssignment
-    updateUser(email: String, password: String): User
-    updateItem(id: ID!, quantity: Int!): Item
-    addUser(email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
+    addUser: User
   }
 `;
 
 module.exports = typeDefs;
+
