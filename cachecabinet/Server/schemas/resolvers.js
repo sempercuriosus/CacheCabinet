@@ -54,7 +54,7 @@ const resolvers = {
         return userCollections;
       } catch (error) {
         console.error('Error fetching assignments:', error);
-        throw new Error('Failed to fetch user assignments');
+        throw new Error('Failed to fetch USER ASSIGNMENTS');
       }
     },
 
@@ -78,7 +78,22 @@ const resolvers = {
         return collectionItems;
       } catch (error) {
         console.error('Error fetching collection details:', error);
-        throw new Error('Failed to fetch collections');
+        throw new Error('Failed to fetch COLLECTION details');
+      }
+    },
+
+    getItem: async (parent, { itemId }, context) => {
+      console.log('Getting Item details');
+
+      try {
+        const item = await Item.findById(itemId);
+
+        console.log(item);
+
+        return item;
+      } catch (error) {
+        console.error('Error fetching item details:', error);
+        throw new Error('Failed to fetch ITEM details');
       }
     },
   },
