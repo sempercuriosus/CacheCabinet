@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import colorPalette from '../utils/colorPalette';
-import ViewCollection from './ViewCollection'; 
 
-const Collection = ({ name, description }) => {
+const Collection = ({ userCollections }) => {
+  console.log('COLLLECTION PAGE DATA', JSON.stringify(userCollections));
+
   const [showViewCollection, setShowViewCollection] = useState(false);
 
   const cardStyle = {
@@ -17,26 +18,41 @@ const Collection = ({ name, description }) => {
   };
 
   return (
-    <div className='card' style={cardStyle}>
-      <div className='card-content has-text-centered'> 
-        <h2 className='title is-4'>{name}</h2>
-        <h3 className='subtitle is-6'>{description}</h3>
-      </div>
-      <footer className='card-footer'>
-        <a href='#' className='card-footer-item has-text-black' style={{ backgroundColor: colorPalette.BABYBLUE }} onClick={handleViewClick}>
-          View
-        </a>
-        <a
-          href='#'
-          className='card-footer-item has-text-black'
-          style={{ backgroundColor: colorPalette.SAGE }}>
-          Edit
-        </a>
-      </footer>
+    <Fragment>
+      {userCollections.collections.map((collection) => (
+        // Card
+        <div
+          className='card block'
+          style={cardStyle}
+          key={collection._id}>
+          {/* Card Header */}
 
-      {showViewCollection && <ViewCollection />} {/* Render ViewCollection when showViewCollection is true */}
-    </div>
+          <div className='card-content has-text-centered'>
+            <h2 className='title is-4'>{collection.name}</h2>
+            <h3 className='subtitle is-6'>{collection.description}</h3>
+          </div>
+
+          {/* Card Footer */}
+          <footer className='card-footer'>
+            <a
+              href='#'
+              className='card-footer-item has-text-black'
+              style={{ backgroundColor: colorPalette.BABYBLUE }}
+              onClick={handleViewClick}>
+              View
+            </a>
+            <a
+              href='#'
+              className='card-footer-item has-text-black'
+              style={{ backgroundColor: colorPalette.SAGE }}>
+              Edit
+            </a>
+          </footer>
+        </div> // end card
+      ))}
+    </Fragment>
   );
 };
 
 export default Collection;
+
