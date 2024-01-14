@@ -58,6 +58,11 @@ const typeDefs = `
     description: String
   }
 
+    input UpdateCollection{
+    name: String!
+    description: String
+  }
+
   input NewItem{
     name: String
     description: String
@@ -65,7 +70,6 @@ const typeDefs = `
     purchasePrice: Float
     forSale: Boolean
     dateAdded: String
-
   }
   
   type Mutation {
@@ -73,6 +77,7 @@ const typeDefs = `
     addUser: User
     addCollection(userId: ID!, collectionData: NewCollection!): Collection
     addItem(userId: ID!, collectionId: ID!, itemData: NewItem): Item
+    updateCollection(userId: ID!, collectionId: ID!, updatedCollection: UpdateCollection!): Collection
   }
 `;
 

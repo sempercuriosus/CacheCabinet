@@ -182,6 +182,42 @@ const resolvers = {
         throw new Error('Failed to create new ITEM');
       }
     },
+
+    // update
+
+    updateCollection: async (
+      parent,
+      { userId, collectionId, updatedCollection },
+      context,
+    ) => {
+      try {
+        // get the existing collection
+        const existingCollection = await Collection.findById(collectionId);
+
+        if (existingCollection) {
+          // set the new values
+          existingCollection.name = updatedCollection.name;
+          existingCollection.description = updatedCollection.description;
+
+          // save them to the collection
+          const updateResult = await existingCollection.save();
+
+          console.log(
+            'updating',
+            collectionId,
+            'new collection information',
+            existingCollection,
+          );
+
+          // return updates
+          return updateResult;
+        }
+      } catch (error) {
+        console.error('Error updating collection:', error);
+
+        throw new Error('Failed to UPDATE collection');
+      }
+    },
   },
 };
 
