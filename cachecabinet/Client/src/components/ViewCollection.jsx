@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import colorPalette from '../utils/colorPalette';
-import Item from './Item';
+import Item from './item';
 import CreateItem from './CreateItem';
 
 const ViewCollection = () => {
@@ -36,3 +36,4 @@ const ViewCollection = () => {
 };
 
 export default ViewCollection;
+
