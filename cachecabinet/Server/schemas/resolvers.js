@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Item, ItemAssignment } = require('../models');
+const { User, Collection, Item, ItemAssignment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -31,7 +31,7 @@ const resolvers = {
         );
 
         // Fetch the corresponding collection data for the distinct collectionIds
-        const userCollections = await Item.find({
+        const userCollections = await Collection.find({
           _id: { $in: distinctCollectionIds },
         });
 
