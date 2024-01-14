@@ -20,14 +20,17 @@ const resolvers = {
     * 
      */
 
-    getUserAssignments: async (parent, { userId }, context) => {
+    getUserAssignments: async (parent, args, context) => {
       // console.log('Getting User Assignments!!');
+
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
 
       try {
         // Getting the distinct collection ids, by user id
         const distinctCollectionIds = await ItemAssignment.distinct(
           'collectionId',
-          { userId },
         );
 
         // Fetch the corresponding collection data for the distinct collectionIds
@@ -35,15 +38,12 @@ const resolvers = {
           _id: { $in: distinctCollectionIds },
         });
 
-        const collections = { userId: userId, collections: userCollections };
-
-        if (!collections) {
-          return [];
-        }
+        const collections = { collections: userCollections };
 
         return collections;
       } catch (error) {
         console.error('Error fetching assignments:', error);
+
         throw new Error('Failed to fetch USER ASSIGNMENTS');
       }
     },
