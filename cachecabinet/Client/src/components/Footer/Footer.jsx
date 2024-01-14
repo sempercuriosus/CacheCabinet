@@ -1,11 +1,18 @@
 import React from 'react';
+import '../../assets/home.css'
 
 const Footer = () => {
-    return (
-        <footer>
-            <div>created by Eric Hulse, Keith Primas, Nohemi Moser, and Jonathan Montalvo<br></br>with 🫶🏼 and ☕️</div>
-        </footer>
-    );
+  return (
+    <footer className="footer" style={{backgroundColor: '#E4C9B6'}}>
+      <div className="content has-text-centered">
+        <p>
+          Created by Eric Hulse, Keith Primas, Nohemi Moser, and Jonathan Montalvo
+          <br />
+          with 🧡 and ☕️
+        </p>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

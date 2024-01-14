@@ -1,12 +1,7 @@
+import React from 'react';
 import colorPalette from '../utils/colorPalette';
 
-/**
- * @component Item
- * @description This is a single-item the user wishes to track in a collection
- * @returns One Item's details
- */
-
-function Item() {
+function Item({ imageData, name, description, purchasePrice, dateAdded, forSale, salePrice }) {
   return (
     <div
       className='card'
@@ -17,9 +12,10 @@ function Item() {
       }}>
       <div className='card-image'>
         <figure className='image is-4by3'>
+          {/* Use the passed imageData or provide a default placeholder */}
           <img
-            src='https://bulma.io/images/placeholders/1280x960.png'
-            alt='Placeholder image'
+            src={imageData || 'https://bulma.io/images/placeholders/1280x960.png'}
+            alt='Item Image'
           />
         </figure>
       </div>
@@ -27,23 +23,28 @@ function Item() {
         <h2
           className='title is-4'
           style={{ color: '' }}>
-          Item Name
+          {name}
         </h2>
         <h3
           className='subtitle is-6'
           style={{ color: colorPalette.GREY }}>
-          This is a long description of an item.Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Nulla dolor elit, lobortis eu auctor ut,
-          accumsan et elit. Sed vestibulum lacinia est, id viverra felis maximus
-          at. Morbi quis dolor ante. Fusce ac libero in tortor malesuada
-          vestibulum. Vivamus eget risus non nisi auctor malesuada.
+          {description}
         </h3>
         <div className='content'>
           <div className='columns'>
-            <p className='column is-half'>Item Quantity</p>
-            <p className='column is-half'>Item Date Added</p>
+            <p className='column is-half'>{`Purchase Price: ${purchasePrice}`}</p>
+            <p className='column is-half'>{`Date Added: ${dateAdded}`}</p>
           </div>
-          <p className='is-centered'>Item For Sale</p>
+          <p className='is-centered'>{`For Sale: ${forSale ? 'Yes' : 'No'}`}</p>
+          
+          {forSale && (
+          <div className='field'>
+            <p className='column'>{salePrice}</p>
+          </div>
+          )}
+
+
+          
           <footer className='card-footer'>
             <a
               href='#'
@@ -65,4 +66,3 @@ function Item() {
 }
 
 export default Item;
-
