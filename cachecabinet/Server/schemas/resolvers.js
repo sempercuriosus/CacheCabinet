@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Collection, Item, ItemAssignment } = require('../models');
+const { User, Item, ItemAssignment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -31,7 +31,7 @@ const resolvers = {
         );
 
         // Fetch the corresponding collection data for the distinct collectionIds
-        const userCollections = await Collection.find({
+        const userCollections = await Item.find({
           _id: { $in: distinctCollectionIds },
         });
 
@@ -118,7 +118,7 @@ const resolvers = {
     addCollection: async (parent, { userId, collectionData }, context) => {
       try {
         // Create new collection
-        const newCollection = await Collection.create(collectionData);
+        const newCollection = await Item.create(collectionData);
 
         // Get the new Collection ID
         const collectionId = newCollection._id;
@@ -185,6 +185,8 @@ const resolvers = {
 
     // update
 
+    // collection
+
     updateCollection: async (
       parent,
       { userId, collectionId, updatedCollection },
@@ -192,7 +194,7 @@ const resolvers = {
     ) => {
       try {
         // get the existing collection
-        const existingCollection = await Collection.findById(collectionId);
+        const existingCollection = await Item.findById(collectionId);
 
         if (existingCollection) {
           // set the new values
@@ -208,6 +210,37 @@ const resolvers = {
             'new collection information',
             existingCollection,
           );
+
+          // return updates
+          return updateResult;
+        }
+      } catch (error) {
+        console.error('Error updating collection:', error);
+
+        throw new Error('Failed to UPDATE collection');
+      }
+    },
+
+    // item
+
+    updateItem: async (
+      parent,
+      { userId, itemId, updatedItem: updatedItem },
+      context,
+    ) => {
+      try {
+        // item
+        const existingItem = await Item.findById(itemId);
+
+        if (existingItem) {
+          // set the new values
+          existingItem.name = updatedItem.name;
+          existingItem.description = updatedItem.description;
+
+          // save them to the collection
+          const updateResult = await existingItem.save();
+
+          console.log('updating', itemId, 'new Item information', existingItem);
 
           // return updates
           return updateResult;
