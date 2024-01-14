@@ -27,10 +27,16 @@ const resolvers = {
         throw new AuthenticationError('User not authenticated');
       }
 
+      console.log('Request from', context.user);
+
       try {
         // Getting the distinct collection ids, by user id
+
+        const userId = context.user._id;
+
         const distinctCollectionIds = await ItemAssignment.distinct(
           'collectionId',
+          { userId },
         );
 
         // Fetch the corresponding collection data for the distinct collectionIds
