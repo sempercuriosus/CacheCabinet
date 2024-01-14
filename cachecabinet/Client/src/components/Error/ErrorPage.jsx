@@ -1,15 +1,25 @@
 import { Fragment } from 'react';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 function ErrorPage() {
   return (
     <Fragment>
-      <section className='content'>
-        <h1 className='title'>Route Was Not Found</h1>
-        <h3 className='title is-3'>
-          The Route that you have tried to access was not found. Please try
-          again.
-        </h3>
+      <Header />
+      <section className='card'>
+        <div className='card-header-title is-centered title'>
+          🚨 Route Was Not Found 🚨
+        </div>
+        <hr />
+        <div className='card-content'>
+          <div className='subtitle is-4'>
+            The page that you have tried to access was not found
+          </div>
+          <div className='subtitle is-4'>Please try again</div>
+          <br />
+        </div>
       </section>
+      <Footer />
     </Fragment>
   );
 }
