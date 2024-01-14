@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Outlet } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
-
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 import {
@@ -35,6 +35,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <Header />
       <Outlet />
       <Footer />
     </ApolloProvider>
