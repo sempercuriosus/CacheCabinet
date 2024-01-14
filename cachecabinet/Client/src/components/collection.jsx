@@ -2,8 +2,6 @@ import React, { useState, Fragment } from 'react';
 import colorPalette from '../utils/colorPalette';
 
 const Collection = ({ userCollections }) => {
-  console.log('COLLLECTION PAGE DATA', JSON.stringify(userCollections));
-
   const [showViewCollection, setShowViewCollection] = useState(false);
 
   const cardStyle = {
