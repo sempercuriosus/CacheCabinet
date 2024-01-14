@@ -48,7 +48,7 @@ const typeDefs = `
   }
 
   type Query {
-    getUserAssignments(userId: ID!): UserAssignment
+    getUserAssignments: UserAssignment
     getCollection(collectionId: ID!): CollectionDetails
     getItem(itemId: ID!): Item
   }
