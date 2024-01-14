@@ -1,16 +1,14 @@
 import React from 'react';
 
 const Header = () => {
-    return (
-        <main>
-            <a href="/" className="logo">CacheCabinet</a>
-            <nav>
-                <a href="">Log in</a>
-                <a href="">Register</a>
-                <a href="">Sign out</a>
-            </nav>
-        </main>
-    )
+  return (
+    <header className='level'>
+      <div className='title level-item has-text-centered'>
+        <div className='title'>🗃️ Cache Cabinet</div>
+      </div>
+    </header>
+  );
 };
 
 export default Header;
+
