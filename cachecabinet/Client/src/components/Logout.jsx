@@ -8,7 +8,7 @@ const Logout = () => {
     localStorage.removeItem('token');
 
     // After logout, navigate back to the login page
-    navigate('/home');
+    navigate('/login');
   };
 
   return (

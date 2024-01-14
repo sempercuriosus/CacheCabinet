@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-body {
+  margin-top: 10%;  
+}
+
+
+
+
+
+
+
