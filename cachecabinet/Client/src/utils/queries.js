@@ -12,9 +12,8 @@ import { gql } from '@apollo/client';
  *
  */
 export const GET_USER_ASSIGNMENTS = gql`
-  query GetUserAssignments($userId: ID!) {
-    getUserAssignments(userId: $userId) {
-      userId
+  query GetUserAssignments {
+    getUserAssignments {
       collections {
         _id
         name
