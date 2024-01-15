@@ -85,6 +85,7 @@ const resolvers = {
             name: item.name || '',
             description: item.description || '',
             purchasePrice: item.purchasePrice || 0.0,
+            salePrice: item.salePrice || 0.0,
             quantity: item.quantity || 0,
             dateAdded: formattedDate,
             image: item.image || '',

@@ -34,10 +34,10 @@ const CreateItem = ({ onAddItem }) => {
     const newItem = {
       name: name,
       description: description,
-      purchasePrice: purchasePrice || 0.0,
+      purchasePrice: parseFloat(purchasePrice) || 0.0,
       dateAdded: dateAdded,
       forSale: forSale,
-      salePrice: forSale ? salePrice : 0.0, // Only include salePrice if forSale is true
+      salePrice: forSale ? parseFloat(salePrice) : 0.0, // Only include salePrice if forSale is true
     };
 
     // add mutation here.
