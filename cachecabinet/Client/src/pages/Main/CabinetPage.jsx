@@ -35,12 +35,12 @@ export default function Home() {
           <div className='columns is-centered is-mobile'>
             <div
               className='column'
-              style={{ margin: '40px' }}>
+              style={{ margin: '20px', paddingRight: '40px' }}>
               <CreateCollection onAddCollection={handleAddCollection} />
             </div>
           </div>
-          <div className='columns is-multiline'>
-            <div className='column is-6'>
+          <div className='columns'>
+            <div>
               <Collection userCollections={collections} />
             </div>
           </div>
