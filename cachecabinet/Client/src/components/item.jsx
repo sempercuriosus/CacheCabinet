@@ -2,8 +2,12 @@ import React, { useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function Item({ items }) {
+  const navigate = useNavigate();
+  const [selectedItem, setSelectedItem] = useState(null);
+
   // Access the itemID from the route parameters
   // const { itemID } = useParams();
 
@@ -18,6 +22,14 @@ function Item({ items }) {
   // if (loading) {
   //   return <h1 className='title is-3'>Loading...</h1>;
   // }
+
+  const handleViewClick = (item) => {
+    // set the state
+
+    setSelectedItem(item);
+
+    navigate(`/item/${item._id}`);
+  };
 
   const handleDelete = () => {
     const confirmed = Swal.fire({
@@ -82,9 +94,10 @@ function Item({ items }) {
                   )}
                   <footer className='card-footer'>
                     <a
-                      href='#'
+                      href=''
                       className='card-footer-item has-text-black'
-                      style={{ backgroundColor: colorPalette.BABYBLUE }}>
+                      style={{ backgroundColor: colorPalette.BABYBLUE }}
+                      onClick={() => handleViewClick(item)}>
                       Edit
                     </a>
                     <a
