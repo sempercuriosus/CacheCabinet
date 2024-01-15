@@ -68,7 +68,7 @@ function Item({ items }) {
                 </h3>
                 <div className='content'>
                   <div className='columns'>
-                    <p className='column is-half'>{`Purchase Price: ${item.purchasePrice}`}</p>
+                    <p className='column is-half'>{`Purchase Price: $ ${item.purchasePrice}`}</p>
                     <p className='column is-half'>{`Date Added: ${item.dateAdded}`}</p>
                   </div>
                   <p className='is-centered'>{`For Sale: ${
