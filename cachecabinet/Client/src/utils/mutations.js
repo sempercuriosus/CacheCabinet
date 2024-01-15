@@ -82,13 +82,15 @@ export const ADD_COLLECTION = gql`
  * forSale
  */
 export const ADD_ITEM = gql`
-  mutation AddItem($userId: ID!, $collectionId: ID!, $itemData: NewItem) {
-    addItem(userId: $userId, collectionId: $collectionId, itemData: $itemData) {
+  mutation AddItem($collectionId: ID!, $itemData: NewItem) {
+    addItem(collectionId: $collectionId, itemData: $itemData) {
       name
       description
       quantity
       purchasePrice
       forSale
+      dateAdded
+      image
     }
   }
 `;
@@ -148,13 +150,15 @@ export const UPDATE_COLLECTION = gql`
  * purchasePrice
  * forSale
  */
-export const UPDATE_ITEM = `mutation UpdateItem($userId: ID!, $itemId: ID!, $updatedItem: UpdateItem!) {
-  updateItem(userId: $userId, itemId: $itemId, updatedItem: $updatedItem) {
-    name
-    description
-    quantity
-    purchasePrice
-    forSale
+export const UPDATE_ITEM = gql`
+  mutation UpdateItem($userId: ID!, $itemId: ID!, $updatedItem: UpdateItem!) {
+    updateItem(userId: $userId, itemId: $itemId, updatedItem: $updatedItem) {
+      name
+      description
+      quantity
+      purchasePrice
+      forSale
+    }
   }
-}`;
+`;
 

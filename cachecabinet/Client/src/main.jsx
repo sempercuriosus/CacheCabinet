@@ -24,6 +24,10 @@ const router = createBrowserRouter([
         element: <CabinetPage />,
       },
       {
+        path: '/item/new',
+        element: <CreateItem />,
+      },
+      {
         path: '/collection/:collectionId',
         element: <ViewCollection />,
       },

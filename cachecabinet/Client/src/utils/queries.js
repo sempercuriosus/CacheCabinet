@@ -47,6 +47,7 @@ export const GET_COLLECTION = gql`
         dateAdded
         forSale
         purchasePrice
+        salePrice
         quantity
       }
     }

@@ -20,6 +20,11 @@ const itemSchema = new Schema({
     default: 0.0,
     required: false,
   },
+  salePrice: {
+    type: Number,
+    default: 0.0,
+    required: false,
+  },
   quantity: {
     type: Number,
     default: 1,
