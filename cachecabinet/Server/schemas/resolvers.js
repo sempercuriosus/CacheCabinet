@@ -213,7 +213,6 @@ const resolvers = {
           image: itemData.image || '',
         };
 
-        console.log(itemDataSanitized);
         // Create new item
         const newItem = await Item.create(itemDataSanitized);
 
