@@ -75,7 +75,7 @@ const CreateItem = ({ onAddItem }) => {
       <div className='card-content'>
         <button
           className='button is-primary'
-          style={{ backgroundColor: colorPalette.NUDE }}
+          style={{ backgroundColor: colorPalette.BABYBLUE }}
           type='button'
           onClick={handleImageUpload}>
           Upload Image
@@ -160,7 +160,7 @@ const CreateItem = ({ onAddItem }) => {
               <div className='control'>
                 <button
                   className='button is-primary'
-                  style={{ backgroundColor: colorPalette.NUDE }}
+                  style={{ backgroundColor: colorPalette.SAGE }}
                   type='button'
                   onClick={handleAddItem}>
                   Add Item
