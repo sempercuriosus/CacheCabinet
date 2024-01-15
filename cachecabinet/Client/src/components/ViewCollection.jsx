@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
+import { useParams } from 'react-router-dom';
 import Item from './item';
 import CreateItem from './CreateItem';
+import { useQuery } from '@apollo/client';
+import { GET_COLLECTION, GET_ITEM } from '../utils/queries';
 
 const ViewCollection = () => {
+  const { collectionId } = useParams();
+
   const [collection, setCollection] = useState([]);
   const [showCreateItem, setShowCreateItem] = useState(true);
+
+  const { loading, error, data } = useQuery(GET_COLLECTION, {
+    variables: {
+      collectionId: collectionId,
+    },
+  });
+
+  if (error) {
+    return `Error! ${error.message}`;
+  }
+
+  if (loading) {
+    return <h1 className='title is-3'>Loading...</h1>;
+  }
 
   const handleAddItem = (newItem) => {
     // Update the collection state with the new item
@@ -22,27 +41,20 @@ const ViewCollection = () => {
     });
   };
 
-  return (
-    <div>
-      {/* Render CreateItem component with the callback and show/hide logic */}
-      {showCreateItem && <CreateItem onAddItem={handleAddItem} />}
+  if (data) {
+    const items = data.getCollection.items;
 
-      {/* Display Item components for each item in the collection */}
-      {collection.map((item, index) => (
-        <Item
-          key={index}
-          index={index}
-          name={item.name}
-          description={item.description}
-          purchasePrice={item.purchasePrice}
-          dateAdded={item.dateAdded}
-          forSale={item.forSale}
-          salePrice={item.salePrice}
-          onEditItem={handleEditItem}
-        />
-      ))}
-    </div>
-  );
+    return (
+      <Fragment>
+        <div>
+          {/* Render CreateItem component with the callback and show/hide logic */}
+          {/* {showCreateItem && <CreateItem onAddItem={handleAddItem} />} */}
+          {/* Display Item components for each item in the collection */}
+          <Item items={items} />
+        </div>
+      </Fragment>
+    );
+  }
 };
-
 export default ViewCollection;
+
