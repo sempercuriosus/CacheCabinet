@@ -37,10 +37,13 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <Outlet />
+      <section className='section'>
+        <Outlet />
+      </section>
       <Footer />
     </ApolloProvider>
   );
 }
 
 export default App;
+
