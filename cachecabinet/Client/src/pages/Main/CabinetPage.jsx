@@ -5,6 +5,7 @@ import Logout from '../../components/Logout';
 import '../../assets/CabinetPage.css';
 import { useQuery } from '@apollo/client';
 import { GET_USER_ASSIGNMENTS } from '../../utils/queries';
+import DisplayError from '../../components/Error/DisplayError';
 
 export default function Home() {
   const [collections, setCollections] = useState([]);
@@ -12,12 +13,12 @@ export default function Home() {
   const handleAddCollection = (newCollection) => {
     setCollections([...collections, newCollection]);
   };
-  
 
   const { loading, error, data } = useQuery(GET_USER_ASSIGNMENTS);
 
   if (error) {
-    return `Error! ${error.message}`;
+    return <DisplayError />;
+    //return <section className='section'>`Error! ${error.message}`;</section>;
   }
 
   if (loading) {
@@ -28,7 +29,7 @@ export default function Home() {
     const collections = data.getUserAssignments;
 
     return (
-      <div className='hero is-fullheight'>
+      <div className='content section'>
         <div
           className='hero-body'
           style={{ position: 'relative', bottom: '30px' }}>
@@ -54,3 +55,4 @@ export default function Home() {
     );
   }
 }
+
