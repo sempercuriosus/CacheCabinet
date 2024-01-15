@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Item, ItemAssignment } = require('../models');
+const { User, Collection, Item, ItemAssignment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -20,30 +20,36 @@ const resolvers = {
     * 
      */
 
-    getUserAssignments: async (parent, { userId }, context) => {
+    getUserAssignments: async (parent, args, context) => {
       // console.log('Getting User Assignments!!');
+
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+
+      console.log('Request from', context.user);
 
       try {
         // Getting the distinct collection ids, by user id
+
+        const userId = context.user._id;
+
         const distinctCollectionIds = await ItemAssignment.distinct(
           'collectionId',
           { userId },
         );
 
         // Fetch the corresponding collection data for the distinct collectionIds
-        const userCollections = await Item.find({
+        const userCollections = await Collection.find({
           _id: { $in: distinctCollectionIds },
         });
 
-        const collections = { userId: userId, collections: userCollections };
-
-        if (!collections) {
-          return [];
-        }
+        const collections = { collections: userCollections };
 
         return collections;
       } catch (error) {
         console.error('Error fetching assignments:', error);
+
         throw new Error('Failed to fetch USER ASSIGNMENTS');
       }
     },
@@ -115,10 +121,18 @@ const resolvers = {
     },
 
     // Collection
-    addCollection: async (parent, { userId, collectionData }, context) => {
+    addCollection: async (parent, { collectionData }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+
       try {
+        const userId = context.user._id;
+
+        console.log(collectionData);
+
         // Create new collection
-        const newCollection = await Item.create(collectionData);
+        const newCollection = await Collection.create(collectionData);
 
         // Get the new Collection ID
         const collectionId = newCollection._id;
