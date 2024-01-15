@@ -38,7 +38,7 @@ const CreateCollection = ({ onAddCollection }) => {
   return (
     <div
       className='box has-text-centered'
-      style={{ maxWidth: '500px' }}>
+      style={{ maxWidth: '550px' }}>
       <h2 className='title is-4'>Create a Collection</h2>
       <div className='is-flex is-justify-content-flex-end'>
         <button
@@ -76,7 +76,8 @@ const CreateCollection = ({ onAddCollection }) => {
           </div>
           <div className='control'>
             <button
-              className='button is-primary'
+              className='button'
+              style={{ backgroundColor: colorPalette.SAGE }}
               onClick={handleAddCollection}>
               Add Collection
             </button>
