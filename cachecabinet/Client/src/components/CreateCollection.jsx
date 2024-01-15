@@ -36,7 +36,9 @@ const CreateCollection = ({ onAddCollection }) => {
   };
 
   return (
-    <div className='box has-text-centered'>
+    <div
+      className='box has-text-centered'
+      style={{ maxWidth: '400px' }}>
       <h2 className='title is-4'>Create a Collection</h2>
       <div className='is-flex is-justify-content-flex-end'>
         <button
