@@ -12,6 +12,7 @@ export default function Home() {
   const handleAddCollection = (newCollection) => {
     setCollections([...collections, newCollection]);
   };
+  
 
   const { loading, error, data } = useQuery(GET_USER_ASSIGNMENTS);
 

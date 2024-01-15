@@ -65,7 +65,7 @@ function Register(props) {
           <div className="field">
             <div className="control">
               <button type="submit" className="button is-success">
-                <Link to="/login" className="has-text-white">
+                <Link to="/main" className="has-text-white">
                   Register
                 </Link>
               </button>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import colorPalette from '../utils/colorPalette';
 import Item from './item';
 import CreateItem from './CreateItem';
 
@@ -14,6 +13,15 @@ const ViewCollection = () => {
     setShowCreateItem(false);
   };
 
+  const handleEditItem = (index, updatedItem) => {
+    // Update the collection state with the edited item
+    setCollection((prevCollection) => {
+      const newCollection = [...prevCollection];
+      newCollection[index] = updatedItem;
+      return newCollection;
+    });
+  };
+
   return (
     <div>
       {/* Render CreateItem component with the callback and show/hide logic */}
@@ -23,12 +31,14 @@ const ViewCollection = () => {
       {collection.map((item, index) => (
         <Item
           key={index}
+          index={index}
           name={item.name}
           description={item.description}
           purchasePrice={item.purchasePrice}
           dateAdded={item.dateAdded}
           forSale={item.forSale}
-          // Add more props based on your data structure
+          salePrice={item.salePrice}
+          onEditItem={handleEditItem}
         />
       ))}
     </div>
@@ -36,4 +46,3 @@ const ViewCollection = () => {
 };
 
 export default ViewCollection;
-
