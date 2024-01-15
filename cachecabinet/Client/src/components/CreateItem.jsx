@@ -47,7 +47,7 @@ const CreateItem = ({ onAddItem }) => {
   };
 
   return (
-    <div className="card" style={{ backgroundColor: colorPalette.DUSTYROSE }}>
+    <div className="card" style={{ backgroundColor: colorPalette.DUSTYROSE, height: '200px', overflow: 'auto', width: '500px' }}>
       <div className="card-content">
         <button className="button is-primary" style={{ backgroundColor: colorPalette.NUDE }} type="button" onClick={handleImageUpload}>
           Upload Image
