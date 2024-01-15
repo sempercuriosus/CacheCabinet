@@ -54,20 +54,31 @@ function Item({ items }) {
   };
 
   return (
-    <Fragment>
-      <div>
-        <button onClick={handleAddItemClick}>+</button>
+    <div className='container'>
+      <div
+        className='box has-text-centered'
+        style={{ maxWidth: '550px' }}>
+        <h2 className='title is-4'>Create Item</h2>
+        <div className='is-flex is-justify-content-flex-end'>
+          <button
+            style={{ backgroundColor: colorPalette.SAGE }}
+            className='button is-light is-rounded plus-button'
+            onClick={handleAddItemClick}>
+            +
+          </button>
+        </div>
       </div>
+      <div className='block'></div>
       {items.map((item) => (
         <div
-          className='card'
+          className='card block'
           key={item._id}
           style={{
             backgroundColor: colorPalette.IVORY,
-            maxWidth: '400px',
+            maxWidth: '550px',
           }}>
           <div className='card-image'>
-            <figure className='image is-4by3'>
+            {/* <figure className='image is-4by3'>
               <img
                 src={
                   item.imageData ||
@@ -75,7 +86,7 @@ function Item({ items }) {
                 }
                 alt='Item Image'
               />
-            </figure>
+            </figure> */}
           </div>
           <div className='card-content'>
             <h2
@@ -90,12 +101,17 @@ function Item({ items }) {
             </h3>
             <div className='content'>
               <div className='columns'>
-                <p className='column is-half'>{`Purchase Price: $ ${item.purchasePrice}`}</p>
-                <p className='column is-half'>{`Date Added: ${item.dateAdded}`}</p>
+                <p className='column is-half'>
+                  <strong>Purchase Price:</strong> $ {item.purchasePrice}
+                </p>
+                <p className='column is-half'>
+                  <strong>Date Added:</strong> {item.dateAdded}
+                </p>
               </div>
-              <p className='is-centered'>{`For Sale: ${
-                item.forSale ? 'Yes' : 'No'
-              }`}</p>
+              <p className='is-centered'>
+                <strong>For Sale: </strong>
+                {item.forSale ? 'Yes' : 'No'}
+              </p>
 
               {item.forSale && (
                 <div className='field'>
@@ -123,7 +139,7 @@ function Item({ items }) {
           {/* Card End */}
         </div>
       ))}
-    </Fragment>
+    </div>
   );
 }
 

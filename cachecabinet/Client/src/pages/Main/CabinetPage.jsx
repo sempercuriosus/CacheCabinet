@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import CreateCollection from '../../components/CreateCollection';
 import Collection from '../../components/collection';
 import Logout from '../../components/Logout';
 import '../../assets/CabinetPage.css';
 import { useQuery } from '@apollo/client';
 import { GET_USER_ASSIGNMENTS } from '../../utils/queries';
+import DisplayError from '../../components/Error/DisplayError';
 
 export default function Home() {
   const [collections, setCollections] = useState([]);
@@ -12,12 +13,12 @@ export default function Home() {
   const handleAddCollection = (newCollection) => {
     setCollections([...collections, newCollection]);
   };
-  
 
   const { loading, error, data } = useQuery(GET_USER_ASSIGNMENTS);
 
   if (error) {
-    return `Error! ${error.message}`;
+    return <DisplayError />;
+    //return <section className='section'>`Error! ${error.message}`;</section>;
   }
 
   if (loading) {
@@ -28,19 +29,19 @@ export default function Home() {
     const collections = data.getUserAssignments;
 
     return (
-      <div className='hero is-fullheight'>
+      <Fragment>
         <div
-          className='hero-body'
+          className=''
           style={{ position: 'relative', bottom: '30px' }}>
-          <div className='columns is-centered is-mobile'>
+          <div className='columns is-mobile'>
             <div
               className='column'
-              style={{ margin: '20px', paddingRight: '40px' }}>
+              style={{ margin: '20px' }}>
               <CreateCollection onAddCollection={handleAddCollection} />
             </div>
           </div>
-          <div className='columns'>
-            <div>
+          <div className='columns is-multiline'>
+            <div className='column'>
               <Collection userCollections={collections} />
             </div>
           </div>
@@ -50,7 +51,8 @@ export default function Home() {
           style={{ position: 'fixed', top: '10px', right: '10px' }}>
           <Logout />
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
+

@@ -37,10 +37,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <Outlet />
+      <section
+        id='topLevel'
+        className='content section'>
+        <Outlet />
+      </section>
       <Footer />
     </ApolloProvider>
   );
 }
 
 export default App;
+

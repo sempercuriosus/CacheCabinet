@@ -46,12 +46,7 @@ const ViewCollection = () => {
 
     return (
       <Fragment>
-        <div>
-          {/* Render CreateItem component with the callback and show/hide logic */}
-          {/* {showCreateItem && <CreateItem onAddItem={handleAddItem} />} */}
-          {/* Display Item components for each item in the collection */}
-          <Item items={items} />
-        </div>
+        <Item items={items} />
       </Fragment>
     );
   }
