@@ -55,13 +55,20 @@ function Item({ items }) {
 
   return (
     <section className='container'>
-      <div className='block'>
-        <button
-          style={{ backgroundColor: colorPalette.SAGE }}
-          onClick={handleAddItemClick}>
-          +
-        </button>
+      <div
+        className='box has-text-centered'
+        style={{ maxWidth: '400px' }}>
+        <h2 className='title is-4'>Create Item</h2>
+        <div className='is-flex is-justify-content-flex-end'>
+          <button
+            style={{ backgroundColor: colorPalette.SAGE }}
+            className='button is-light is-rounded plus-button'
+            onClick={handleAddItemClick}>
+            +
+          </button>
+        </div>
       </div>
+      <div className='block'></div>
       {items.map((item) => (
         <div
           className='card block'
@@ -71,7 +78,7 @@ function Item({ items }) {
             maxWidth: '400px',
           }}>
           <div className='card-image'>
-            <figure className='image is-4by3'>
+            {/* <figure className='image is-4by3'>
               <img
                 src={
                   item.imageData ||
@@ -79,7 +86,7 @@ function Item({ items }) {
                 }
                 alt='Item Image'
               />
-            </figure>
+            </figure> */}
           </div>
           <div className='card-content'>
             <h2
