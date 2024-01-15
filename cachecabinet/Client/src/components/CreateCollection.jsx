@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_COLLECTION } from '../utils/mutations';
+import colorPalette from '../utils/colorPalette';
 
 const CreateCollection = ({ onAddCollection }) => {
   const [showForm, setShowForm] = useState(false);
@@ -39,6 +40,7 @@ const CreateCollection = ({ onAddCollection }) => {
       <h2 className='title is-4'>Create a Collection</h2>
       <div className='is-flex is-justify-content-flex-end'>
         <button
+          style={{ backgroundColor: colorPalette.SAGE }}
           className='button is-light is-rounded plus-button'
           onClick={() => setShowForm(!showForm)}>
           {showForm ? (
