@@ -44,6 +44,10 @@ export const GET_COLLECTION = gql`
         _id
         name
         description
+        dateAdded
+        forSale
+        purchasePrice
+        quantity
       }
     }
   }
