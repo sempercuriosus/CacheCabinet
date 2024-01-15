@@ -37,7 +37,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <section className='section'>
+      <section
+        id='topLevel'
+        className='content section'>
         <Outlet />
       </section>
       <Footer />
