@@ -28,7 +28,7 @@ const itemSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  image: {
+  imageData: {
     type: String,
   },
   forSale: {
@@ -40,4 +40,3 @@ const itemSchema = new Schema({
 const Item = model('Item', itemSchema);
 
 module.exports = Item;
-

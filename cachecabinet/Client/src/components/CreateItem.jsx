@@ -10,6 +10,7 @@ const CreateItem = ({ onAddItem }) => {
   const [forSale, setForSale] = useState(false);
   const [salePrice, setSalePrice] = useState('');
   const [error, setError] = useState('');
+  const [imageData, setImageData] = useState('');
 
   // Function to handle form submission
   const handleAddItem = () => {
@@ -18,7 +19,9 @@ const CreateItem = ({ onAddItem }) => {
       setError('Please enter a name and description');
       return;
     }
-
+  
+    console.log('Image Data before calling onAddItem:', imageData);
+  
     const newItem = {
       name,
       description,
@@ -26,8 +29,10 @@ const CreateItem = ({ onAddItem }) => {
       dateAdded,
       forSale,
       salePrice: forSale ? salePrice : '', // Only include salePrice if forSale is true
+      imageData, // Pass the image URL directly
     };
-
+    console.log('New item data:', newItem);
+  
     // Pass the new item data to the parent component
     onAddItem(newItem);
 
@@ -39,11 +44,15 @@ const CreateItem = ({ onAddItem }) => {
     setForSale(false);
     setSalePrice('');
     setError(''); // Clear the error message
+    setImageData('');
   };
 
   const handleImageUpload = () => {
     // Logic to handle image upload
-    console.log('Image upload logic goes here');
+    if (imageData) {
+      console.log('Image URL:', imageData);
+      setImageData(imageData);
+    }
   };
 
   return (
@@ -52,6 +61,15 @@ const CreateItem = ({ onAddItem }) => {
         <button className="button is-primary" style={{ backgroundColor: colorPalette.NUDE }} type="button" onClick={handleImageUpload}>
           Upload Image
         </button>
+        <input
+          className="input"
+          type="text"
+          placeholder="Enter Image URL"
+          value={imageData}
+          onChange={(e) => setImageData(e.target.value)}
+        />
+        {/* Display the image */}
+        {imageData && <img src={imageData} alt="Uploaded image" />}
         <div className="content">
           <form>
             <div className="field">

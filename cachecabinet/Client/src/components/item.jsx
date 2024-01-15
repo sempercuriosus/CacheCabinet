@@ -2,6 +2,7 @@ import React from 'react';
 import colorPalette from '../utils/colorPalette';
 
 function Item({ imageData, name, description, purchasePrice, dateAdded, forSale, salePrice }) {
+  console.log('Received imageData:', imageData);
   return (
     <div
       className='card'

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import colorPalette from '../utils/colorPalette';
-import Item from './item';
+import Item from './ViewCollection';
 import CreateItem from './CreateItem';
 
 const ViewCollection = () => {
@@ -28,6 +28,7 @@ const ViewCollection = () => {
           purchasePrice={item.purchasePrice}
           dateAdded={item.dateAdded}
           forSale={item.forSale}
+          imageData={item.imageData}
           // Add more props based on your data structure
         />
       ))}
@@ -36,4 +37,3 @@ const ViewCollection = () => {
 };
 
 export default ViewCollection;
-
