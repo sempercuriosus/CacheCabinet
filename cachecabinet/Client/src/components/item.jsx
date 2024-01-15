@@ -1,9 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
+import { useParams } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-function Item({ imageData, name, description, purchasePrice, dateAdded, forSale, salePrice }) {
+function Item({ items }) {
+  const navigate = useNavigate();
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  // Access the itemID from the route parameters
+  // const { itemID } = useParams();
+
+  // const { loading, error, data } = useQuery(GET_ITEM);
+
   const [isVisible, setIsVisible] = useState(true);
+
+  // if (error) {
+  //   return `Error! ${error.message}`;
+  // }
+
+  // if (loading) {
+  //   return <h1 className='title is-3'>Loading...</h1>;
+  // }
+
+  const handleViewClick = (item) => {
+    // set the state
+
+    setSelectedItem(item);
+
+    navigate(`/item/${item._id}`);
+  };
 
   const handleDelete = () => {
     const confirmed = Swal.fire({
@@ -11,69 +37,86 @@ function Item({ imageData, name, description, purchasePrice, dateAdded, forSale,
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
+      cancelButtonText: 'No',
     });
     if (confirmed) {
       setIsVisible(false);
     }
   };
-  
 
   return (
-    isVisible && (
-      <div
-        className='card'
-        style={{
-          backgroundColor: colorPalette.IVORY,
-          maxWidth: '400px',
-        }}>
-        <div className='card-image'>
-          <figure className='image is-4by3'>
-            <img
-              src={imageData || 'https://bulma.io/images/placeholders/1280x960.png'}
-              alt='Item Image'
-            />
-          </figure>
-        </div>
-        <div className='card-content'>
-          <h2 className='title is-4' style={{ color: '' }}>
-            {name}
-          </h2>
-          <h3 className='subtitle is-6' style={{ color: colorPalette.GREY }}>
-            {description}
-          </h3>
-          <div className='content'>
-            <div className='columns'>
-              <p className='column is-half'>{`Purchase Price: ${purchasePrice}`}</p>
-              <p className='column is-half'>{`Date Added: ${dateAdded}`}</p>
-            </div>
-            <p className='is-centered'>{`For Sale: ${forSale ? 'Yes' : 'No'}`}</p>
-            
-            {forSale && (
-              <div className='field'>
-                <p className='column'>{salePrice}</p>
+    <Fragment>
+      {items.map(
+        (item) =>
+          isVisible && (
+            <div
+              className='card'
+              key={item._id}
+              style={{
+                backgroundColor: colorPalette.IVORY,
+                maxWidth: '400px',
+              }}>
+              <div className='card-image'>
+                <figure className='image is-4by3'>
+                  <img
+                    src={
+                      item.imageData ||
+                      'https://bulma.io/images/placeholders/1280x960.png'
+                    }
+                    alt='Item Image'
+                  />
+                </figure>
               </div>
-            )}
-            <footer className='card-footer'>
-              <a
-                href='#'
-                className='card-footer-item has-text-black'
-                style={{ backgroundColor: colorPalette.BABYBLUE }}>
-                Edit
-              </a>
-              <a
-                href='#'
-                className='card-footer-item has-text-black'
-                style={{ backgroundColor: colorPalette.DUSTYROSE }}
-                onClick={handleDelete}>
-                Delete
-              </a>
-            </footer>
-          </div>
-        </div>
-      </div>
-    )
+              <div className='card-content'>
+                <h2
+                  className='title is-4'
+                  style={{ color: '' }}>
+                  {item.name}
+                </h2>
+                <h3
+                  className='subtitle is-6'
+                  style={{ color: colorPalette.GREY }}>
+                  {item.description}
+                </h3>
+                <div className='content'>
+                  <div className='columns'>
+                    <p className='column is-half'>{`Purchase Price: $ ${item.purchasePrice}`}</p>
+                    <p className='column is-half'>{`Date Added: ${item.dateAdded}`}</p>
+                  </div>
+                  <p className='is-centered'>{`For Sale: ${
+                    item.forSale ? 'Yes' : 'No'
+                  }`}</p>
+
+                  {item.forSale && (
+                    <div className='field'>
+                      <p className='column'>{item.salePrice}</p>
+                    </div>
+                  )}
+                  <footer className='card-footer'>
+                    <a
+                      href=''
+                      className='card-footer-item has-text-black'
+                      style={{ backgroundColor: colorPalette.BABYBLUE }}
+                      onClick={() => handleViewClick(item)}>
+                      Edit
+                    </a>
+                    <a
+                      href='#'
+                      className='card-footer-item has-text-black'
+                      style={{ backgroundColor: colorPalette.DUSTYROSE }}
+                      onClick={handleDelete}>
+                      Delete
+                    </a>
+                  </footer>
+                </div>
+              </div>
+              {/* Card End */}
+            </div>
+          ),
+      )}
+    </Fragment>
   );
 }
 
 export default Item;
+
