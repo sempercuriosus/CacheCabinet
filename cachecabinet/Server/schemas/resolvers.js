@@ -66,9 +66,36 @@ const resolvers = {
         // Getting the item name and description for the cards
         const items = await Item.find({
           _id: { $in: distinctItemIds },
-        }).select('name description');
+        });
 
-        const collectionItems = { collectionId: collectionId, items: items };
+        // Format items details
+        const formattedItems = items.map((item) => {
+          let date = new Date(item.dateAdded) || '';
+
+          const formattedDate = date
+            ? date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })
+            : '';
+
+          return {
+            _id: item._id,
+            name: item.name || '',
+            description: item.description || '',
+            purchasePrice: item.purchasePrice || 0.0,
+            quantity: item.quantity || '',
+            dateAdded: formattedDate,
+            image: item.image || '',
+            forSale: item.forSale || false,
+          };
+        });
+
+        const collectionItems = {
+          collectionId: collectionId,
+          items: formattedItems,
+        };
 
         return collectionItems;
       } catch (error) {
