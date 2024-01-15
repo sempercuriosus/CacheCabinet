@@ -68,7 +68,7 @@ function Item({ items }) {
           </button>
         </div>
       </div>
-      <div className='block'></div>
+
       {items.map((item) => (
         <div
           className='card block'
@@ -114,10 +114,11 @@ function Item({ items }) {
               </p>
 
               {item.forSale && (
-                <div className='field'>
-                  <p className='column'>{item.salePrice}</p>
+                <div className='block'>
+                  <strong>Sale Price: </strong> {item.salePrice}
                 </div>
               )}
+
               <footer className='card-footer'>
                 <a
                   href=''
