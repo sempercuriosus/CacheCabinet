@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import colorPalette from '../utils/colorPalette';
-import Item from './ViewCollection';
+import Item from './item';
 import CreateItem from './CreateItem';
 
 const ViewCollection = () => {
@@ -17,8 +17,8 @@ const ViewCollection = () => {
   return (
     <div>
       {/* Render CreateItem component with the callback and show/hide logic */}
-      {showCreateItem && <CreateItem onAddItem={handleAddItem} />}
-
+      {/* {showCreateItem && <CreateItem onAddItem={handleAddItem} />} */}
+      {collection.length === 0 && <CreateItem onAddItem={handleAddItem} />}
       {/* Display Item components for each item in the collection */}
       {collection.map((item, index) => (
         <Item
@@ -29,6 +29,7 @@ const ViewCollection = () => {
           dateAdded={item.dateAdded}
           forSale={item.forSale}
           imageData={item.imageData}
+          salePrice={item.salePrice}
           // Add more props based on your data structure
         />
       ))}
