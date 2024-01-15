@@ -4,6 +4,7 @@ import Item from './item';
 import CreateItem from './CreateItem';
 import { useQuery } from '@apollo/client';
 import { GET_COLLECTION } from '../utils/queries';
+import DisplayError from '../components/Error/DisplayError';
 
 const ViewCollection = () => {
   const { collectionId } = useParams();
@@ -18,7 +19,7 @@ const ViewCollection = () => {
   });
 
   if (error) {
-    return `Error! ${error.message}`;
+    return <DisplayError />;
   }
 
   if (loading) {
@@ -46,7 +47,7 @@ const ViewCollection = () => {
 
     return (
       <Fragment>
-        <div>
+        <div className='content section'>
           {/* Render CreateItem component with the callback and show/hide logic */}
           {/* {showCreateItem && <CreateItem onAddItem={handleAddItem} />} */}
           {/* Display Item components for each item in the collection */}
