@@ -16,6 +16,7 @@ const typeDefs = `
     description: String
     quantity: Int
     purchasePrice: Float
+    salePrice: Float
     forSale: Boolean
     dateAdded: String
     image: String
@@ -68,6 +69,7 @@ const typeDefs = `
     description: String
     quantity: Int
     purchasePrice: Float
+    salePrice: Float
     forSale: Boolean
     dateAdded: String
   }
@@ -85,7 +87,7 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!): Auth
     addCollection(collectionData: NewCollection!): Collection
-    addItem(userId: ID!, collectionId: ID!, itemData: NewItem): Item
+    addItem( collectionId: ID!, itemData: NewItem): Item
     updateCollection(userId: ID!, collectionId: ID!, updatedCollection: UpdateCollection!): Collection
     updateItem(userId: ID!, itemId: ID!, updatedItem: UpdateItem!): Item
 
