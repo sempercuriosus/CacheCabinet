@@ -54,10 +54,10 @@ function Item({ items }) {
   };
 
   return (
-    <section className='container'>
+    <div className='container'>
       <div
         className='box has-text-centered'
-        style={{ maxWidth: '400px' }}>
+        style={{ maxWidth: '550px' }}>
         <h2 className='title is-4'>Create Item</h2>
         <div className='is-flex is-justify-content-flex-end'>
           <button
@@ -75,7 +75,7 @@ function Item({ items }) {
           key={item._id}
           style={{
             backgroundColor: colorPalette.IVORY,
-            maxWidth: '400px',
+            maxWidth: '550px',
           }}>
           <div className='card-image'>
             {/* <figure className='image is-4by3'>
@@ -139,7 +139,7 @@ function Item({ items }) {
           {/* Card End */}
         </div>
       ))}
-    </section>
+    </div>
   );
 }
 
