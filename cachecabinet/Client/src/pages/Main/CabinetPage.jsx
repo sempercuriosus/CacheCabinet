@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import CreateCollection from '../../components/CreateCollection';
 import Collection from '../../components/collection';
 import Logout from '../../components/Logout';
@@ -29,19 +29,19 @@ export default function Home() {
     const collections = data.getUserAssignments;
 
     return (
-      <div className='content section'>
+      <Fragment>
         <div
-          className='hero-body'
+          className=''
           style={{ position: 'relative', bottom: '30px' }}>
-          <div className='columns is-centered is-mobile'>
+          <div className='columns is-mobile'>
             <div
               className='column'
-              style={{ margin: '20px', paddingRight: '40px' }}>
+              style={{ margin: '20px' }}>
               <CreateCollection onAddCollection={handleAddCollection} />
             </div>
           </div>
-          <div className='columns'>
-            <div>
+          <div className='columns is-multiline'>
+            <div className='column'>
               <Collection userCollections={collections} />
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function Home() {
           style={{ position: 'fixed', top: '10px', right: '10px' }}>
           <Logout />
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
