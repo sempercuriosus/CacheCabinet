@@ -188,10 +188,34 @@ const resolvers = {
     },
 
     // Item
-    addItem: async (parent, { userId, collectionId, itemData }, context) => {
+    addItem: async (parent, { collectionId, itemData }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+
+      const userId = context.user._id;
+
       try {
+        const itemDataSanitized = {
+          name: itemData.name,
+          description: itemData.description || '',
+          quantity: itemData.quantity || 0,
+          purchasePrice: itemData.purchasePrice || 0.0,
+          salePrice: itemData.salePrice || 0.0,
+          forSale: itemData.forSale || false,
+          dateAdded:
+            itemData.dateAdded ||
+            new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            }),
+          image: itemData.image || '',
+        };
+
+        console.log(itemDataSanitized);
         // Create new item
-        const newItem = await Item.create(itemData);
+        const newItem = await Item.create(itemDataSanitized);
 
         // Get the new Item ID
         const itemId = newItem._id;
