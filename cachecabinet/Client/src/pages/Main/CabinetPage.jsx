@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom'; // Import Navigate for redirection
 import CreateCollection from '../../components/CreateCollection';
 import Collection from '../../components/collection';
 import Logout from '../../components/Logout';
 import '../../assets/CabinetPage.css';
-import AuthService from '../../utils/auth';
+import { useQuery } from '@apollo/client';
+import { GET_USER_ASSIGNMENTS } from '../../utils/queries';
 
 export default function Home() {
   const [collections, setCollections] = useState([]);
@@ -14,31 +14,43 @@ export default function Home() {
   };
   
 
-  if (!AuthService.loggedIn || AuthService.isTokenExpired()) {
-    return <Navigate to="/" />;
+  const { loading, error, data } = useQuery(GET_USER_ASSIGNMENTS);
+
+  if (error) {
+    return `Error! ${error.message}`;
   }
 
-  if (AuthService.loggedIn) {
-  return (
-    <div className='hero is-fullheight'>
-      <div className='hero-body' style={{ position: 'relative', bottom: '30px' }}>
-        <div className='columns is-centered is-mobile'>
-          <div className='column' style={{ margin: '40px' }}>
-            <CreateCollection onAddCollection={handleAddCollection} />
+  if (loading) {
+    return <h1 className='title is-3'>Loading...</h1>;
+  }
+
+  if (data) {
+    const collections = data.getUserAssignments;
+
+    return (
+      <div className='hero is-fullheight'>
+        <div
+          className='hero-body'
+          style={{ position: 'relative', bottom: '30px' }}>
+          <div className='columns is-centered is-mobile'>
+            <div
+              className='column'
+              style={{ margin: '40px' }}>
+              <CreateCollection onAddCollection={handleAddCollection} />
+            </div>
+          </div>
+          <div className='columns is-multiline'>
+            <div className='column is-6'>
+              <Collection userCollections={collections} />
+            </div>
           </div>
         </div>
-        <div className='columns is-multiline'>
-          {collections.map((collection, index) => (
-            <div className='column is-6' key={index}>
-              <Collection {...collection} />
-            </div>
-          ))}
+        <div
+          className='logout-container'
+          style={{ position: 'fixed', top: '10px', right: '10px' }}>
+          <Logout />
         </div>
       </div>
-      <div className='logout-container' style={{ position: 'fixed', top: '50px', right: '20px' }}>
-        <Logout />
-      </div>
-    </div>
-  );
-}
+    );
+  }
 }

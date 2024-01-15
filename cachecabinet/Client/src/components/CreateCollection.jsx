@@ -1,65 +1,79 @@
 import React, { useState } from 'react';
-
+import { useMutation } from '@apollo/client';
+import { ADD_COLLECTION } from '../utils/mutations';
 
 const CreateCollection = ({ onAddCollection }) => {
   const [showForm, setShowForm] = useState(false);
   const [collectionName, setCollectionName] = useState('');
   const [collectionDescription, setCollectionDescription] = useState('');
 
-  const handleAddCollection = () => {
-    if (collectionName.trim() !== '') {
-      const newCollection = {
-        name: collectionName,
-        description: collectionDescription,
-      };
+  const [addCollection] = useMutation(ADD_COLLECTION);
 
-      // Pass the new collection to the parent component
-      onAddCollection(newCollection);
+  const handleAddCollection = async () => {
+    try {
+      if (collectionName.trim() !== '') {
+        const newCollection = {
+          name: collectionName,
+          description: collectionDescription,
+        };
 
-      // Reset form state
-      setCollectionName('');
-      setCollectionDescription('');
-      setShowForm(false);
+        await addCollection({
+          variables: { collectionData: newCollection },
+        });
+
+        // Pass the new collection to the parent component
+        onAddCollection(newCollection);
+
+        // Reset form state
+        setCollectionName('');
+        setCollectionDescription('');
+        setShowForm(false);
+      }
+    } catch (error) {
+      console.error('Error adding collection:', error);
     }
   };
 
   return (
-    <div className="box has-text-centered">
-      <h2 className="title is-4">Create a Collection</h2>
-      <div className="is-flex is-justify-content-flex-end">
+    <div className='box has-text-centered'>
+      <h2 className='title is-4'>Create a Collection</h2>
+      <div className='is-flex is-justify-content-flex-end'>
         <button
-          className="button is-light is-rounded plus-button"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? 'Cancel' : <i className="material-icons has-text-danger">add</i>}
+          className='button is-light is-rounded plus-button'
+          onClick={() => setShowForm(!showForm)}>
+          {showForm ? (
+            'Cancel'
+          ) : (
+            <i className='material-icons has-text-danger'>add</i>
+          )}
         </button>
       </div>
       {showForm && (
-        <div className="field">
-          <label className="label">Collection Name</label>
-          <div className="control">
+        <div className='field'>
+          <label className='label'>Collection Name</label>
+          <div className='control'>
             <input
-              className="input"
-              type="text"
-              placeholder="Enter collection name"
+              className='input'
+              type='text'
+              placeholder='Enter collection name'
               value={collectionName}
               onChange={(e) => setCollectionName(e.target.value)}
             />
           </div>
-          <label className="label">Collection Description</label>
-          <div className="control">
+          <label className='label'>Collection Description</label>
+          <div className='control'>
             <textarea
-              className="textarea"
-              placeholder="Enter collection description"
+              className='textarea'
+              placeholder='Enter collection description'
               value={collectionDescription}
-              onChange={(e) => setCollectionDescription(e.target.value)}
-            ></textarea>
+              onChange={(e) =>
+                setCollectionDescription(e.target.value)
+              }></textarea>
           </div>
-          <div className="control">
+          <div className='control'>
             <button
-              className="button is-primary"
-              onClick={handleAddCollection}
-            >
+              className='button is-primary'
+              onClick={handleAddCollection}>
               Add Collection
             </button>
           </div>
@@ -69,5 +83,5 @@ const CreateCollection = ({ onAddCollection }) => {
   );
 };
 
-
 export default CreateCollection;
+

@@ -57,8 +57,8 @@ export const ADD_USER = gql`
  * description
  */
 export const ADD_COLLECTION = gql`
-  mutation AddCollection($userId: ID!, $collectionData: NewCollection!) {
-    addCollection(userId: $userId, collectionData: $collectionData) {
+  mutation AddCollection($collectionData: NewCollection!) {
+    addCollection(collectionData: $collectionData) {
       name
       description
     }
