@@ -121,10 +121,18 @@ const resolvers = {
     },
 
     // Collection
-    addCollection: async (parent, { userId, collectionData }, context) => {
+    addCollection: async (parent, { collectionData }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+
       try {
+        const userId = context.user._id;
+
+        console.log(collectionData);
+
         // Create new collection
-        const newCollection = await Item.create(collectionData);
+        const newCollection = await Collection.create(collectionData);
 
         // Get the new Collection ID
         const collectionId = newCollection._id;
