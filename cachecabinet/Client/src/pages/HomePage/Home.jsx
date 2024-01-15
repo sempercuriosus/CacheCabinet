@@ -5,7 +5,7 @@ import '../../assets/home.css';
 
 export default function Home() {
   return (
-    <div className='hero is-fullheight'>
+    <div className='hero is-fullheight' style={{ marginTop: '-180px'}}>
       <div className='hero-body'>
         <div className='columns is-centered is-mobile'>
           <div className='column is-5 is-mobile'>
@@ -25,4 +25,3 @@ export default function Home() {
     </div>
   );
 }
-

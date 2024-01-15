@@ -1,14 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../utils/auth'
 
 const Logout = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    AuthService.logout;
 
     // After logout, navigate back to the login page
-    navigate('/login');
+    navigate('/');
   };
 
   return (
