@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Item from './item';
 import CreateItem from './CreateItem';
 import { useQuery } from '@apollo/client';
-import { GET_COLLECTION, GET_ITEM } from '../utils/queries';
+import { GET_COLLECTION } from '../utils/queries';
 
 const ViewCollection = () => {
   const { collectionId } = useParams();
