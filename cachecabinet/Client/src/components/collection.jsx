@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Collection = ({ userCollections }) => {
   const [selectedCollection, setSelectedCollection] = useState(null);
-  const [editingCollection, setEditingCollection] = useState(null);
   const navigate = useNavigate();
 
   const cardStyle = {
@@ -22,17 +21,7 @@ const Collection = ({ userCollections }) => {
   };
 
   const handleEditClick = (collection) => {
-    const { _id, name, description } = collection;
-
-    setEditingCollection({
-      collectionId: _id,
-      collectionName: name,
-      collectionDescription: description,
-    });
-
-    navigate('/collection-edit?collectionId=' + _id, {
-      state: { _id, name, description },
-    });
+    navigate('/collection-edit?collectionId=' + collection._id);
   };
 
   return (
