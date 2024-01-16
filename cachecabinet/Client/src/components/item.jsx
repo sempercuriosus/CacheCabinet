@@ -49,18 +49,25 @@ function Item({ items }) {
       <div className='columns is-multiline'>
       {items.map((item) => (
           <div
-            className='column is-mobile'
+            className='container column is-mobile'
             key={item._id}
             style={{
               position: 'relative',
               left: '20px',
-              margin: '20px',
-              marginLeft: '20px',
-              marginBottom: '25px'
+              margin: '10px',
+              marginLeft: '0px',
+              marginBottom: '25px',
             }}>
-            {/* Conditional rendering for additional info */}
-            {selectedItem === item._id && <CreateItem />}
-          <div className='card' style={{ maxWidth: '240px', maxHeight: '500px', minHeight: '250px', minWidth: '100px', overflow: 'auto' }}>
+            <div
+              className='card'
+              style={{
+                maxWidth: '300px',
+                maxHeight: '700px',
+                minHeight: '250px',
+                minWidth: '100px',
+                // overflow: 'auto',
+              }}>
+
               <div className='card-image'>
                 <figure className='image is-1by4'>
                   <img
