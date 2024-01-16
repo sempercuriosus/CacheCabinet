@@ -84,3 +84,11 @@ export const GET_ITEM = gql`
   }
 `;
 
+export const GET_COLLECTION_NAMEDESC = gql`
+  query GetCollectionNameDesc($collectionId: ID!) {
+    getCollectionNameDesc(collectionId: $collectionId) {
+      name
+      description
+    }
+  }
+`;
