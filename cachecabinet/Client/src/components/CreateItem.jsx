@@ -75,10 +75,6 @@ const CreateItem = ({ onAddItem }) => {
       className='card'
       style={{
         backgroundColor: colorPalette.DUSTYROSE,
-        maxWidth: '300px',
-        maxHeight: '700px',
-        minHeight: '250px',
-        minWidth: '100px',
       }}>
       <div className='card-content'>
         <button
@@ -105,7 +101,7 @@ const CreateItem = ({ onAddItem }) => {
             <div className='field'>
               <label className='label'>Description</label>
               <div className='control'>
-                <input
+                <textarea
                   className='input'
                   type='text'
                   placeholder='Description'
