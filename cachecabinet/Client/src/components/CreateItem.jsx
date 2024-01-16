@@ -3,8 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
-
-
+import { useNavigate } from 'react-router-dom';
 
 const CreateItem = ({ onAddItem }) => {
   // State variables for the form fields
@@ -19,6 +18,7 @@ const CreateItem = ({ onAddItem }) => {
     addItem,
     { data: itemData, loading: addItemLoading, error: addItemError },
   ] = useMutation(ADD_ITEM);
+  const navigate = useNavigate();
 
   // extract the query param
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,32 +33,36 @@ const CreateItem = ({ onAddItem }) => {
       return;
     }
 
-    const newItem = {
-      name: name,
-      description: description,
-      purchasePrice: parseFloat(purchasePrice) || 0.0,
-      dateAdded: dateAdded,
-      forSale: forSale,
-      salePrice: forSale ? parseFloat(salePrice) : 0.0, // Only include salePrice if forSale is true
-    };
+    try {
+      const newItem = {
+        name: name,
+        description: description,
+        purchasePrice: parseFloat(purchasePrice) || 0.0,
+        dateAdded: dateAdded,
+        forSale: forSale,
+        salePrice: forSale ? parseFloat(salePrice) : 0.0, // Only include salePrice if forSale is true
+      };
 
-    
+      await addItem({
+        variables: { collectionId: collectionId, itemData: newItem },
+      });
 
-    await addItem({
-      variables: { collectionId: collectionId, itemData: newItem },
-    });
+      // Pass the new item data to the parent component
+      // onAddItem(newItem);
 
-    // Pass the new item data to the parent component
-    // onAddItem(newItem);
+      // Clear the form fields after adding the item
+      setName('');
+      setDescription('');
+      setPurchasePrice('');
+      setDateAdded('');
+      setForSale(false);
+      setSalePrice('');
+      setError(''); // Clear the error message
 
-    // Clear the form fields after adding the item
-    setName('');
-    setDescription('');
-    setPurchasePrice('');
-    setDateAdded('');
-    setForSale(false);
-    setSalePrice('');
-    setError(''); // Clear the error message
+      navigate(`/collection/${collectionId}`);
+    } catch (error) {
+      //
+    }
   };
 
   const handleImageUpload = () => {
@@ -71,8 +75,10 @@ const CreateItem = ({ onAddItem }) => {
       className='card'
       style={{
         backgroundColor: colorPalette.DUSTYROSE,
-        overflow: 'auto',
-        width: '500px',
+        maxWidth: '300px',
+        maxHeight: '700px',
+        minHeight: '250px',
+        minWidth: '100px',
       }}>
       <div className='card-content'>
         <button
