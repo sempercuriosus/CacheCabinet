@@ -71,8 +71,6 @@ const resolvers = {
           _id: _id,
         });
 
-        console.log(collectionData);
-
         return collectionData;
       } catch (error) {
         console.error('Error fetching collection details:', error);
@@ -187,8 +185,6 @@ const resolvers = {
 
       try {
         const userId = context.user._id;
-
-        console.log(collectionData);
 
         // Create new collection
         const newCollection = await Collection.create(collectionData);

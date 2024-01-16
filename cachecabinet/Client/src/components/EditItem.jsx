@@ -64,8 +64,6 @@ const EditItem = () => {
           });
         };
 
-        console.log(editedItem);
-
         await updateItem({
           variables: {
             itemId: itemId,
@@ -92,7 +90,6 @@ const EditItem = () => {
   const handleImageUpload = () => {
     // Logic to handle image upload
     if (imageData) {
-      console.log('Image URL:', imageData);
       setImageData(imageData);
     }
   };

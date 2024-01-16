@@ -73,7 +73,6 @@ const CreateItem = ({ onAddItem }) => {
     // Logic to handle image upload
     // Assuming imageData is the URL provided
     if (imageData) {
-      console.log('Image URL:', imageData);
       // Set the state with the image URL
       setImageData(imageData);
     }
