@@ -9,6 +9,7 @@ import ErrorPage from './components/Error/ErrorPage.jsx';
 import ViewCollection from './components/ViewCollection.jsx';
 import CreateItem from './components/CreateItem.jsx';
 import EditColection from './components/EditCollection.jsx';
+import EditItem from './components/editItem.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,8 +38,8 @@ const router = createBrowserRouter([
         element: <ViewCollection />,
       },
       {
-        path: '/item/:itemId',
-        element: <CreateItem />,
+        path: '/item-edit',
+        element: <EditItem />,
       },
     ],
   },
@@ -47,4 +48,3 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />,
 );
-
