@@ -138,7 +138,25 @@ const resolvers = {
         // Getting the Item Details
         const item = await Item.findById(itemId);
 
-        return item;
+        const itemDataSanitized = {
+          _id: item._id,
+          name: item.name,
+          description: item.description || '',
+          quantity: item.quantity || 0,
+          purchasePrice: item.purchasePrice || 0.0,
+          salePrice: item.salePrice || 0.0,
+          forSale: item.forSale || false,
+          dateAdded:
+            item.dateAdded ||
+            new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            }),
+          imageData: item.imageData || '',
+        };
+
+        return itemDataSanitized;
       } catch (error) {
         console.error('Error fetching item details:', error);
         throw new Error('Failed to fetch ITEM details');

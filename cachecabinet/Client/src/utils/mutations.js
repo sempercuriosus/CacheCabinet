@@ -153,6 +153,7 @@ export const UPDATE_ITEM = gql`
     updateItem(itemId: $itemId, updatedItem: $updatedItem) {
       name
       description
+      dateAdded
       quantity
       purchasePrice
       salePrice
