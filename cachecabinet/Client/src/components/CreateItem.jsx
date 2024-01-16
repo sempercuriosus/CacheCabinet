@@ -19,7 +19,7 @@ const CreateItem = ({ onAddItem }) => {
   ] = useMutation(ADD_ITEM);
 
   // extract the query param
-  const [searchParams, setSetParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const collectionId = searchParams.get('collectionId');
 
