@@ -19,7 +19,7 @@ const typeDefs = `
     salePrice: Float
     forSale: Boolean
     dateAdded: String
-    image: String
+    imageData: String
   }
 
   type Collection {
@@ -73,6 +73,7 @@ const typeDefs = `
     salePrice: Float
     forSale: Boolean
     dateAdded: String
+    imageData: String!
   }
 
   input UpdateItem{
@@ -82,6 +83,7 @@ const typeDefs = `
     purchasePrice: Float
     forSale: Boolean
     dateAdded: String
+    imageData: String!
   }
   
   type Mutation {
