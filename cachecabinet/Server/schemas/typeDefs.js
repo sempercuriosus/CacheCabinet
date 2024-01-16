@@ -52,6 +52,7 @@ const typeDefs = `
     getUserAssignments: UserAssignment
     getCollection(collectionId: ID!): CollectionDetails
     getItem(itemId: ID!): Item
+    getCollectionNameDesc( collectionId: ID!): Collection
   }
 
   input NewCollection{
@@ -90,7 +91,6 @@ const typeDefs = `
     addItem( collectionId: ID!, itemData: NewItem): Item
     updateCollection( collectionId: ID!, updatedCollection: UpdateCollection!): Collection
     updateItem(userId: ID!, itemId: ID!, updatedItem: UpdateItem!): Item
-
   }
 `;
 
