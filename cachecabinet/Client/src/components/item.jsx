@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 function Item({ items }) {
@@ -19,18 +18,7 @@ function Item({ items }) {
     navigate('/item/new?collectionId=' + collectionId);
   };
 
-  const handleDelete = () => {
-    const confirmed = Swal.fire({
-      title: 'Are you sure?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No',
-    });
-    if (confirmed) {
-      setIsVisible(false);
-    }
-  };
+
 
   return (
     <Fragment>
@@ -40,16 +28,18 @@ function Item({ items }) {
       <div className='columns is-multiline'>
         {items.map((item) => (
           <div
-            className='column is-one-third' // Adjust the column width as needed
+            className='column is-mobile is-2'
             key={item._id}
             style={{
+              position: 'relative',
+              left: '20px',
               margin: '20px',
               marginLeft: '20px',
-              marginBottom: '25px' // Add margin for spacing
+              marginBottom: '25px'
             }}>
-            <div className='card' style={{ maxWidth: '350px', maxHeight: '500px', minHeight: '250px', minWidth: '100px', overflow: 'auto' }}>
+            <div className='card' style={{ maxWidth: '240px', maxHeight: '500px', minHeight: '250px', minWidth: '100px', overflow: 'auto' }}>
               <div className='card-image'>
-                <figure className='image is-4by3'>
+                <figure className='image is-1by4'>
                   <img
                     src={item.imageData || 'https://bulma.io/images/placeholders/1280x960.png'}
                     alt='Item Image'
@@ -87,7 +77,7 @@ function Item({ items }) {
                       href='#'
                       className='card-footer-item has-text-black'
                       style={{ backgroundColor: colorPalette.DUSTYROSE }}
-                      onClick={handleDelete}>
+                      >
                       Delete
                     </a>
                   </footer>

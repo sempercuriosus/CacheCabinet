@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_COLLECTION } from '../utils/mutations';
+import colorPalette from '../utils/colorPalette';
 
 const CreateCollection = ({ onAddCollection }) => {
   const [showForm, setShowForm] = useState(false);
@@ -35,10 +36,13 @@ const CreateCollection = ({ onAddCollection }) => {
   };
 
   return (
-    <div className='box has-text-centered'>
+    <div
+      className='box has-text-centered'
+      style={{ maxWidth: '550px' }}>
       <h2 className='title is-4'>Create a Collection</h2>
       <div className='is-flex is-justify-content-flex-end'>
         <button
+          style={{ backgroundColor: colorPalette.SAGE }}
           className='button is-light is-rounded plus-button'
           onClick={() => setShowForm(!showForm)}>
           {showForm ? (
@@ -72,7 +76,8 @@ const CreateCollection = ({ onAddCollection }) => {
           </div>
           <div className='control'>
             <button
-              className='button is-primary'
+              className='button'
+              style={{ backgroundColor: colorPalette.SAGE }}
               onClick={handleAddCollection}>
               Add Collection
             </button>
