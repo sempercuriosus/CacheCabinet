@@ -88,7 +88,7 @@ const typeDefs = `
     addUser(email: String!, password: String!): Auth
     addCollection(collectionData: NewCollection!): Collection
     addItem( collectionId: ID!, itemData: NewItem): Item
-    updateCollection(userId: ID!, collectionId: ID!, updatedCollection: UpdateCollection!): Collection
+    updateCollection( collectionId: ID!, updatedCollection: UpdateCollection!): Collection
     updateItem(userId: ID!, itemId: ID!, updatedItem: UpdateItem!): Item
 
   }
