@@ -14,16 +14,26 @@ function Item({ items }) {
     navigate(`/item/${item._id}`);
   };
 
-
   const handleAddItemClick = () => {
     navigate('/item/new?collectionId=' + collectionId);
   };
 
   return (
     <Fragment>
-      <div>
-        <button onClick={handleAddItemClick}>+</button>
+      <div
+        className='box container has-text-centered'
+        style={{ maxWidth: '550px' }}>
+        <h2 className='title is-4'>Create an Item</h2>
+        <div className='is-flex is-justify-content-flex-end'>
+          <button
+            style={{ backgroundColor: colorPalette.SAGE }}
+            className='button is-light is-rounded plus-button'
+            onClick={handleAddItemClick}>
+            <i className='material-icons has-text-danger'>add</i>
+          </button>
+        </div>
       </div>
+
       <div className='columns is-multiline'>
         {items.map((item) => (
           <div
@@ -34,22 +44,37 @@ function Item({ items }) {
               left: '20px',
               margin: '20px',
               marginLeft: '20px',
-              marginBottom: '25px'
+              marginBottom: '25px',
             }}>
-            <div className='card' style={{ maxWidth: '240px', maxHeight: '500px', minHeight: '250px', minWidth: '100px', overflow: 'auto' }}>
+            <div
+              className='card'
+              style={{
+                maxWidth: '240px',
+                maxHeight: '500px',
+                minHeight: '250px',
+                minWidth: '100px',
+                overflow: 'auto',
+              }}>
               <div className='card-image'>
                 <figure className='image is-1by4'>
                   <img
-                    src={item.imageData || 'https://bulma.io/images/placeholders/1280x960.png'}
+                    src={
+                      item.imageData ||
+                      'https://bulma.io/images/placeholders/1280x960.png'
+                    }
                     alt='Item Image'
                   />
                 </figure>
               </div>
               <div className='card-content'>
-                <h2 className='title is-5' style={{ color: '' }}>
+                <h2
+                  className='title is-5'
+                  style={{ color: '' }}>
                   {item.name}
                 </h2>
-                <h3 className='subtitle is-6' style={{ color: colorPalette.GREY }}>
+                <h3
+                  className='subtitle is-6'
+                  style={{ color: colorPalette.GREY }}>
                   {item.description}
                 </h3>
                 <div className='content'>
@@ -57,7 +82,9 @@ function Item({ items }) {
                     <p className='column is-half'>{`Purchase Price: $ ${item.purchasePrice}`}</p>
                     <p className='column is-half'>{`Date Added: ${item.dateAdded}`}</p>
                   </div>
-                  <p className='is-centered'>{`For Sale: ${item.forSale ? 'Yes' : 'No'}`}</p>
+                  <p className='is-centered'>{`For Sale: ${
+                    item.forSale ? 'Yes' : 'No'
+                  }`}</p>
 
                   {item.forSale && (
                     <div className='field'>
@@ -75,8 +102,7 @@ function Item({ items }) {
                     <a
                       href='#'
                       className='card-footer-item has-text-black'
-                      style={{ backgroundColor: colorPalette.DUSTYROSE }}
-                      >
+                      style={{ backgroundColor: colorPalette.DUSTYROSE }}>
                       Delete
                     </a>
                   </footer>
@@ -91,3 +117,4 @@ function Item({ items }) {
 }
 
 export default Item;
+
