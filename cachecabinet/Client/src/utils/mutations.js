@@ -113,12 +113,10 @@ export const ADD_ITEM = gql`
  */
 export const UPDATE_COLLECTION = gql`
   mutation UpdateCollection(
-    $userId: ID!
     $collectionId: ID!
     $updatedCollection: UpdateCollection!
   ) {
     updateCollection(
-      userId: $userId
       collectionId: $collectionId
       updatedCollection: $updatedCollection
     ) {
