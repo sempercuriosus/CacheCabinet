@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
+import Navbar from '../../components/Nav';
 
 const Header = () => {
   return (
     <Fragment>
-      <br />
       <header className='level block'>
-        <div className='title level-item'>🗃️ Cache Cabinet 🗑️</div>
+        <Navbar />
       </header>
+
+      <br />
     </Fragment>
   );
 };

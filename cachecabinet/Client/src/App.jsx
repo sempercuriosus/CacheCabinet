@@ -39,7 +39,7 @@ function App() {
       <Header />
       <section
         id='topLevel'
-        className='content section'>
+        className='content section has-navbar-fixed-top'>
         <Outlet />
       </section>
       <Footer />
