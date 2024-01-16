@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Item from './item';
 import { useQuery } from '@apollo/client';
 import { GET_COLLECTION } from '../utils/queries';
+import DisplayError from '../components/Error/DisplayError';
 
 const ViewCollection = () => {
   const { collectionId } = useParams();
@@ -14,7 +15,7 @@ const ViewCollection = () => {
   });
 
   if (error) {
-    return `Error! ${error.message}`;
+    return <DisplayError />;
   }
 
   if (loading) {

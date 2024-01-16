@@ -254,12 +254,18 @@ const resolvers = {
 
     updateCollection: async (
       parent,
-      { userId, collectionId, updatedCollection },
+      { collectionId, updatedCollection },
       context,
     ) => {
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+
       try {
+        const userId = context.user._id;
+
         // get the existing collection
-        const existingCollection = await Item.findById(collectionId);
+        let existingCollection = await Collection.findById(collectionId);
 
         if (existingCollection) {
           // set the new values
@@ -270,6 +276,8 @@ const resolvers = {
           const updateResult = await existingCollection.save();
 
           console.log(
+            'user',
+            userId,
             'updating',
             collectionId,
             'new collection information',

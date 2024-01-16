@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import colorPalette from '../utils/colorPalette';
 import CreateItem from './CreateItem';
 import '../../src/assets/CabinetPage.css';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Collection = ({ userCollections }) => {
   const [selectedCollection, setSelectedCollection] = useState(null);
+  const [editingCollection, setEditingCollection] = useState(null);
   const navigate = useNavigate();
 
   const cardStyle = {
@@ -16,7 +17,22 @@ const Collection = ({ userCollections }) => {
 
   const handleViewClick = (collectionId) => {
     // Toggle selectedCollection state
-    setSelectedCollection(navigate(`/collection/${collectionId}`));
+    setSelectedCollection(collectionId);
+    navigate(`/collection/${collectionId}`);
+  };
+
+  const handleEditClick = (collection) => {
+    const { _id, name, description } = collection;
+
+    setEditingCollection({
+      collectionId: _id,
+      collectionName: name,
+      collectionDescription: description,
+    });
+
+    navigate('/collection-edit?collectionId=' + _id, {
+      state: { _id, name, description },
+    });
   };
 
   return (
@@ -45,7 +61,8 @@ const Collection = ({ userCollections }) => {
             <a
               href=''
               className='card-footer-item has-text-black'
-              style={{ backgroundColor: colorPalette.SAGE }}>
+              style={{ backgroundColor: colorPalette.SAGE }}
+              onClick={() => handleEditClick(collection)}>
               Edit
             </a>
           </footer>
