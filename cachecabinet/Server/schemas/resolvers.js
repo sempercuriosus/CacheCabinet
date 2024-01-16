@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Collection, Item, ItemAssignment } = require('../models');
 const { signToken } = require('../utils/auth');
+const { ObjectId } = require('mongodb');
 
 const resolvers = {
   //    Start Queries
@@ -51,6 +52,31 @@ const resolvers = {
         console.error('Error fetching assignments:', error);
 
         throw new Error('Failed to fetch USER ASSIGNMENTS');
+      }
+    },
+
+    getCollectionNameDesc: async (parent, { collectionId }, context) => {
+      console.log('Request from', context.user, 'getting', collectionId);
+
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+
+      const _id = new ObjectId(collectionId);
+
+      try {
+        // Fetch the corresponding collection data for the distinct collectionIds
+        const collectionData = await Collection.findById({
+          _id: _id,
+        });
+
+        console.log(collectionData);
+
+        return collectionData;
+      } catch (error) {
+        console.error('Error fetching collection details:', error);
+
+        throw new Error('Failed to fetch COLLECTION  DETAILS');
       }
     },
 

@@ -1,30 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_COLLECTION_NAMEDESC } from '../utils/queries';
 import { UPDATE_COLLECTION } from '../utils/mutations';
 import colorPalette from '../utils/colorPalette';
-import { useLocation } from 'react-router-dom';
+import DisplayError from '../components/Error/DisplayError';
 
 const EditCollection = () => {
   const [collectionName, setCollectionName] = useState('');
   const [collectionDescription, setCollectionDescription] = useState('');
   const [updateCollection] = useMutation(UPDATE_COLLECTION);
-  const [searchParams, setSetParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const location = useLocation();
-  const collectionData = location.state;
+  // extract the query param
+  const collectionId = searchParams.get('collectionId');
+
+  const { loading, error, data } = useQuery(GET_COLLECTION_NAMEDESC, {
+    variables: {
+      collectionId: collectionId,
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      const { name, description } = data.getCollectionNameDesc;
+      setCollectionName(name);
+      setCollectionDescription(description);
+    }
+  }, [data]);
 
   const handleAddCollection = async () => {
     try {
-      const collectionId = searchParams.get('collectionId');
-
       if (collectionName.trim() !== '') {
         const editedCollection = {
           name: collectionName,
           description: collectionDescription,
         };
-
-        console.log(editedCollection);
 
         await updateCollection({
           variables: {
@@ -32,6 +44,8 @@ const EditCollection = () => {
             updatedCollection: editedCollection,
           },
         });
+
+        navigate('/main');
 
         // Reset form state
         setCollectionName('');
@@ -41,6 +55,14 @@ const EditCollection = () => {
       console.error('Error adding collection:', error);
     }
   };
+
+  if (error) {
+    return <DisplayError />;
+  }
+
+  if (loading) {
+    return <h1 className='title is-3'>Loading...</h1>;
+  }
 
   return (
     <div
