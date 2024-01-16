@@ -14,11 +14,10 @@ function Item({ items }) {
     navigate(`/item/${item._id}`);
   };
 
+
   const handleAddItemClick = () => {
     navigate('/item/new?collectionId=' + collectionId);
   };
-
-
 
   return (
     <Fragment>
@@ -28,7 +27,7 @@ function Item({ items }) {
       <div className='columns is-multiline'>
         {items.map((item) => (
           <div
-            className='column is-mobile is-2'
+            className='column is-mobile'
             key={item._id}
             style={{
               position: 'relative',

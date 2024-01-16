@@ -4,6 +4,8 @@ import colorPalette from '../utils/colorPalette';
 import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
 
+
+
 const CreateItem = ({ onAddItem }) => {
   // State variables for the form fields
   const [name, setName] = useState('');
@@ -40,7 +42,7 @@ const CreateItem = ({ onAddItem }) => {
       salePrice: forSale ? parseFloat(salePrice) : 0.0, // Only include salePrice if forSale is true
     };
 
-    // add mutation here.
+    
 
     await addItem({
       variables: { collectionId: collectionId, itemData: newItem },
