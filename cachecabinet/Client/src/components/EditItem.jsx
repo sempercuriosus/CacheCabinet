@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_ITEM } from '../utils/queries';
 import { UPDATE_ITEM } from '../utils/mutations';
 import colorPalette from '../utils/colorPalette';
-import { useLocation } from 'react-router-dom';
 
 const EditItem = () => {
   const [itemName, setItemName] = useState('');
@@ -14,16 +14,39 @@ const EditItem = () => {
   const [salePrice, setSalePrice] = useState('');
   const [imageData, setImageData] = useState('');
   const [updateItem] = useMutation(UPDATE_ITEM);
-
   const [searchParams, setSetParams] = useSearchParams();
+  const itemId = searchParams.get('itemId');
 
-  const location = useLocation();
-  const itemData = location.state;
+  const { loading, error, data } = useQuery(GET_ITEM, {
+    variables: {
+      itemId: itemId,
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      const {
+        name,
+        description,
+        purchasePrice,
+        dateAdded,
+        // forSale,
+        salePrice,
+        imageData,
+      } = data.getItem;
+
+      setItemName(name);
+      setItemDescription(description);
+      setPurchasePrice(purchasePrice);
+      setDateAdded(dateAdded);
+      // setForSale(forSale);
+      setSalePrice(salePrice);
+      setImageData(imageData);
+    }
+  }, [data]);
 
   const handleAddItem = async () => {
     try {
-      const itemId = searchParams.get('itemId');
-
       if (itemName.trim() !== '') {
         const editedItem = {
           name: itemName,
@@ -55,7 +78,7 @@ const EditItem = () => {
         setItemDescription('');
         setPurchasePrice('');
         setDateAdded('');
-        setForSale(false);
+        setForSale('');
         setImageData('');
       }
     } catch (error) {
@@ -110,7 +133,7 @@ const EditItem = () => {
             className='input'
             placeholder='Enter date added'
             value={dateAdded}
-            onChange={(e) => setItemDescription(e.target.value)}></input>
+            onChange={(e) => setDateAdded(e.target.value)}></input>
         </div>
 
         <label className='label'>Image URL</label>

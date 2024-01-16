@@ -86,39 +86,6 @@ const CreateItem = ({ onAddItem }) => {
         backgroundColor: colorPalette.DUSTYROSE,
       }}>
       <div className='card-content'>
-        <button
-          className='button is-primary block'
-          style={{ backgroundColor: colorPalette.BABYBLUE }}
-          type='button'
-          onClick={handleImageUpload}>
-          Upload Image
-        </button>
-        <input
-          className='input'
-          type='text'
-          placeholder='Enter Image URL'
-          value={imageData}
-          onChange={(e) => setImageData(e.target.value)}
-        />
-        {/* Display the image */}
-        {imageData && (
-          <img
-            src={imageData}
-            alt='Uploaded image'
-          />
-        )}
-        <div className='field'>
-          <label className='label'>Image URL</label>
-          <div className='control'>
-            <input
-              className='input'
-              type='text'
-              placeholder='Enter Image URL'
-              value={imageData}
-              onChange={(e) => setImageData(e.target.value)}
-            />
-          </div>
-        </div>
         <div className='content'>
           <form>
             <div className='field'>
@@ -195,6 +162,41 @@ const CreateItem = ({ onAddItem }) => {
                 For Sale
               </label>
             </div>
+
+            {/* <button
+              className='button is-primary block'
+              style={{ backgroundColor: colorPalette.BABYBLUE }}
+              type='button'
+              onClick={handleImageUpload}>
+              Upload Image
+            </button>
+            <input
+              className='input'
+              type='text'
+              placeholder='Enter Image URL'
+              value={imageData}
+              onChange={(e) => setImageData(e.target.value)}
+            /> */}
+            {/* Display the image */}
+            {imageData && (
+              <img
+                src={imageData}
+                alt='Uploaded image'
+              />
+            )}
+            <div className='field'>
+              <label className='label'>Image URL</label>
+              <div className='control'>
+                <input
+                  className='input'
+                  type='text'
+                  placeholder='Enter Image URL'
+                  value={imageData}
+                  onChange={(e) => setImageData(e.target.value)}
+                />
+              </div>
+            </div>
+
             <div className='field'>
               <div className='control'>
                 <button
