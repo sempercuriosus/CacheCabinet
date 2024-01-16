@@ -2,9 +2,8 @@ import React from 'react';
 import AuthService from '../utils/auth';
 
 const Logout = () => {
-
   const handleLogout = () => {
-    AuthService.logout();  // Include parentheses to call the logout method
+    AuthService.logout(); // Include parentheses to call the logout method
   };
 
   return (
@@ -15,3 +14,4 @@ const Logout = () => {
 };
 
 export default Logout;
+
