@@ -8,6 +8,7 @@ import CabinetPage from './pages/Main/CabinetPage.jsx';
 import ErrorPage from './components/Error/ErrorPage.jsx';
 import ViewCollection from './components/ViewCollection.jsx';
 import CreateItem from './components/CreateItem.jsx';
+import EditColection from './components/EditCollection.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/item/new',
         element: <CreateItem />,
+      },
+      {
+        path: '/collection-edit',
+        element: <EditColection />,
       },
       {
         path: '/collection/:collectionId',
