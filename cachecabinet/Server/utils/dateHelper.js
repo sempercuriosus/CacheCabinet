@@ -9,8 +9,6 @@ const dateHelper = (dateToConvert) => {
     return '';
   }
 
-  console.log(dateToConvert);
-
   try {
     const dateInput = isNaN(new Date(dateToConvert).getTime())
       ? new Date(dateToConvert)
