@@ -324,7 +324,7 @@ const resolvers = {
 
     updateItem: async (
       parent,
-      { userId, itemId, updatedItem: updatedItem },
+      { itemId, updatedItem: updatedItem },
       context,
     ) => {
       try {

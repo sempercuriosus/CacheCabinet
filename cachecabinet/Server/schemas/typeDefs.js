@@ -81,6 +81,7 @@ const typeDefs = `
     description: String
     quantity: Int
     purchasePrice: Float
+    salePrice: Float
     forSale: Boolean
     dateAdded: String
     imageData: String!
@@ -92,7 +93,7 @@ const typeDefs = `
     addCollection(collectionData: NewCollection!): Collection
     addItem( collectionId: ID!, itemData: NewItem): Item
     updateCollection( collectionId: ID!, updatedCollection: UpdateCollection!): Collection
-    updateItem(userId: ID!, itemId: ID!, updatedItem: UpdateItem!): Item
+    updateItem(itemId: ID!, updatedItem: UpdateItem!): Item
   }
 `;
 

@@ -149,12 +149,13 @@ export const UPDATE_COLLECTION = gql`
  * forSale
  */
 export const UPDATE_ITEM = gql`
-  mutation UpdateItem($userId: ID!, $itemId: ID!, $updatedItem: UpdateItem!) {
-    updateItem(userId: $userId, itemId: $itemId, updatedItem: $updatedItem) {
+  mutation UpdateItem($itemId: ID!, $updatedItem: UpdateItem!) {
+    updateItem(itemId: $itemId, updatedItem: $updatedItem) {
       name
       description
       quantity
       purchasePrice
+      salePrice
       forSale
       imageData
     }
