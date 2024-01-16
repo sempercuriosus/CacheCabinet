@@ -31,9 +31,6 @@ function Item({ items }) {
       dateAdded: dateAdded,
       imageData,
     });
-  
-    // Set the isEditing state to true
-    setIsEditing(true);
     
     navigate('/item-edit?itemId=' + _id, {
       state: { _id, name, description, purchasePrice, dateAdded, imageData },
