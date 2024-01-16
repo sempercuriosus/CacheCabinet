@@ -90,7 +90,7 @@ export const ADD_ITEM = gql`
       purchasePrice
       forSale
       dateAdded
-      image
+      imageData
     }
   }
 `;
@@ -156,6 +156,7 @@ export const UPDATE_ITEM = gql`
       quantity
       purchasePrice
       forSale
+      imageData
     }
   }
 `;
