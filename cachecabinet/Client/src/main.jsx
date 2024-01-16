@@ -8,7 +8,7 @@ import CabinetPage from './pages/Main/CabinetPage.jsx';
 import ErrorPage from './components/Error/ErrorPage.jsx';
 import ViewCollection from './components/ViewCollection.jsx';
 import CreateItem from './components/CreateItem.jsx';
-import EditItem from './components/editItem.jsx';
+import EditItem from './components/EditItem.jsx';
 import EditColection from './components/EditCollection.jsx';
 
 const router = createBrowserRouter([
