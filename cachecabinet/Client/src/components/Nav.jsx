@@ -1,5 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
+import AuthService from '../utils/auth';
+
+const handleLogout = () => {
+  AuthService.logout(); // Include parentheses to call the logout method
+};
 
 function NavBar() {
   const navigate = useNavigate();
@@ -35,9 +40,10 @@ function NavBar() {
               </a>
 
               <a
+                onClick={handleLogout}
                 className='button'
                 style={{ backgroundColor: colorPalette.DUSTYROSE }}>
-                Log Out
+                Logout
               </a>
             </div>
           </div>

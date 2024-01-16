@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import CreateCollection from '../../components/CreateCollection';
 import Collection from '../../components/collection';
-import Logout from '../../components/Logout';
 import '../../assets/CabinetPage.css';
 import { useQuery } from '@apollo/client';
 import { GET_USER_ASSIGNMENTS } from '../../utils/queries';
@@ -49,11 +48,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           className='logout-container'
           style={{ position: 'fixed', top: '10px', right: '10px' }}>
           <Logout />
-        </div>
+        </div> */}
       </Fragment>
     );
   }

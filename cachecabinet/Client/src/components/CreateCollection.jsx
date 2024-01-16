@@ -40,9 +40,9 @@ const CreateCollection = ({ onAddCollection }) => {
       className='container box has-text-centered'
       style={{ maxWidth: '550px' }}>
       <h2 className='title is-4'>Create a Collection</h2>
-      <div className='is-flex is-justify-content-flex-end'>
+      <div className='is-flex is-justify-content-flex-end block'>
         <button
-          style={{ backgroundColor: colorPalette.SAGE }}
+          style={{ backgroundColor: colorPalette.DUSTYROSE }}
           className='button is-light is-rounded plus-button'
           onClick={() => setShowForm(!showForm)}>
           {showForm ? (
