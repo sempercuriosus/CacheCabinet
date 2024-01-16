@@ -30,7 +30,7 @@ const EditItem = () => {
         description,
         purchasePrice,
         dateAdded,
-        // forSale,
+        forSale,
         salePrice,
         imageData,
       } = data.getItem;
@@ -39,7 +39,7 @@ const EditItem = () => {
       setItemDescription(description);
       setPurchasePrice(purchasePrice);
       setDateAdded(dateAdded);
-      // setForSale(forSale);
+      setForSale(forSale);
       setSalePrice(salePrice);
       setImageData(imageData);
     }
