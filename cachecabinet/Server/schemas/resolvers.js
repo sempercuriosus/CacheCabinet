@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Collection, Item, ItemAssignment } = require('../models');
 const { signToken } = require('../utils/auth');
 const { ObjectId } = require('mongodb');
+const dateHelper = require('../utils/dateHelper');
 
 const resolvers = {
   //    Start Queries
@@ -96,15 +97,7 @@ const resolvers = {
 
         // Format items details
         const formattedItems = items.map((item) => {
-          let date = new Date(item.dateAdded) || '';
-
-          const formattedDate = date
-            ? date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              })
-            : '';
+          const formattedDate = dateHelper(item.dateAdded);
 
           return {
             _id: item._id,
@@ -146,13 +139,7 @@ const resolvers = {
           purchasePrice: item.purchasePrice || 0.0,
           salePrice: item.salePrice || 0.0,
           forSale: item.forSale || false,
-          dateAdded:
-            item.dateAdded ||
-            new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            }),
+          dateAdded: dateHelper(item.dateAdded),
           imageData: item.imageData || '',
         };
 
@@ -248,13 +235,7 @@ const resolvers = {
           purchasePrice: itemData.purchasePrice || 0.0,
           salePrice: itemData.salePrice || 0.0,
           forSale: itemData.forSale || false,
-          dateAdded:
-            itemData.dateAdded ||
-            new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            }),
+          dateAdded: dateHelper(itemData.dateAdded),
           imageData: itemData.imageData || '',
         };
 
@@ -349,12 +330,14 @@ const resolvers = {
         // item
         const existingItem = await Item.findById(itemId);
 
+        console.log('UPDATED', updatedItem);
+
         if (existingItem) {
           // set the new values
           existingItem.name = updatedItem.name;
           existingItem.description = updatedItem.description;
           existingItem.purchasePrice = updatedItem.purchasePrice;
-          existingItem.dateAdded = updatedItem.dateAdded;
+          existingItem.dateAdded = dateHelper(updatedItem.dateAdded);
           existingItem.forSale = updatedItem.forSale;
           existingItem.salePrice = updatedItem.salePrice;
           existingItem.imageData = updatedItem.imageData;
@@ -362,7 +345,7 @@ const resolvers = {
           // save them to the collection
           const updateResult = await existingItem.save();
 
-          console.log('updating', itemId, 'new Item information', existingItem);
+          console.log('updating', itemId, 'new Item information', updatedItem);
 
           // return updates
           return updateResult;
