@@ -43,7 +43,7 @@ db.once('open', async () => {
     const items = await Item.insertMany(itemSeeds);
 
     // Insert User Seed Data
-    const users = await User.insertMany(userSeeds);
+    const users = await User.create(userSeeds);
 
     // Create associations between collections and items in the ItemAssignment model
     for (const user of users) {
