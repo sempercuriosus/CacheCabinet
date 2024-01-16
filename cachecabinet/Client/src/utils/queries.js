@@ -49,6 +49,7 @@ export const GET_COLLECTION = gql`
         purchasePrice
         salePrice
         quantity
+        imageData
       }
     }
   }
@@ -74,6 +75,7 @@ export const GET_ITEM = gql`
     getItem(itemId: $itemId) {
       _id
       name
+      imageData
       description
       quantity
       purchasePrice
