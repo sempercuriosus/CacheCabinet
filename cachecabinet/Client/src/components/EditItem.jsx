@@ -78,7 +78,7 @@ const EditItem = () => {
         setItemDescription('');
         setPurchasePrice('');
         setDateAdded('');
-        setForSale('');
+        setForSale(false);
         setImageData('');
 
         // Trigger a refetch after the item is updated
