@@ -13,24 +13,9 @@ function Item({ items }) {
 
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Access the itemID from the route parameters
-  // const { itemID } = useParams();
-
-  // const { loading, error, data } = useQuery(GET_ITEM);
-
   const [isVisible, setIsVisible] = useState(true);
 
-  // if (error) {
-  //   return `Error! ${error.message}`;
-  // }
-
-  // if (loading) {
-  //   return <h1 className='title is-3'>Loading...</h1>;
-  // }
-
   const handleViewClick = (item) => {
-    // set the state
-
     setSelectedItem(item);
 
     navigate(`/item/${item._id}`);
