@@ -17,7 +17,7 @@ const EditItem = () => {
   const [searchParams, setSetParams] = useSearchParams();
   const itemId = searchParams.get('itemId');
 
-  const { loading, error, data } = useQuery(GET_ITEM, {
+  const { loading, error, data, refetch } = useQuery(GET_ITEM, {
     variables: {
       itemId: itemId,
     },
@@ -80,6 +80,9 @@ const EditItem = () => {
         setDateAdded('');
         setForSale('');
         setImageData('');
+
+        // Trigger a refetch after the item is updated
+        refetch();
       }
     } catch (error) {
       console.error('Error adding item:', error);
