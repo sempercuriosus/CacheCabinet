@@ -41,6 +41,7 @@ const CreateItem = ({ onAddItem }) => {
         dateAdded: dateAdded,
         forSale: forSale,
         salePrice: forSale ? parseFloat(salePrice) : 0.0, // Only include salePrice if forSale is true
+        imageData: imageData  || 'https://bulma.io/images/placeholders/1280x960.png',
       };
 
       await addItem({
@@ -57,6 +58,7 @@ const CreateItem = ({ onAddItem }) => {
       setDateAdded('');
       setForSale(false);
       setSalePrice('');
+      setImageData('');
       setError(''); // Clear the error message
 
       navigate(`/collection/${collectionId}`);
@@ -67,7 +69,12 @@ const CreateItem = ({ onAddItem }) => {
 
   const handleImageUpload = () => {
     // Logic to handle image upload
-    console.log('Image upload logic goes here');
+    // Assuming imageData is the URL provided
+    if (imageData) {
+      console.log('Image URL:', imageData);
+      // Set the state with the image URL
+      setImageData(imageData);
+    }
   };
 
   return (
@@ -78,12 +85,34 @@ const CreateItem = ({ onAddItem }) => {
       }}>
       <div className='card-content'>
         <button
-          className='button is-primary'
+          className="button is-primary"
           style={{ backgroundColor: colorPalette.BABYBLUE }}
-          type='button'
-          onClick={handleImageUpload}>
+          type="button"
+          onClick={handleImageUpload}
+        >
           Upload Image
         </button>
+        <input
+          className="input"
+          type="text"
+          placeholder="Enter Image URL"
+          value={imageData}
+          onChange={(e) => setImageData(e.target.value)}
+        />
+        {/* Display the image */}
+        {imageData && <img src={imageData} alt="Uploaded image" />}
+        <div className="field">
+              <label className="label">Image URL</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Enter Image URL"
+                  value={imageData}
+                  onChange={(e) => setImageData(e.target.value)}
+                />
+              </div>
+            </div>
         <div className='content'>
           <form>
             <div className='field'>

@@ -23,7 +23,7 @@ function Item({ items }) {
       itemDescription: description,
       purchasePrice: purchasePrice,
       dateAdded: dateAdded,
-      imageData,
+      imageData: imageData,
     });
 
     navigate('/item-edit?itemId=' + _id, {

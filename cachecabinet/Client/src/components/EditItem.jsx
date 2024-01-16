@@ -103,7 +103,7 @@ const EditItem = () => {
         <div className='control'>
           <textarea
             className='textarea'
-            placeholder='Enter item description'
+            placeholder='Enter purchase price'
             value={purchasePrice}
             onChange={(e) =>
               setPurchasePrice(e.target.value)
@@ -113,7 +113,7 @@ const EditItem = () => {
         <div className='control'>
           <textarea
             className='textarea'
-            placeholder='Enter item description'
+            placeholder='Enter date added'
             value={dateAdded}
             onChange={(e) =>
               setItemDescription(e.target.value)

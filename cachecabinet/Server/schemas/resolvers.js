@@ -114,7 +114,7 @@ const resolvers = {
             salePrice: item.salePrice || 0.0,
             quantity: item.quantity || 0,
             dateAdded: formattedDate,
-            image: item.image || '',
+            imageData: item.imageData || '',
             forSale: item.forSale || false,
           };
         });
@@ -237,7 +237,7 @@ const resolvers = {
               month: '2-digit',
               day: '2-digit',
             }),
-          image: itemData.image || '',
+          imageData: itemData.imageData || '',
         };
 
         // Create new item
@@ -335,6 +335,11 @@ const resolvers = {
           // set the new values
           existingItem.name = updatedItem.name;
           existingItem.description = updatedItem.description;
+          existingItem.purchasePrice = updatedItem.purchasePrice;
+          existingItem.dateAdded = updatedItem.dateAdded;
+          existingItem.forSale = updatedItem.forSale;
+          existingItem.salePrice = updatedItem.salePrice;
+          existingItem.imageData = updatedItem.imageData;
 
           // save them to the collection
           const updateResult = await existingItem.save();
