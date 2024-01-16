@@ -12,9 +12,12 @@ export default function Home() {
 
   const handleAddCollection = (newCollection) => {
     setCollections([...collections, newCollection]);
+    refetch();
   };
 
-  const { loading, error, data } = useQuery(GET_USER_ASSIGNMENTS);
+  const { loading, error, data, refetch } = useQuery(GET_USER_ASSIGNMENTS);
+
+  // reretch
 
   if (error) {
     return <DisplayError />;
