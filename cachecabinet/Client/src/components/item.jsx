@@ -39,10 +39,10 @@ function Item({ items }) {
         <h2 className='title is-4'>Create an Item</h2>
         <div className='is-flex is-justify-content-flex-end'>
           <button
-            style={{ backgroundColor: colorPalette.SAGE }}
+            style={{ backgroundColor: colorPalette.BABYBLUE }}
             className='button is-light is-rounded plus-button'
             onClick={handleAddItemClick}>
-            <i className='material-icons has-text-danger'>add</i>
+            <i className='material-icons'>add</i>
           </button>
         </div>
       </div>

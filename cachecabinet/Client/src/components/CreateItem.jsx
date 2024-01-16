@@ -13,6 +13,7 @@ const CreateItem = ({ onAddItem }) => {
   const [dateAdded, setDateAdded] = useState('');
   const [forSale, setForSale] = useState(false);
   const [salePrice, setSalePrice] = useState('');
+  const [imageData, setImageData] = useState('');
   const [error, setError] = useState('');
   const [
     addItem,
@@ -41,7 +42,8 @@ const CreateItem = ({ onAddItem }) => {
         dateAdded: dateAdded,
         forSale: forSale,
         salePrice: forSale ? parseFloat(salePrice) : 0.0, // Only include salePrice if forSale is true
-        imageData: imageData  || 'https://bulma.io/images/placeholders/1280x960.png',
+        imageData:
+          imageData || 'https://bulma.io/images/placeholders/1280x960.png',
       };
 
       await addItem({
@@ -85,34 +87,38 @@ const CreateItem = ({ onAddItem }) => {
       }}>
       <div className='card-content'>
         <button
-          className="button is-primary"
+          className='button is-primary block'
           style={{ backgroundColor: colorPalette.BABYBLUE }}
-          type="button"
-          onClick={handleImageUpload}
-        >
+          type='button'
+          onClick={handleImageUpload}>
           Upload Image
         </button>
         <input
-          className="input"
-          type="text"
-          placeholder="Enter Image URL"
+          className='input'
+          type='text'
+          placeholder='Enter Image URL'
           value={imageData}
           onChange={(e) => setImageData(e.target.value)}
         />
         {/* Display the image */}
-        {imageData && <img src={imageData} alt="Uploaded image" />}
-        <div className="field">
-              <label className="label">Image URL</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Enter Image URL"
-                  value={imageData}
-                  onChange={(e) => setImageData(e.target.value)}
-                />
-              </div>
-            </div>
+        {imageData && (
+          <img
+            src={imageData}
+            alt='Uploaded image'
+          />
+        )}
+        <div className='field'>
+          <label className='label'>Image URL</label>
+          <div className='control'>
+            <input
+              className='input'
+              type='text'
+              placeholder='Enter Image URL'
+              value={imageData}
+              onChange={(e) => setImageData(e.target.value)}
+            />
+          </div>
+        </div>
         <div className='content'>
           <form>
             <div className='field'>

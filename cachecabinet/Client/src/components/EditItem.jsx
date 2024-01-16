@@ -38,7 +38,6 @@ const EditItem = () => {
         const handleSave = () => {
           onSave({
             ...editedData,
-            
           });
         };
 
@@ -95,70 +94,71 @@ const EditItem = () => {
             className='textarea'
             placeholder='Enter item description'
             value={itemDescription}
-            onChange={(e) =>
-              setItemDescription(e.target.value)
-            }></textarea>
+            onChange={(e) => setItemDescription(e.target.value)}></textarea>
         </div>
         <label className='label'>Purchase Price</label>
         <div className='control'>
-          <textarea
-            className='textarea'
+          <input
+            className='input'
             placeholder='Enter purchase price'
             value={purchasePrice}
-            onChange={(e) =>
-              setPurchasePrice(e.target.value)
-            }></textarea>
+            onChange={(e) => setPurchasePrice(e.target.value)}></input>
         </div>
         <label className='label'>Date Added</label>
         <div className='control'>
-          <textarea
-            className='textarea'
+          <input
+            className='input'
             placeholder='Enter date added'
             value={dateAdded}
-            onChange={(e) =>
-              setItemDescription(e.target.value)
-            }></textarea>
-        </div>        
-        <label className="checkbox">
+            onChange={(e) => setItemDescription(e.target.value)}></input>
+        </div>
+
+        <label className='label'>Image URL</label>
+        <div className='control'>
+          {/* <button 
+          className="button is-primary" 
+          style={{ backgroundColor: colorPalette.BABYBLUE }} 
+          type="button" onClick={handleImageUpload}>
+          Upload Image
+        </button> */}
           <input
-            type="checkbox"
+            className='input '
+            type='text'
+            placeholder='Enter Image URL'
+            value={imageData}
+            onChange={(e) => setImageData(e.target.value)}
+          />
+          {/* Display the image */}
+          {imageData && (
+            <img
+              src={imageData}
+              alt='Uploaded image'
+            />
+          )}
+        </div>
+        <label className='checkbox'>
+          <input
+            type='checkbox'
             checked={forSale}
             onChange={() => setForSale(!forSale)}
           />
           For Sale
         </label>
         {forSale && (
-              <div className="field">
-                <label className="label">Sale Price</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Sale Price"
-                    value={salePrice}
-                    onChange={(e) => setSalePrice(e.target.value)}
-                  />
-                </div>
-              </div>
-            )}
-        <label className='label'>Image URL</label>
-        <div className='control'>
-        {/* <button 
-          className="button is-primary" 
-          style={{ backgroundColor: colorPalette.BABYBLUE }} 
-          type="button" onClick={handleImageUpload}>
-          Upload Image
-        </button> */}
-        <input
-          className="input"
-          type="text"
-          placeholder="Enter Image URL"
-          value={imageData}
-          onChange={(e) => setImageData(e.target.value)}
-        />
-        {/* Display the image */}
-        {imageData && <img src={imageData} alt="Uploaded image" />}
-        </div> 
+          <div className='field'>
+            <label className='label'>Sale Price</label>
+            <div className='control'>
+              <input
+                className='input'
+                type='text'
+                placeholder='Sale Price'
+                value={salePrice}
+                onChange={(e) => setSalePrice(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+
         <div className='control'>
           <button
             className='button'
@@ -173,3 +173,4 @@ const EditItem = () => {
 };
 
 export default EditItem;
+
