@@ -1,12 +1,14 @@
 import React, { useState, Fragment } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
-import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Item({ items }) {
   const navigate = useNavigate();
   const { collectionId } = useParams();
+    console.log('COLLECTION ID', collectionId);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [editingItem, setEditingItem] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
 
   const handleViewClick = (item) => {
@@ -18,24 +20,34 @@ function Item({ items }) {
     navigate('/item/new?collectionId=' + collectionId);
   };
 
+  const handleEditClick = (item) => {
+    const { _id, name, description, purchasePrice, dateAdded, imageData } = item;
+    
+    setEditingItem({
+      itemId: _id,
+      itemName: name,
+      itemDescription: description,
+      purchasePrice: purchasePrice,
+      dateAdded: dateAdded,
+      imageData,
+    });
+  
+    // Set the isEditing state to true
+    setIsEditing(true);
+    
+    navigate('/item-edit?itemId=' + _id, {
+      state: { _id, name, description, purchasePrice, dateAdded, imageData },
+    });
+  };
+
+
   return (
     <Fragment>
-      <div
-        className='box container has-text-centered'
-        style={{ maxWidth: '550px' }}>
-        <h2 className='title is-4'>Create an Item</h2>
-        <div className='is-flex is-justify-content-flex-end'>
-          <button
-            style={{ backgroundColor: colorPalette.SAGE }}
-            className='button is-light is-rounded plus-button'
-            onClick={handleAddItemClick}>
-            <i className='material-icons has-text-danger'>add</i>
-          </button>
-        </div>
+      <div>
+        <button onClick={handleAddItemClick}>+</button>
       </div>
-
       <div className='columns is-multiline'>
-        {items.map((item) => (
+      {items.map((item) => (
           <div
             className='column is-mobile'
             key={item._id}
@@ -44,37 +56,24 @@ function Item({ items }) {
               left: '20px',
               margin: '20px',
               marginLeft: '20px',
-              marginBottom: '25px',
+              marginBottom: '25px'
             }}>
-            <div
-              className='card'
-              style={{
-                maxWidth: '240px',
-                maxHeight: '500px',
-                minHeight: '250px',
-                minWidth: '100px',
-                overflow: 'auto',
-              }}>
+            {/* Conditional rendering for additional info */}
+            {selectedItem === item._id && <CreateItem />}
+          <div className='card' style={{ maxWidth: '240px', maxHeight: '500px', minHeight: '250px', minWidth: '100px', overflow: 'auto' }}>
               <div className='card-image'>
                 <figure className='image is-1by4'>
                   <img
-                    src={
-                      item.imageData ||
-                      'https://bulma.io/images/placeholders/1280x960.png'
-                    }
+                    src={item.imageData || 'https://bulma.io/images/placeholders/1280x960.png'}
                     alt='Item Image'
                   />
                 </figure>
               </div>
               <div className='card-content'>
-                <h2
-                  className='title is-5'
-                  style={{ color: '' }}>
+                <h2 className='title is-5' style={{ color: '' }}>
                   {item.name}
                 </h2>
-                <h3
-                  className='subtitle is-6'
-                  style={{ color: colorPalette.GREY }}>
+                <h3 className='subtitle is-6' style={{ color: colorPalette.GREY }}>
                   {item.description}
                 </h3>
                 <div className='content'>
@@ -82,9 +81,7 @@ function Item({ items }) {
                     <p className='column is-half'>{`Purchase Price: $ ${item.purchasePrice}`}</p>
                     <p className='column is-half'>{`Date Added: ${item.dateAdded}`}</p>
                   </div>
-                  <p className='is-centered'>{`For Sale: ${
-                    item.forSale ? 'Yes' : 'No'
-                  }`}</p>
+                  <p className='is-centered'>{`For Sale: ${item.forSale ? 'Yes' : 'No'}`}</p>
 
                   {item.forSale && (
                     <div className='field'>
@@ -92,17 +89,19 @@ function Item({ items }) {
                     </div>
                   )}
                   <footer className='card-footer'>
-                    <a
-                      href=''
+                  <Link
+                      to={`/item-edit?itemId=${item._id}`}
                       className='card-footer-item has-text-black'
                       style={{ backgroundColor: colorPalette.BABYBLUE }}
-                      onClick={() => handleViewClick(item)}>
+                      onClick={() => handleEditClick(item)}
+                    >
                       Edit
-                    </a>
+                    </Link>
                     <a
                       href='#'
                       className='card-footer-item has-text-black'
-                      style={{ backgroundColor: colorPalette.DUSTYROSE }}>
+                      style={{ backgroundColor: colorPalette.DUSTYROSE }}
+                      >
                       Delete
                     </a>
                   </footer>
@@ -117,4 +116,3 @@ function Item({ items }) {
 }
 
 export default Item;
-
