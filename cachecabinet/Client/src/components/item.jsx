@@ -55,16 +55,14 @@ function Item({ items }) {
               position: 'relative',
               left: '20px',
               margin: '10px',
-              marginLeft: '0px',
               marginBottom: '25px',
             }}>
             <div
               className='card'
               style={{
-                maxWidth: '300px',
+                width: '300px',
                 maxHeight: '700px',
                 minHeight: '250px',
-                minWidth: '100px',
                 // overflow: 'auto',
               }}>
               <div className='card-image'>

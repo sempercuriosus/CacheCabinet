@@ -133,6 +133,7 @@ const EditItem = () => {
         <label className='label'>Date Added</label>
         <div className='control'>
           <input
+            type='date'
             className='input'
             placeholder='Enter date added'
             value={dateAdded}
