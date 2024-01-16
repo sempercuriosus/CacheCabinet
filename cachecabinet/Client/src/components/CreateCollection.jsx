@@ -42,13 +42,13 @@ const CreateCollection = ({ onAddCollection }) => {
       <h2 className='title is-4'>Create a Collection</h2>
       <div className='is-flex is-justify-content-flex-end block'>
         <button
-          style={{ backgroundColor: colorPalette.DUSTYROSE }}
+          style={{ backgroundColor: colorPalette.BABYBLUE }}
           className='button is-light is-rounded plus-button'
           onClick={() => setShowForm(!showForm)}>
           {showForm ? (
             'Cancel'
           ) : (
-            <i className='material-icons has-text-danger'>add</i>
+            <i className='material-icons is-danger'>add</i>
           )}
         </button>
       </div>

@@ -39,10 +39,10 @@ function Item({ items }) {
         <h2 className='title is-4'>Create an Item</h2>
         <div className='is-flex is-justify-content-flex-end'>
           <button
-            style={{ backgroundColor: colorPalette.SAGE }}
+            style={{ backgroundColor: colorPalette.BABYBLUE }}
             className='button is-light is-rounded plus-button'
             onClick={handleAddItemClick}>
-            <i className='material-icons has-text-danger'>add</i>
+            <i className='material-icons'>add</i>
           </button>
         </div>
       </div>
@@ -55,16 +55,14 @@ function Item({ items }) {
               position: 'relative',
               left: '20px',
               margin: '10px',
-              marginLeft: '0px',
               marginBottom: '25px',
             }}>
             <div
               className='card'
               style={{
-                maxWidth: '300px',
+                width: '300px',
                 maxHeight: '700px',
                 minHeight: '250px',
-                minWidth: '100px',
                 // overflow: 'auto',
               }}>
               <div className='card-image'>

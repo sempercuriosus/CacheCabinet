@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_ITEM } from '../utils/queries';
 import { UPDATE_ITEM } from '../utils/mutations';
 import colorPalette from '../utils/colorPalette';
-import { useLocation } from 'react-router-dom';
 
 const EditItem = () => {
   const [itemName, setItemName] = useState('');
@@ -14,16 +14,39 @@ const EditItem = () => {
   const [salePrice, setSalePrice] = useState('');
   const [imageData, setImageData] = useState('');
   const [updateItem] = useMutation(UPDATE_ITEM);
-
   const [searchParams, setSetParams] = useSearchParams();
+  const itemId = searchParams.get('itemId');
 
-  const location = useLocation();
-  const itemData = location.state;
+  const { loading, error, data, refetch } = useQuery(GET_ITEM, {
+    variables: {
+      itemId: itemId,
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      const {
+        name,
+        description,
+        purchasePrice,
+        dateAdded,
+        forSale,
+        salePrice,
+        imageData,
+      } = data.getItem;
+
+      setItemName(name);
+      setItemDescription(description);
+      setPurchasePrice(purchasePrice);
+      setDateAdded(dateAdded);
+      setForSale(forSale);
+      setSalePrice(salePrice);
+      setImageData(imageData);
+    }
+  }, [data]);
 
   const handleAddItem = async () => {
     try {
-      const itemId = searchParams.get('itemId');
-
       if (itemName.trim() !== '') {
         const editedItem = {
           name: itemName,
@@ -38,7 +61,6 @@ const EditItem = () => {
         const handleSave = () => {
           onSave({
             ...editedData,
-            
           });
         };
 
@@ -58,6 +80,9 @@ const EditItem = () => {
         setDateAdded('');
         setForSale(false);
         setImageData('');
+
+        // Trigger a refetch after the item is updated
+        refetch();
       }
     } catch (error) {
       console.error('Error adding item:', error);
@@ -95,70 +120,72 @@ const EditItem = () => {
             className='textarea'
             placeholder='Enter item description'
             value={itemDescription}
-            onChange={(e) =>
-              setItemDescription(e.target.value)
-            }></textarea>
+            onChange={(e) => setItemDescription(e.target.value)}></textarea>
         </div>
         <label className='label'>Purchase Price</label>
         <div className='control'>
-          <textarea
-            className='textarea'
+          <input
+            className='input'
             placeholder='Enter purchase price'
             value={purchasePrice}
-            onChange={(e) =>
-              setPurchasePrice(e.target.value)
-            }></textarea>
+            onChange={(e) => setPurchasePrice(e.target.value)}></input>
         </div>
         <label className='label'>Date Added</label>
         <div className='control'>
-          <textarea
-            className='textarea'
+          <input
+            type='date'
+            className='input'
             placeholder='Enter date added'
             value={dateAdded}
-            onChange={(e) =>
-              setItemDescription(e.target.value)
-            }></textarea>
-        </div>        
-        <label className="checkbox">
+            onChange={(e) => setDateAdded(e.target.value)}></input>
+        </div>
+
+        <label className='label'>Image URL</label>
+        <div className='control'>
+          {/* <button 
+          className="button is-primary" 
+          style={{ backgroundColor: colorPalette.BABYBLUE }} 
+          type="button" onClick={handleImageUpload}>
+          Upload Image
+        </button> */}
           <input
-            type="checkbox"
+            className='input '
+            type='text'
+            placeholder='Enter Image URL'
+            value={imageData}
+            onChange={(e) => setImageData(e.target.value)}
+          />
+          {/* Display the image */}
+          {imageData && (
+            <img
+              src={imageData}
+              alt='Uploaded image'
+            />
+          )}
+        </div>
+        <label className='checkbox'>
+          <input
+            type='checkbox'
             checked={forSale}
             onChange={() => setForSale(!forSale)}
           />
           For Sale
         </label>
         {forSale && (
-              <div className="field">
-                <label className="label">Sale Price</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Sale Price"
-                    value={salePrice}
-                    onChange={(e) => setSalePrice(e.target.value)}
-                  />
-                </div>
-              </div>
-            )}
-        <label className='label'>Image URL</label>
-        <div className='control'>
-        {/* <button 
-          className="button is-primary" 
-          style={{ backgroundColor: colorPalette.BABYBLUE }} 
-          type="button" onClick={handleImageUpload}>
-          Upload Image
-        </button> */}
-        <input
-          className="input"
-          type="text"
-          placeholder="Enter Image URL"
-          value={imageData}
-          onChange={(e) => setImageData(e.target.value)}
-        />
-        {/* Display the image */}
-        {imageData && <img src={imageData} alt="Uploaded image" />}
-        </div> 
+          <div className='field'>
+            <label className='label'>Sale Price</label>
+            <div className='control'>
+              <input
+                className='input'
+                type='text'
+                placeholder='Sale Price'
+                value={salePrice}
+                onChange={(e) => setSalePrice(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+
         <div className='control'>
           <button
             className='button'
@@ -173,3 +200,4 @@ const EditItem = () => {
 };
 
 export default EditItem;
+
