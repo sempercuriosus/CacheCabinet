@@ -6,19 +6,21 @@ function ErrorPage() {
   return (
     <Fragment>
       <Header />
-      <section className='card'>
-        <div className='card-header-title is-centered title'>
-          🚨 Route Was Not Found 🚨
-        </div>
-        <hr />
-        <div className='card-content'>
-          <div className='subtitle is-4'>
-            The page that you have tried to access was not found
+      <section className='container box block'>
+        <div className='section'>
+          <div className='title has-text-centered'>
+            🚨 Route Was Not Found 🚨
           </div>
-          <div className='subtitle is-4'>Please try again</div>
-          <br />
+
+          <div className=''>
+            <div className='subtitle is-4'>
+              The page that you have tried to access was not found
+            </div>
+            <div className='subtitle is-4'>Please try again</div>
+          </div>
         </div>
       </section>
+      <br />
       <Footer />
     </Fragment>
   );
