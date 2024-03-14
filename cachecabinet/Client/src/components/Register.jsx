@@ -50,7 +50,7 @@ function Register(props) {
           </div>
 
           <div className="field">
-            <label className="label">Password</label>
+            <label className="label">Password (minimum 8 char)</label>
             <div className="control">
               <input
                 className="input"
