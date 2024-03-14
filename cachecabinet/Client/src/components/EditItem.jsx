@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ITEM } from '../utils/queries';
 import { UPDATE_ITEM } from '../utils/mutations';
@@ -16,6 +16,7 @@ const EditItem = () => {
   const [updateItem] = useMutation(UPDATE_ITEM);
   const [searchParams, setSetParams] = useSearchParams();
   const itemId = searchParams.get('itemId');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const { loading, error, data, refetch } = useQuery(GET_ITEM, {
     variables: {
@@ -58,14 +59,6 @@ const EditItem = () => {
           imageData,
         };
 
-        const handleSave = () => {
-          onSave({
-            ...editedData,
-          });
-        };
-
-        console.log(editedItem);
-
         await updateItem({
           variables: {
             itemId: itemId,
@@ -73,16 +66,8 @@ const EditItem = () => {
           },
         });
 
-        // Reset form state
-        setItemName('');
-        setItemDescription('');
-        setPurchasePrice('');
-        setDateAdded('');
-        setForSale(false);
-        setImageData('');
-
-        // Trigger a refetch after the item is updated
-        refetch();
+        // Navigate to previous page after saving item
+        navigate(-1);
       }
     } catch (error) {
       console.error('Error adding item:', error);
@@ -200,4 +185,3 @@ const EditItem = () => {
 };
 
 export default EditItem;
-

@@ -9,7 +9,7 @@ import ErrorPage from './components/Error/ErrorPage.jsx';
 import ViewCollection from './components/ViewCollection.jsx';
 import CreateItem from './components/CreateItem.jsx';
 import EditItem from './components/EditItem.jsx';
-import EditColection from './components/EditCollection.jsx';
+import EditCollection from './components/EditCollection.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/collection-edit',
-        element: <EditColection />,
+        element: <EditCollection />,
       },
       {
         path: '/collection/:collectionId',
