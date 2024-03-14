@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
-import Swal from 'sweetalert2';
 
 function Item({ items }) {
   const navigate = useNavigate();
