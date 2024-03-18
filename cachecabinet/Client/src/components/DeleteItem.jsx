@@ -1,19 +1,18 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { DELETE_ITEM, GET_ITEM } from '../utils/queries';
+import { DELETE_ITEM, GET_COLLECTION } from '../utils/queries';
 import { useNavigate } from 'react-router-dom';
 
 
-const DeleteItem = ({ itemId, collectionId, onClose, updateItems }) => {
+const DeleteItem = ({ itemId, collectionId, onClose }) => {
     const navigate = useNavigate();
     const [deleteItem] = useMutation(DELETE_ITEM, {
-        refetchQueries: [{ query: GET_ITEM }],
         onCompleted: () => {
             onClose();
             navigate(`/collection/${collectionId}`);
 
-            updateItems();
         },
+        refetchQueries: [{ query: GET_COLLECTION, variables: { collectionId } }],
     });
 
     const handleDeleteItem = async () => {

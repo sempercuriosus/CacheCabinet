@@ -1,14 +1,24 @@
 import React, { useState, Fragment } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 import colorPalette from '../utils/colorPalette';
 import DeleteItem from './DeleteItem';
+import { GET_COLLECTION } from '../utils/queries';
 
-function Item({ items }) {
+function Item() {
   const navigate = useNavigate();
   const { collectionId } = useParams();
   const [selectedItem, setSelectedItem] = useState(null);
   const [editingItem, setEditingItem] = useState(null);
-  const [itemList, setItemList] = useState(items);
+
+  const { loading, error, data, refetch } = useQuery(GET_COLLECTION, {
+    variables: { collectionId },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const items = data.getCollection.items;
 
   const handleAddItemClick = () => {
     navigate('/item/new?collectionId=' + collectionId);
@@ -50,7 +60,7 @@ function Item({ items }) {
   
   const handleDeleteClick = (itemId) => {
     setSelectedItem(itemId);
-  }; //added
+  };
 
   return (
     <Fragment>
@@ -148,10 +158,9 @@ function Item({ items }) {
       {/*added the render DeleteItem component conitionally */}
       {selectedItem && (
         <DeleteItem 
-        itemId={selectedItem} 
-        collectionId={collectionId} 
-        onClose={() => setSelectedItem(null)}
-        updateItems={setItemList}
+          itemId={selectedItem} 
+          collectionId={collectionId} 
+          onClose={() => setSelectedItem(null)}
         />
       )}
     </Fragment>
