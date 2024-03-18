@@ -35,6 +35,8 @@ const ViewCollection = () => {
       </Fragment>
     );
   }
+
+  return null;
 };
 export default ViewCollection;
 

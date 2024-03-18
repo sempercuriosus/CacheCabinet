@@ -163,3 +163,20 @@ export const UPDATE_ITEM = gql`
   }
 `;
 
+/*
+ * DELETE AN ITEM
+ *
+ * needs
+ * item id
+ *
+ * returns
+ * confirmation message
+ */
+export const DELETE_ITEM = gql`
+  mutation DeleteItem($itemId: ID!) {
+    deleteItem(itemId: $itemId) {
+      success
+      message
+    }
+  }
+  `;

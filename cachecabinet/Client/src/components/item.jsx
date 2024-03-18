@@ -1,12 +1,14 @@
 import React, { useState, Fragment } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import colorPalette from '../utils/colorPalette';
+import DeleteItem from './DeleteItem';
 
 function Item({ items }) {
   const navigate = useNavigate();
   const { collectionId } = useParams();
   const [selectedItem, setSelectedItem] = useState(null);
   const [editingItem, setEditingItem] = useState(null);
+  const [itemList, setItemList] = useState(items);
 
   const handleAddItemClick = () => {
     navigate('/item/new?collectionId=' + collectionId);
@@ -29,6 +31,26 @@ function Item({ items }) {
       state: { _id, name, description, purchasePrice, dateAdded, imageData },
     });
   };
+
+  const handleDeleteItem = async (itemId, updateItems) => {
+    try {
+      await DeleteItem({
+        variables: {
+          itemId: itemId,
+        },
+      });
+      onClose();
+      navigate(`/collection/${collectionId}`);
+
+      updateItems(itemList.filter((item) => item._id !== itemId));
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
+  
+  const handleDeleteClick = (itemId) => {
+    setSelectedItem(itemId);
+  }; //added
 
   return (
     <Fragment>
@@ -108,10 +130,12 @@ function Item({ items }) {
                       onClick={() => handleEditClick(item)}>
                       Edit
                     </Link>
+                    {/* added the handleDeleteClick function to onClick */}
                     <a
                       href='#'
                       className='card-footer-item has-text-black'
-                      style={{ backgroundColor: colorPalette.DUSTYROSE }}>
+                      style={{ backgroundColor: colorPalette.DUSTYROSE }}
+                      onClick={() => handleDeleteClick(item._id)}>
                       Delete
                     </a>
                   </footer>
@@ -121,6 +145,15 @@ function Item({ items }) {
           </div>
         ))}
       </div>
+      {/*added the render DeleteItem component conitionally */}
+      {selectedItem && (
+        <DeleteItem 
+        itemId={selectedItem} 
+        collectionId={collectionId} 
+        onClose={() => setSelectedItem(null)}
+        updateItems={setItemList}
+        />
+      )}
     </Fragment>
   );
 }
