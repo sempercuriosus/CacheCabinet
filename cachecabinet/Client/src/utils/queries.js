@@ -94,3 +94,12 @@ export const GET_COLLECTION_NAMEDESC = gql`
     }
   }
 `;
+
+export const DELETE_ITEM = gql`
+  mutation DeleteItem($itemId: ID!) {
+    deleteItem(itemId: $itemId) {
+      success
+      message
+    }
+  }
+  `;

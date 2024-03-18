@@ -87,6 +87,16 @@ const typeDefs = `
     imageData: String!
   }
   
+  type DeleteCollectionResponse {
+    success: Boolean!
+    message: String!
+  }
+
+  type DeleteItemResponse {
+    success: Boolean!
+    message: String!
+  }
+
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!): Auth
@@ -94,6 +104,8 @@ const typeDefs = `
     addItem( collectionId: ID!, itemData: NewItem): Item
     updateCollection( collectionId: ID!, updatedCollection: UpdateCollection!): Collection
     updateItem(itemId: ID!, updatedItem: UpdateItem!): Item
+    deleteCollection(collectionId: ID!): DeleteCollectionResponse!
+    deleteItem(itemId: ID!): DeleteItemResponse!
   }
 `;
 

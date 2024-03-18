@@ -151,6 +151,7 @@ const resolvers = {
     },
   },
 
+  
   //   Start Mutations
 
   Mutation: {
@@ -356,6 +357,85 @@ const resolvers = {
         throw new Error('Failed to UPDATE collection');
       }
     },
+
+      // delete collection
+  deleteCollection: async (parent, { collectionId }, context) => {
+    if (!context.user) {
+      throw new AuthenticationError('User not authenticated');
+    }
+
+    try {
+      const userId = context.user._id;
+
+      // check if user has permission to delete collection
+      const collection = await Collection.findById(collectionId);
+      if (!collection) {
+        throw new Error('Collection not found');
+      }
+      if (collection.userId.toString() !== userId.toString()) {
+        throw new Error('User is not authorized to delete this collection');
+      }
+
+      // delete collection
+      const deleteResult = await Collection.deleteOne({ _id: collectionId });
+
+      console.log('Collection deleted:', collectionId);
+
+      return {
+        success: deleteResult.ok === 1,
+        message: deleteResult.ok ===1 ? 'Collection deleted successfully' : 'Failed to delete collection',
+      };
+    } catch (error) {
+      console.error('Error deleting collection:', error);
+      throw new Error('Failed to delete collection');
+    }
+  },
+
+  // delete item
+  deleteItem: async (parent, { itemId }, context) => {
+    if (!context.user) {
+      throw new AuthenticationError('User not authenticated');
+    }
+
+    try {
+      const userId = context.user._id;
+
+      // check if user has permission to delete the item
+      const item = await Item.findById(itemId);
+      if (!item) {
+        throw new Error('Item not found');
+      }
+
+      // get collection ID associated with the item
+      const assignment = await ItemAssignment.findOne({ itemId });
+      if (!assignment) {
+        throw new Error('Item assignment not found');
+      }
+      const collectionId = assignment.collectionId;
+
+      // check if the user has permission to delete the item
+      const collection = await Collection.findById(collectionId);
+      if (!collection) {
+        throw new Error('Collection not found');
+      }
+      if (collection.userId && collection.userId.toString() !== userId.toString()) {
+        throw new Error('User is not authorized to delete this item');
+      }
+
+      // delete the item
+      const deleteResult = await Item.deleteOne({ _id: itemId });
+
+      console.log('Item deleted:', itemId);
+
+      return {
+        success: deleteResult.ok === 1,
+        message: deleteResult.ok === 1 ? 'Item deleted successfully' : 'Failed to delete item',
+      };
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      throw new Error('Failed to delete item');
+    }
+  },
   },
 };
 

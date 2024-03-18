@@ -10,6 +10,7 @@ import ViewCollection from './components/ViewCollection.jsx';
 import CreateItem from './components/CreateItem.jsx';
 import EditItem from './components/EditItem.jsx';
 import EditCollection from './components/EditCollection.jsx';
+import DeleteItem from './components/DeleteItem.jsx'; //added
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/item-edit',
         element: <EditItem />,
+      },
+      {
+        path: '/delete/:itemId',
+        element: <DeleteItem />,
       },
     ],
   },
