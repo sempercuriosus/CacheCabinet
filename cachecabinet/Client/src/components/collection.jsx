@@ -31,32 +31,35 @@ const Collection = ({ userCollections }) => {
 
   const updateCollectionList = async () => {
     try {
-        await refetchCollection();
+        await refetchCollection({
+          collectionId: selectedCollection
+        });
     } catch (error) {
         console.error('Error refetching collections:', error);
-    }
-  };
-
-  const handleDeleteCollection = async (collectionId, updateCollections) => {
-    try {
-      await deleteCollection({
-        variables: {
-          collectionId: collectionId,
-        },
-        refetchQueries: [{ query: GET_COLLECTION }],
-      });
-      onClose();
-      navigate('/main');
-      // setSelectedCollection(null); // Reset selected collection after deletion
-      updateCollections(collectionList.filter((collection) => collection._id !== collectionId));
-    } catch (error) {
-      console.error('Error deleting collection:', error);
     }
   };
 
   const handleDeleteClick = (collectionId) => {
     console.log('Deleting collection:', collectionId);
     setSelectedCollection(collectionId);
+  };
+
+  const handleDeleteCollection = async (collectionId) => {
+    try {
+      await deleteCollection({
+        variables: {
+          collectionId,
+        },
+        refetchQueries: [{ query: GET_COLLECTION }],
+      });
+      onClose();
+      navigate('/main');
+      await refetchCollection();
+      setSelectedCollection(null); // Reset selected collection after deletion
+      updateCollections(collectionList.filter((collection) => collection._id !== collectionId));
+    } catch (error) {
+      console.error('Error deleting collection:', error);
+    }
   };
 
   return (
