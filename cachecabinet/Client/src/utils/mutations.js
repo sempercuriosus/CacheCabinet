@@ -180,3 +180,22 @@ export const DELETE_ITEM = gql`
     }
   }
   `;
+
+/*
+ * DELETE A COLLECTION
+ *
+ * needs
+ * collection id
+ *
+ * returns
+ * confirmation message
+ */
+
+export const DELETE_COLLECTION = gql`
+  mutation DeleteCollection($collectionId: ID!) {
+    deleteCollection(collectionId: $collectionId) {
+      success
+      message
+    }
+  }
+`;
