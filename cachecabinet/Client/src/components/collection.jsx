@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import colorPalette from '../utils/colorPalette';
 import CreateItem from './CreateItem';
 import '../../src/assets/CabinetPage.css';
@@ -10,8 +10,10 @@ const Collection = ({ userCollections }) => {
 
   const cardStyle = {
     backgroundColor: colorPalette.IVORY,
-    minWidth: '200px',
+    minWidth: '250px',
     minHeight: '100px',
+    margin: '0.75em',
+    border: 'thin black solid',
   };
 
   const handleViewClick = (collectionId) => {
@@ -25,39 +27,51 @@ const Collection = ({ userCollections }) => {
   };
 
   return (
-    <Fragment>
+    <>
       {userCollections.collections.map((collection) => (
         <div
-          className='card block'
+          className='column is-half card block'
           style={cardStyle}
           key={collection._id}>
-          <div className='card-content has-text-centered'>
-            <h2 className='title is-4'>{collection.name}</h2>
-            <h3 className='subtitle is-6'>{collection.description}</h3>
+          <p className='card-header-title title is-4'>{collection.name}</p>
 
-            {/* Conditional rendering for additional info */}
-            {selectedCollection === collection._id && <CreateItem />}
-          </div>
+          {collection.description && (
+            <div className='card-content subtitle is-5'>
+              {collection.description}
+              {/* Conditional rendering for additional info */}
+              {selectedCollection === collection._id && <CreateItem />}
+            </div>
+          )}
 
           <footer className='card-footer'>
             <a
               href=''
-              className='card-footer-item has-text-black'
-              style={{ backgroundColor: colorPalette.BABYBLUE }}
+              className='card-footer-item button has-text-black'
+              style={{
+                backgroundColor: colorPalette.BABYBLUE,
+                border: 'thin black solid',
+                marginLeft: '0.55rem',
+                marginRight: '0.55rem',
+              }}
               onClick={() => handleViewClick(collection._id)}>
               View
             </a>
             <a
               href=''
-              className='card-footer-item has-text-black'
-              style={{ backgroundColor: colorPalette.SAGE }}
+              className='card-footer-item button has-text-black'
+              style={{
+                backgroundColor: colorPalette.SAGE,
+                border: 'thin black solid',
+                marginLeft: '0.55rem',
+                marginRight: '0.55rem',
+              }}
               onClick={() => handleEditClick(collection)}>
               Edit
             </a>
           </footer>
         </div>
       ))}
-    </Fragment>
+    </>
   );
 };
 
