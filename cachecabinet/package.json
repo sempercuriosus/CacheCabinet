@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "cd Server && npm i && cd ../Client && npm i && npm run build",
-    "develop": "concurrently \"cd Server && npm run start\" \"cd Client && npm run dev\""
+    "develop": "concurrently \"cd Server && npm run start\" \"cd Client && npm run dev\"",
+    "dir": "echo \"Hello, I am garbage.\""
   },
   "author": "",
   "license": "ISC",
