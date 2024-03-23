@@ -7,7 +7,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_COLLECTION, GET_COLLECTION } from '../utils/queries';
 import DeleteCollection from './DeleteCollection';
 
-
 const Collection = ({ userCollections }) => {
   const [selectedCollection, setSelectedCollection] = useState(null);
   const navigate = useNavigate();
@@ -33,16 +32,15 @@ const Collection = ({ userCollections }) => {
     navigate('/collection-edit?collectionId=' + collection._id);
   };
 
-
   // Footer Style
 
   const updateCollectionList = async () => {
     try {
-        await refetchCollection({
-          collectionId: selectedCollection
-        });
+      await refetchCollection({
+        collectionId: selectedCollection,
+      });
     } catch (error) {
-        console.error('Error refetching collections:', error);
+      console.error('Error refetching collections:', error);
     }
   };
 
@@ -63,7 +61,9 @@ const Collection = ({ userCollections }) => {
       navigate('/main');
       await refetchCollection();
       setSelectedCollection(null); // Reset selected collection after deletion
-      updateCollections(collectionList.filter((collection) => collection._id !== collectionId));
+      updateCollections(
+        collectionList.filter((collection) => collection._id !== collectionId),
+      );
     } catch (error) {
       console.error('Error deleting collection:', error);
     }
@@ -93,12 +93,15 @@ const Collection = ({ userCollections }) => {
             {/* {selectedCollection === collection._id && <CreateItem />} */}
           </div>
 
-          <footer className='card-footer'>
+          <footer
+            className='card-footer'
+            style={{ paddingTop: '1.5rem' }}>
             <a
               href=''
               className='card-footer-item button has-text-black'
               style={{
                 backgroundColor: colorPalette.BABYBLUE,
+                color: 'black',
                 border: 'thin black solid',
                 marginLeft: '0.55rem',
                 marginRight: '0.55rem',
@@ -111,6 +114,7 @@ const Collection = ({ userCollections }) => {
               className='card-footer-item button has-text-black'
               style={{
                 backgroundColor: colorPalette.SAGE,
+                color: 'black',
                 border: 'thin black solid',
                 marginLeft: '0.55rem',
                 marginRight: '0.55rem',
@@ -118,17 +122,23 @@ const Collection = ({ userCollections }) => {
               onClick={() => handleEditClick(collection)}>
               Edit
             </a>
-            <button
+
+            <a
               className='card-footer-item button is-danger'
-              style={{ backgroundColor: colorPalette.DUSTYROSE }}
+              style={{
+                backgroundColor: colorPalette.DUSTYROSE,
+                color: 'black',
+                border: 'thin black solid',
+                marginLeft: '0.55rem',
+                marginRight: '0.55rem',
+              }}
               onClick={() => handleDeleteClick(collection._id)}>
               Delete
-            </button>
+            </a>
           </footer>
         </div>
       ))}
     </>
-
   );
 };
 
