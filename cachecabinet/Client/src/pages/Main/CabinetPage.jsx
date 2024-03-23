@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import CreateCollection from '../../components/CreateCollection';
 import Collection from '../../components/collection';
 import '../../assets/CabinetPage.css';
@@ -31,29 +31,15 @@ export default function Home() {
     const collections = data.getUserAssignments;
 
     return (
-      <Fragment>
-        <div
-          className=''
-          style={{ position: 'relative', bottom: '30px' }}>
-          <div className='columns is-mobile'>
-            <div
-              className='column'
-              style={{ margin: '20px' }}>
-              <CreateCollection onAddCollection={handleAddCollection} />
-            </div>
-          </div>
-          <div className='columns is-multiline'>
-            <div className='column'>
-              <Collection userCollections={collections} />
-            </div>
-          </div>
+      <>
+        <div className='container block'>
+          <CreateCollection onAddCollection={handleAddCollection} />
         </div>
-        {/* <div
-          className='logout-container'
-          style={{ position: 'fixed', top: '10px', right: '10px' }}>
-          <Logout />
-        </div> */}
-      </Fragment>
+
+        <div className='columns is-multiline is-centered'>
+          <Collection userCollections={collections} />
+        </div>
+      </>
     );
   }
 }

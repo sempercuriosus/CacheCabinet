@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Item from './item';
 import { useQuery } from '@apollo/client';
@@ -30,9 +30,9 @@ const ViewCollection = () => {
     const items = data.getCollection.items;
 
     return (
-      <Fragment>
+      <>
         <Item items={items} />
-      </Fragment>
+      </>
     );
   }
 

@@ -35,11 +35,18 @@ const CreateCollection = ({ onAddCollection }) => {
     }
   };
 
+  // Header Card Style
+  const headerCardStyle = {
+    maxWidth: '400px',
+    border: 'solid black thin',
+  };
+
   return (
     <div
       className='container box has-text-centered'
-      style={{ maxWidth: '550px' }}>
+      style={headerCardStyle}>
       <h2 className='title is-4'>Create a Collection</h2>
+
       <div className='is-flex is-justify-content-flex-end block'>
         <button
           style={{ backgroundColor: colorPalette.BABYBLUE }}

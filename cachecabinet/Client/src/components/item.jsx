@@ -1,5 +1,6 @@
-import React, { useState, Fragment } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import colorPalette from '../utils/colorPalette';
 import DeleteItem from './DeleteItem';
@@ -15,15 +16,23 @@ function Item() {
     variables: { collectionId },
   });
 
+  // Loading
   if (loading) return <p>Loading...</p>;
+
+  // Error
   if (error) return <p>Error: {error.message}</p>;
 
+  // Items passed in from parent collection
   const items = data.getCollection.items;
 
+  // Event Handlers
+
+  // Add
   const handleAddItemClick = () => {
     navigate('/item/new?collectionId=' + collectionId);
   };
 
+  // Edit
   const handleEditClick = (item) => {
     const { _id, name, description, purchasePrice, dateAdded, imageData } =
       item;
@@ -37,65 +46,113 @@ function Item() {
       imageData: imageData,
     });
 
+    // navigation to the item
     navigate('/item-edit?itemId=' + _id, {
       state: { _id, name, description, purchasePrice, dateAdded, imageData },
     });
   };
 
-  const handleDeleteItem = async (itemId, updateItems) => {
-    try {
-      await DeleteItem({
-        variables: {
-          itemId: itemId,
-        },
-      });
-      onClose();
-      navigate(`/collection/${collectionId}`);
+  // Delete
 
-      updateItems(itemList.filter((item) => item._id !== itemId));
+  const handleDeleteItem = async (itemId) => {
+    try {
+      console.log(itemId);
+
+      // await DeleteItem({
+      //   variables: {
+      //     itemId: itemId,
+      //   },
+      // });
+
+      // navigate(`/collection/${collectionId}`);
     } catch (error) {
       console.error('Error deleting item:', error);
     }
   };
-  
+
   const handleDeleteClick = (itemId) => {
     setSelectedItem(itemId);
+
+    handleDeleteItem(itemId);
   };
 
+  // Header Card Style
+  const headerCardStyle = {
+    maxWidth: '400px',
+    border: 'solid black thin',
+  };
+
+  // Card Style
+  const cardStyle = {
+    margin: '1.5rem auto',
+    border: 'solid black thin',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: colorPalette.IVORY,
+  };
+
+  // Footer Style
+  const deleteButtonStyle = {
+    backgroundColor: colorPalette.DUSTYROSE,
+    border: 'solid black thin',
+    borderRadius: '6px',
+    color: 'black',
+  };
+
+  const editButtonStyle = {
+    backgroundColor: colorPalette.SAGE,
+    border: 'solid black thin',
+    borderRadius: '6px',
+    color: 'black',
+  };
+
+  //  Component Start
+
   return (
-    <Fragment>
+    <>
+      {/* Create Item Button */}
       <div
         className='box container has-text-centered'
-        style={{ maxWidth: '550px' }}>
+        style={headerCardStyle}>
         <h2 className='title is-4'>Create an Item</h2>
-        <div className='is-flex is-justify-content-flex-end'>
-          <button
-            style={{ backgroundColor: colorPalette.BABYBLUE }}
-            className='button is-light is-rounded plus-button'
-            onClick={handleAddItemClick}>
-            <i className='material-icons'>add</i>
-          </button>
-        </div>
+
+        <button
+          style={{ backgroundColor: colorPalette.BABYBLUE }}
+          className='button 
+          is-light 
+          is-rounded 
+          plus-button'
+          onClick={handleAddItemClick}>
+          <i className='material-icons'>add</i>
+        </button>
       </div>
-      <div className='columns is-multiline'>
+
+      {/* Columns */}
+      <div className='columns is-multiline is-centered'>
+        {/* Itterate over the items */}
         {items.map((item) => (
+          // Column Definition
           <div
-            className='container column is-mobile'
+            className='column is-full-mobile
+            is-two-thirds-tablet
+            is-half-desktop
+            is-one-third-widescreen
+            is-one-quarter-fullhd'
             key={item._id}
             style={{
-              position: 'relative',
-              left: '20px',
-              margin: '10px',
               marginBottom: '25px',
             }}>
+            {/* Card  */}
             <div
               className='card'
-              style={{
-                width: '300px',
-                maxHeight: '700px',
-                minHeight: '250px',
-                // overflow: 'auto',
-              }}>
+              style={cardStyle}>
+              {/* Card Title */}
+              <header className='card-header block'>
+                <h2 className='card-header-title title is-5'>{item.name}</h2>
+              </header>
+
+              {/* Image */}
               <div className='card-image'>
                 <figure className='image is-1by4'>
                   <img
@@ -103,67 +160,92 @@ function Item() {
                       item.imageData ||
                       'https://bulma.io/images/placeholders/1280x960.png'
                     }
-                    alt='Item Image'
+                    alt='Item Image Preview'
                   />
                 </figure>
               </div>
-              <div className='card-content'>
-                <h2
-                  className='title is-5'
-                  style={{ color: '' }}>
-                  {item.name}
-                </h2>
-                <h3
-                  className='subtitle is-6'
-                  style={{ color: colorPalette.GREY }}>
-                  {item.description}
-                </h3>
-                <div className='content'>
-                  <div className='columns'>
-                    <p className='column is-half'>{`Purchase Price: $ ${item.purchasePrice}`}</p>
-                    <p className='column is-half'>{`Date Added: ${item.dateAdded}`}</p>
-                  </div>
-                  <p className='is-centered'>{`For Sale: ${
-                    item.forSale ? 'Yes' : 'No'
-                  }`}</p>
 
+              {/* Card Content */}
+              <div
+                className='card-content'
+                style={{
+                  height: '100%',
+                }}>
+                <div className='content'>
+                  <p className='card-header-subtitle'>
+                    {item.description ? item.description : ''}
+                  </p>
+                  {/* Description */}
+
+                  {/* Date Added*/}
+                  <p>{`Date Added: ${item.dateAdded}`}</p>
+
+                  {/* Purchase Price */}
+                  <p>{`Purchase Price: $ ${item.purchasePrice}`}</p>
+
+                  {/* For Sale */}
+
+                  {/* CONDITIONAL ITEMS */}
                   {item.forSale && (
-                    <div className='field'>
-                      <p className='column'>{item.salePrice}</p>
+                    // Columns
+
+                    <div className='columns'>
+                      {/* For Sale */}
+                      <p className='column is-half'>{`For Sale: ${
+                        item.forSale ? '✔' : ''
+                      }`}</p>
+
+                      {/* Sale Price */}
+                      <p className='column is-half'>{`Selling For: $ ${item.salePrice}`}</p>
                     </div>
                   )}
-                  <footer className='card-footer'>
-                    <Link
-                      to={`/item-edit?itemId=${item._id}`}
-                      className='card-footer-item has-text-black'
-                      style={{ backgroundColor: colorPalette.BABYBLUE }}
+
+                  {/*  */}
+                </div>
+              </div>
+
+              {/* Card Footer */}
+              <footer className='card-footer'>
+                {/* Columns */}
+                <div className='card-footer-item columns'>
+                  {/* Column */}
+                  <div className='column is-two-thirds'>
+                    {/* Edit */}
+                    <a
+                      className='card-footer-item'
+                      style={editButtonStyle}
                       onClick={() => handleEditClick(item)}>
                       Edit
-                    </Link>
-                    {/* added the handleDeleteClick function to onClick */}
+                    </a>
+                  </div>
+
+                  {/* Column */}
+                  <div className='column'>
+                    {/* Delete */}
                     <a
-                      href='#'
-                      className='card-footer-item has-text-black'
-                      style={{ backgroundColor: colorPalette.DUSTYROSE }}
+                      className='card-footer-item'
+                      style={deleteButtonStyle}
                       onClick={() => handleDeleteClick(item._id)}>
                       Delete
                     </a>
-                  </footer>
+                  </div>
                 </div>
-              </div>
+              </footer>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Delete Item */}
       {/*added the render DeleteItem component conitionally */}
       {selectedItem && (
-        <DeleteItem 
-          itemId={selectedItem} 
-          collectionId={collectionId} 
+        <DeleteItem
+          itemId={selectedItem}
+          collectionId={collectionId}
           onClose={() => setSelectedItem(null)}
         />
       )}
-    </Fragment>
+    </>
   );
 }
 
