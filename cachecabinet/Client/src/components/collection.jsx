@@ -3,10 +3,16 @@ import colorPalette from '../utils/colorPalette';
 import CreateItem from './CreateItem';
 import '../../src/assets/CabinetPage.css';
 import { useNavigate } from 'react-router-dom';
+import { useMutation, useQuery } from '@apollo/client';
+import { DELETE_COLLECTION, GET_COLLECTION } from '../utils/queries';
+import DeleteCollection from './DeleteCollection';
+
 
 const Collection = ({ userCollections }) => {
   const [selectedCollection, setSelectedCollection] = useState(null);
   const navigate = useNavigate();
+  const [deleteCollection] = useMutation(DELETE_COLLECTION);
+  const { refetch: refetchCollection } = useQuery(GET_COLLECTION);
 
   const cardStyle = {
     backgroundColor: colorPalette.IVORY,
@@ -19,7 +25,6 @@ const Collection = ({ userCollections }) => {
   };
 
   const handleViewClick = (collectionId) => {
-    // Toggle selectedCollection state
     setSelectedCollection(collectionId);
     navigate(`/collection/${collectionId}`);
   };
@@ -28,7 +33,41 @@ const Collection = ({ userCollections }) => {
     navigate('/collection-edit?collectionId=' + collection._id);
   };
 
+
   // Footer Style
+
+  const updateCollectionList = async () => {
+    try {
+        await refetchCollection({
+          collectionId: selectedCollection
+        });
+    } catch (error) {
+        console.error('Error refetching collections:', error);
+    }
+  };
+
+  const handleDeleteClick = (collectionId) => {
+    console.log('Deleting collection:', collectionId);
+    setSelectedCollection(collectionId);
+  };
+
+  const handleDeleteCollection = async (collectionId) => {
+    try {
+      await deleteCollection({
+        variables: {
+          collectionId,
+        },
+        refetchQueries: [{ query: GET_COLLECTION }],
+      });
+      onClose();
+      navigate('/main');
+      await refetchCollection();
+      setSelectedCollection(null); // Reset selected collection after deletion
+      updateCollections(collectionList.filter((collection) => collection._id !== collectionId));
+    } catch (error) {
+      console.error('Error deleting collection:', error);
+    }
+  };
 
   return (
     <>
@@ -51,7 +90,7 @@ const Collection = ({ userCollections }) => {
               {collection.description ? collection.description : <br />}
             </div>
             {/* Conditional rendering for additional info */}
-            {selectedCollection === collection._id && <CreateItem />}
+            {/* {selectedCollection === collection._id && <CreateItem />} */}
           </div>
 
           <footer className='card-footer'>
@@ -79,10 +118,17 @@ const Collection = ({ userCollections }) => {
               onClick={() => handleEditClick(collection)}>
               Edit
             </a>
+            <button
+              className='card-footer-item button is-danger'
+              style={{ backgroundColor: colorPalette.DUSTYROSE }}
+              onClick={() => handleDeleteClick(collection._id)}>
+              Delete
+            </button>
           </footer>
         </div>
       ))}
     </>
+
   );
 };
 
