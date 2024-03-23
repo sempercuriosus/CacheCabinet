@@ -89,7 +89,7 @@ function Item() {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    // maxWidth: '500px',
+    backgroundColor: colorPalette.IVORY,
   };
 
   // Footer Style
@@ -97,12 +97,14 @@ function Item() {
     backgroundColor: colorPalette.DUSTYROSE,
     border: 'solid black thin',
     borderRadius: '6px',
+    color: 'black',
   };
 
   const editButtonStyle = {
-    backgroundColor: colorPalette.BABYBLUE,
+    backgroundColor: colorPalette.SAGE,
     border: 'solid black thin',
     borderRadius: '6px',
+    color: 'black',
   };
 
   //  Component Start
@@ -132,7 +134,7 @@ function Item() {
         {items.map((item) => (
           // Column Definition
           <div
-            className='column
+            className='column is-full-mobile
             is-two-thirds-tablet
             is-half-desktop
             is-one-third-widescreen
@@ -146,7 +148,7 @@ function Item() {
               className='card'
               style={cardStyle}>
               {/* Card Title */}
-              <header className='card-header block '>
+              <header className='card-header block'>
                 <h2 className='card-header-title title is-5'>{item.name}</h2>
               </header>
 
