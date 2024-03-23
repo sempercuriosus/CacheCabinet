@@ -89,12 +89,18 @@ function Item() {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    maxWidth: '500px',
+    // maxWidth: '500px',
   };
 
   // Footer Style
-  const footerItemStyle = {
+  const deleteButtonStyle = {
     backgroundColor: colorPalette.DUSTYROSE,
+    border: 'solid black thin',
+    borderRadius: '6px',
+  };
+
+  const editButtonStyle = {
+    backgroundColor: colorPalette.BABYBLUE,
     border: 'solid black thin',
     borderRadius: '6px',
   };
@@ -126,7 +132,7 @@ function Item() {
         {items.map((item) => (
           // Column Definition
           <div
-            className='column is-full-mobile 
+            className='column
             is-two-thirds-tablet
             is-half-desktop
             is-one-third-widescreen
@@ -205,7 +211,7 @@ function Item() {
                     {/* Edit */}
                     <a
                       className='card-footer-item'
-                      style={footerItemStyle}
+                      style={editButtonStyle}
                       onClick={() => handleEditClick(item)}>
                       Edit
                     </a>
@@ -216,7 +222,7 @@ function Item() {
                     {/* Delete */}
                     <a
                       className='card-footer-item'
-                      style={footerItemStyle}
+                      style={deleteButtonStyle}
                       onClick={() => handleDeleteClick(item._id)}>
                       Delete
                     </a>
