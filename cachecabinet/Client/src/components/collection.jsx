@@ -10,8 +10,10 @@ const Collection = ({ userCollections }) => {
 
   const cardStyle = {
     backgroundColor: colorPalette.IVORY,
-    minWidth: '250px',
-    minHeight: '100px',
+    minWidth: '200px',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
     margin: '0.75em',
     border: 'thin black solid',
   };
@@ -26,22 +28,31 @@ const Collection = ({ userCollections }) => {
     navigate('/collection-edit?collectionId=' + collection._id);
   };
 
+  // Footer Style
+
   return (
     <>
       {userCollections.collections.map((collection) => (
         <div
-          className='column is-half card block'
+          className='column is-full-mobile 
+          is-two-thirds-tablet
+          is-half-desktop
+          is-one-third-widescreen
+          card 
+          block'
           style={cardStyle}
           key={collection._id}>
           <p className='card-header-title title is-4'>{collection.name}</p>
 
-          {collection.description && (
-            <div className='card-content subtitle is-5'>
-              {collection.description}
-              {/* Conditional rendering for additional info */}
-              {selectedCollection === collection._id && <CreateItem />}
+          <div
+            className='card-content subtitle is-5'
+            style={{ height: '100%' }}>
+            <div className='content'>
+              {collection.description ? collection.description : <br />}
             </div>
-          )}
+            {/* Conditional rendering for additional info */}
+            {selectedCollection === collection._id && <CreateItem />}
+          </div>
 
           <footer className='card-footer'>
             <a
