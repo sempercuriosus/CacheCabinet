@@ -79,12 +79,16 @@ const CreateItem = ({ onAddItem }) => {
     }
   };
 
+  const cardStyle = {
+    maxWidth: '400px',
+    border: 'solid black thin',
+    backgroundColor: colorPalette.IVORY,
+  };
+
   return (
     <div
-      className='card'
-      style={{
-        backgroundColor: colorPalette.DUSTYROSE,
-      }}>
+      className='container card'
+      style={cardStyle}>
       <div className='card-content'>
         <div className='content'>
           <form>
