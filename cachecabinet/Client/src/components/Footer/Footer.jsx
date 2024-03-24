@@ -9,7 +9,7 @@ const Footer = () => {
       <div className='content has-text-centered'>
         <p>
           Created by <strong>Eric Hulse</strong>, <strong>Keith Primas</strong>,{' '}
-          <strong>Nohemi Moser</strong>, and <strong>Jonathan Montalvo </strong>
+          <strong>Nohemi Moser</strong>
           <br />
           with 🧡 and ☕️
         </p>
