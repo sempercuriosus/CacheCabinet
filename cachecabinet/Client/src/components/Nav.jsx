@@ -26,11 +26,8 @@ function NavBar() {
         🗃️ Cache Cabinet
       </a>
 
-      <div
-        id='navbar'
-        className='navbar-menu'>
-        <div className='navbar-end'>
-          <div className='navbar-item'>
+      <div>
+          <div className='navbar-item jus'>
             <div className='buttons'>
               <a
                 onClick={handleGoHome}
@@ -48,7 +45,6 @@ function NavBar() {
             </div>
           </div>
         </div>
-      </div>
     </nav>
   );
 }

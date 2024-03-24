@@ -49,7 +49,7 @@ const Collection = ({ userCollections }) => {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0.75em',
+    margin: '0.30em',
     border: 'thin black solid',
   };
 
@@ -59,7 +59,7 @@ const Collection = ({ userCollections }) => {
     navigate(`/collection/${collectionId}`);
   };
 
-  // Edit
+  // Edit    
   const handleEditClick = (collection) => {
     navigate('/collection-edit?collectionId=' + collection._id);
   };
@@ -103,70 +103,69 @@ const Collection = ({ userCollections }) => {
   };
 
   return (
-    <>
+    <div className="columns is-full-mobile is-multiline"> {/* Use is-multiline to wrap cards */}
       {userCollections.collections.map((collection) => (
         <div
-          className='column is-mobile
-          is-one-third-widescreen
-          card 
-          block'
-          style={cardStyle}
+          className='column is-full-mobile
+          is-one-third-widescreen'
           key={collection._id}>
-          <p className='card-header-title title is-'>{collection.name}</p>
+          <div className="card" style={cardStyle}>
+            <p className='card-header-title title is-'>{collection.name}</p>
 
-          <div
-            className='card-content subtitle is-3'
-            style={{ height: '100%' }}>
-            <div className='content'>
-              {collection.description ? collection.description : <br />}
+            <div
+              className='card-content subtitle is-3'
+              style={{ height: '100%' }}>
+              <div className='content'>
+                {collection.description ? collection.description : <br />}
+              </div>
+              {/* Conditional rendering for additional info */}
+              {/* {selectedCollection === collection._id && <CreateItem />} */}
             </div>
-            {/* Conditional rendering for additional info */}
-            {/* {selectedCollection === collection._id && <CreateItem />} */}
+
+            <footer
+              className='card-footer'
+              style={{ padding: '1rem' }}>
+              <a
+                href=''
+                className='card-footer-item button has-text-black'
+                style={{
+                  backgroundColor: colorPalette.BABYBLUE,
+                  color: 'black',
+                  border: 'thin black solid',
+                  marginLeft: '0.55rem',
+                  marginRight: '0.55rem',
+                }}
+                onClick={() => handleViewClick(collection._id)}>
+                View
+              </a>
+              <a
+                href=''
+                className='card-footer-item button has-text-black'
+                style={{
+                  backgroundColor: colorPalette.SAGE,
+                  color: 'black',
+                  border: 'thin black solid',
+                  marginLeft: '0.55rem',
+                  marginRight: '0.55rem',
+                }}
+                onClick={() => handleEditClick(collection)}>
+                Edit
+              </a>
+
+              <a
+                className='card-footer-item button is-danger'
+                style={{
+                  backgroundColor: colorPalette.DUSTYROSE,
+                  color: 'black',
+                  border: 'thin black solid',
+                  marginLeft: '0.55rem',
+                  marginRight: '0.55rem',
+                }}
+                onClick={() => handleDeleteClick(collection._id)}>
+                Delete
+              </a>
+            </footer>
           </div>
-
-          <footer
-            className='card-footer'
-            style={{ paddingTop: '1.5rem' }}>
-            <a
-              href=''
-              className='card-footer-item button has-text-black'
-              style={{
-                backgroundColor: colorPalette.BABYBLUE,
-                color: 'black',
-                border: 'thin black solid',
-                marginLeft: '0.55rem',
-                marginRight: '0.55rem',
-              }}
-              onClick={() => handleViewClick(collection._id)}>
-              View
-            </a>
-            <a
-              href=''
-              className='card-footer-item button has-text-black'
-              style={{
-                backgroundColor: colorPalette.SAGE,
-                color: 'black',
-                border: 'thin black solid',
-                marginLeft: '0.55rem',
-                marginRight: '0.55rem',
-              }}
-              onClick={() => handleEditClick(collection)}>
-              Edit
-            </a>
-
-            <a
-              className='card-footer-item button is-danger'
-              style={{
-                backgroundColor: colorPalette.DUSTYROSE,
-                color: 'black',
-                border: 'thin black solid',
-                marginLeft: '0.55rem',
-                marginRight: '0.55rem',
-              }}
-              onClick={() => handleDeleteClick(collection._id)}>
-              Delete
-            </a>
-          </footer>
         </div>
       ))}
 
@@ -196,7 +195,7 @@ const Collection = ({ userCollections }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
