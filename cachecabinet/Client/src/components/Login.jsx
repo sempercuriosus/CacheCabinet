@@ -31,49 +31,54 @@ function Login(props) {
   };
 
   return (
-    <div className="columns is-centered">
-      <div className="column">
-        <form className="login" onSubmit={handleFormSubmit}>
-          <h1 className="title is-3">Login</h1>
-          <div className="field">
-            <label className="label">Email</label>
-            <div className="control">
-              <input
-                className="input"
-                type="email"
-                placeholder="Enter your email"
-                name="email"
-                onChange={handleChange}
-              />
-            </div>
+    <div className=''>
+      <form
+        className='login'
+        onSubmit={handleFormSubmit}>
+        <h1 className='title is-4'>Login</h1>
+        <div className='field'>
+          <label className='label'>Email</label>
+          <div className='control'>
+            <input
+              className='input'
+              type='email'
+              placeholder='Enter your email'
+              name='email'
+              onChange={handleChange}
+            />
           </div>
+        </div>
 
-          <div className="field">
-            <label className="label">Password</label>
-            <div className="control">
-              <input
-                className="input"
-                type="password"
-                placeholder="Enter your password"
-                name="password"
-                onChange={handleChange}
-              />
-            </div>
+        <div className='field'>
+          <label className='label'>Password</label>
+          <div className='control'>
+            <input
+              className='input'
+              type='password'
+              placeholder='Enter your password'
+              name='password'
+              onChange={handleChange}
+            />
           </div>
+        </div>
 
-          <div className="field">
-            <div className="control">
-              <button type="submit" className="button is-success">
-                <Link to="/main" className="has-text-white">
-                  Login
-                </Link>
-              </button>
-            </div>
+        <div className='field'>
+          <div className='control'>
+            <button
+              type='submit'
+              className='button is-success'>
+              <Link
+                to='/main'
+                className='has-text-white'>
+                Login
+              </Link>
+            </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }
 
 export default Login;
+
