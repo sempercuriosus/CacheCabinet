@@ -82,10 +82,17 @@ const EditItem = () => {
     }
   };
 
+  // Card
+  const cardStyle = {
+    maxWidth: '500px',
+    border: 'solid black thin',
+    backgroundColor: colorPalette.IVORY,
+  };
+
   return (
     <div
-      className='box has-text-centered'
-      style={{ maxWidth: '550px' }}>
+      className='container box has-text-centered'
+      style={cardStyle}>
       <h2 className='title is-4'>Update The Item</h2>
       <div className='is-flex is-justify-content-flex-end'></div>
       <div className='field'>
@@ -185,3 +192,4 @@ const EditItem = () => {
 };
 
 export default EditItem;
+

@@ -64,10 +64,17 @@ const EditCollection = () => {
     return <h1 className='title is-3'>Loading...</h1>;
   }
 
+  // Card
+  const cardStyle = {
+    maxWidth: '500px',
+    border: 'solid black thin',
+    backgroundColor: colorPalette.IVORY,
+  };
+
   return (
     <div
-      className='box has-text-centered'
-      style={{ maxWidth: '550px' }}>
+      className='container box has-text-centered'
+      style={cardStyle}>
       <h2 className='title is-4'>Update The Collection</h2>
       <div className='is-flex is-justify-content-flex-end'></div>
       <div className='field'>
