@@ -7,7 +7,7 @@ import '../../src/assets/home.css';
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -18,6 +18,7 @@ function Login(props) {
       const token = mutationResponse.data.login.token;
       AuthService.login(token);
     } catch (e) {
+      alert('Incorrect email or password.');
       console.log(e);
     }
   };
@@ -73,6 +74,7 @@ function Login(props) {
                 Login
               </Link>
             </button>
+            
           </div>
         </div>
       </form>
