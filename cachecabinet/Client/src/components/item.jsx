@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -11,10 +11,40 @@ function Item() {
   const { collectionId } = useParams();
   const [selectedItem, setSelectedItem] = useState(null);
   const [editingItem, setEditingItem] = useState(null);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   const { loading, error, data, refetch } = useQuery(GET_COLLECTION, {
     variables: { collectionId },
   });
+
+  // Modal
+
+  // Open
+  const openModal = (serviceType) => {
+    setIsModalActive(true);
+  };
+
+  // Close
+  const closeModal = () => {
+    setIsModalActive(false);
+  };
+
+  // Effect
+  useEffect(() => {
+    // Modal ESC Button
+    const handleEsc = (event) => {
+      console.log('Handling Escape key press');
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
 
   // Loading
   if (loading) return <p>Loading...</p>;
@@ -53,7 +83,6 @@ function Item() {
   };
 
   // Delete
-
   const handleDeleteItem = async (itemId) => {
     try {
       console.log(itemId);
@@ -72,6 +101,9 @@ function Item() {
 
   const handleDeleteClick = (itemId) => {
     setSelectedItem(itemId);
+
+    // Open Modal
+    setIsModalActive(true);
 
     handleDeleteItem(itemId);
   };
@@ -237,13 +269,29 @@ function Item() {
       </div>
 
       {/* Delete Item */}
-      {/*added the render DeleteItem component conitionally */}
-      {selectedItem && (
-        <DeleteItem
-          itemId={selectedItem}
-          collectionId={collectionId}
-          onClose={() => setSelectedItem(null)}
-        />
+      {/* IF there is a selected item AND the modal is active THEN render the modal */}
+      {selectedItem && isModalActive && (
+        <div className='modal is-active'>
+          {/* Modal Overlay */}
+          <div
+            className='modal-background'
+            onClick={closeModal}></div>
+
+          {/* Modal Close Button */}
+          <button
+            className='modal-close'
+            aria-label='close'
+            onClick={closeModal}></button>
+
+          {/* Modal Content */}
+          <div className='box modal-content'>
+            <DeleteItem
+              itemId={selectedItem}
+              collectionId={collectionId}
+              onClose={() => setSelectedItem(null)}
+            />
+          </div>
+        </div>
       )}
     </>
   );
