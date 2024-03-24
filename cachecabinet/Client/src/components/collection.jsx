@@ -12,6 +12,36 @@ const Collection = ({ userCollections }) => {
   const navigate = useNavigate();
   const [deleteCollection] = useMutation(DELETE_COLLECTION);
   const { refetch: refetchCollection } = useQuery(GET_COLLECTION);
+  const [isModalActive, setIsModalActive] = useState(false);
+
+  // Modal
+
+  // Open
+  const openModal = (serviceType) => {
+    setIsModalActive(true);
+  };
+
+  // Close
+  const closeModal = () => {
+    setIsModalActive(false);
+  };
+
+  // Effect
+  useEffect(() => {
+    // Modal ESC Button
+    const handleEsc = (event) => {
+      console.log('Handling Escape key press');
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
 
   const cardStyle = {
     backgroundColor: colorPalette.IVORY,
@@ -23,11 +53,13 @@ const Collection = ({ userCollections }) => {
     border: 'thin black solid',
   };
 
+  // View
   const handleViewClick = (collectionId) => {
     setSelectedCollection(collectionId);
     navigate(`/collection/${collectionId}`);
   };
 
+  // Edit
   const handleEditClick = (collection) => {
     navigate('/collection-edit?collectionId=' + collection._id);
   };
@@ -47,6 +79,7 @@ const Collection = ({ userCollections }) => {
   const handleDeleteClick = (collectionId) => {
     console.log('Deleting collection:', collectionId);
     setSelectedCollection(collectionId);
+    setIsModalActive(true);
   };
 
   const handleDeleteCollection = async (collectionId) => {
@@ -138,6 +171,33 @@ const Collection = ({ userCollections }) => {
           </footer>
         </div>
       ))}
+
+      {/* Render DeleteCollection component conditionally */}
+      {/* IF there is a selected collection AND the modal is active THEN render the modal */}
+
+      {selectedCollection && isModalActive && (
+        <div className='modal is-active'>
+          {/* Modal Overlay */}
+          <div
+            className='modal-background'
+            onClick={closeModal}></div>
+
+          {/* Modal Close Button */}
+          <button
+            className='modal-close'
+            aria-label='close'
+            onClick={closeModal}></button>
+
+          {/* Modal Content */}
+          <div className='box modal-content'>
+            <DeleteCollection
+              collectionId={selectedCollection}
+              onClose={() => setSelectedCollection(null)}
+              updateCollectionList={updateCollectionList}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
