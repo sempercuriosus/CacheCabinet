@@ -1,5 +1,5 @@
 // App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Outlet } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
@@ -34,13 +34,22 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('id_token');
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
     <ApolloProvider client={client}>
-      <Header />
+      {isLoggedIn && (
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      )}
       <section
         id='topLevel'
         className='content section has-navbar-fixed-top'>
-        <Outlet />
+        <Outlet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       </section>
       <Footer />
     </ApolloProvider>
