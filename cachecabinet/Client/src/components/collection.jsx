@@ -106,18 +106,16 @@ const Collection = ({ userCollections }) => {
     <>
       {userCollections.collections.map((collection) => (
         <div
-          className='column is-full-mobile 
-          is-two-thirds-tablet
-          is-half-desktop
+          className='column is-mobile
           is-one-third-widescreen
           card 
           block'
           style={cardStyle}
           key={collection._id}>
-          <p className='card-header-title title is-4'>{collection.name}</p>
+          <p className='card-header-title title is-'>{collection.name}</p>
 
           <div
-            className='card-content subtitle is-5'
+            className='card-content subtitle is-3'
             style={{ height: '100%' }}>
             <div className='content'>
               {collection.description ? collection.description : <br />}
