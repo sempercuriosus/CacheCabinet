@@ -44,7 +44,7 @@ const Collection = ({ userCollections }) => {
 
   const cardStyle = {
     backgroundColor: colorPalette.IVORY,
-    minWidth: '250px',
+    minWidth: '275px',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
