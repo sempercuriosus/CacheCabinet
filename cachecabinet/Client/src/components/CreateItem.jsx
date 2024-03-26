@@ -149,7 +149,7 @@ const CreateItem = ({ onAddItem }) => {
               <div className='control'>
                 <input
                   className='input'
-                  type='date'
+                  type='text'
                   placeholder='Date Added'
                   value={dateAdded}
                   onChange={(e) => setDateAdded(e.target.value)}
