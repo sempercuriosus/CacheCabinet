@@ -14,4 +14,13 @@ body {
     font-size: 50px;
   }
   
+  @media screen and (max-width: 400px) {
+    .is-half-desktop {
+      margin-right: 0.7em;
+    }
+    .container.box.has-text-centered {
+        margin-right: 0.7em;
+      }
+  }
+  
   

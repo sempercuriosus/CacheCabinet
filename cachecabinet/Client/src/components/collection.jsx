@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import colorPalette from '../utils/colorPalette';
-import CreateItem from './CreateItem';
 import '../../src/assets/CabinetPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
@@ -45,11 +44,11 @@ const Collection = ({ userCollections }) => {
 
   const cardStyle = {
     backgroundColor: colorPalette.IVORY,
-    minWidth: '200px',
+    minWidth: '250px',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0.30em',
+    marginTop: '1em',
     border: 'thin black solid',
   };
 
@@ -103,11 +102,11 @@ const Collection = ({ userCollections }) => {
   };
 
   return (
-    <div className="columns is-full-mobile is-multiline"> {/* Use is-multiline to wrap cards */}
+    <div className="columns is-mobile is-multiline"> {/* Use is-multiline to wrap cards */}
       {userCollections.collections.map((collection) => (
         <div
-          className='column is-full-mobile
-          is-one-third-widescreen'
+          className='column
+          is-half-desktop'
           key={collection._id}>
           <div className="card" style={cardStyle}>
             <p className='card-header-title title is-'>{collection.name}</p>
@@ -153,9 +152,9 @@ const Collection = ({ userCollections }) => {
               </a>
 
               <a
-                className='card-footer-item button is-danger'
+                className='card-footer-item button has-text-black'
                 style={{
-                  backgroundColor: colorPalette.DUSTYROSE,
+                  backgroundColor: colorPalette.IVORY,
                   color: 'black',
                   border: 'thin black solid',
                   marginLeft: '0.55rem',
