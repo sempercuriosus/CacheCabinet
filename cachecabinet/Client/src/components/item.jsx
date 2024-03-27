@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import '../../src/assets/item.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import colorPalette from '../utils/colorPalette';
@@ -242,7 +243,7 @@ function Item() {
                   <div className='column is-two-thirds'>
                     {/* Edit */}
                     <a
-                      className='card-footer-item'
+                      className='card-footer-item button'
                       style={editButtonStyle}
                       onClick={() => handleEditClick(item)}>
                       Edit
@@ -253,7 +254,7 @@ function Item() {
                   <div className='column'>
                     {/* Delete */}
                     <a
-                      className='card-footer-item'
+                      className='card-footer-item button'
                       style={deleteButtonStyle}
                       onClick={() => handleDeleteClick(item._id)}>
                       Delete

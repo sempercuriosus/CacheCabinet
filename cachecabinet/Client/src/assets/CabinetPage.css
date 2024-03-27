@@ -13,6 +13,10 @@ body {
     height: 50vh;
     font-size: 50px;
   }
+
+  .card-footer-item.button:hover {
+    filter: brightness(70%);
+  }
   
   @media screen and (max-width: 400px) {
     .is-half-desktop {
