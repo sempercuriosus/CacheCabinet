@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
     "concurrently": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "prop-types": "^15.8.1",
