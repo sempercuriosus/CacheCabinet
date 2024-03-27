@@ -8,7 +8,7 @@ body {
 }
 
 .hero-body {
-  margin-top: 1%;  
+  margin-top: 2%;  
 }
 
 .footer {
@@ -17,6 +17,10 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
+}
+
+footer.footer {
+  padding: 48px 24px 20px;
 }
 
 
