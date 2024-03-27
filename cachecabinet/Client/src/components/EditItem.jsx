@@ -74,11 +74,20 @@ const EditItem = () => {
     }
   };
 
-  const handleImageUpload = () => {
-    // Logic to handle image upload
-    if (imageData) {
-      console.log('Image URL:', imageData);
-      setImageData(imageData);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      // Logic to handle image upload
+      // Assuming imageData is the URL provided
+      const imageData = reader.result; // Assuming imageData is the URL provided
+      if (imageData) {
+        // Set the state with the image URL
+        setImageData(imageData);
+      }
+    };
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
 
@@ -122,47 +131,45 @@ const EditItem = () => {
             value={purchasePrice}
             onChange={(e) => setPurchasePrice(e.target.value)}></input>
         </div>
-        <label className='label'>Date Added</label>
+        {/* <label className='label'>Date Added</label>
         <div className='control'>
           <input
-            type='text'
+            type='date'
             className='input'
             placeholder='Enter date added'
             value={dateAdded}
             onChange={(e) => setDateAdded(e.target.value)}></input>
-        </div>
+        </div> */}
 
-        <label className='label'>Image URL</label>
-        <div className='control'>
-          {/* <button 
-          className="button is-primary" 
-          style={{ backgroundColor: colorPalette.BABYBLUE }} 
-          type="button" onClick={handleImageUpload}>
-          Upload Image
-        </button> */}
-          <input
-            className='input '
-            type='text'
-            placeholder='Enter Image URL'
-            value={imageData}
-            onChange={(e) => setImageData(e.target.value)}
-          />
-          {/* Display the image */}
-          {imageData && (
-            <img
-              src={imageData}
-              alt='Uploaded image'
-            />
-          )}
-        </div>
-        <label className='checkbox'>
-          <input
-            type='checkbox'
-            checked={forSale}
-            onChange={() => setForSale(!forSale)}
-          />
-          For Sale
-        </label>
+          {/* <div>
+              <label htmlFor="upload-input" className='button is-primary block' style={{ backgroundColor: colorPalette.BABYBLUE }}>
+                Upload Image
+              </label>
+              <input
+                id="upload-input"
+                className='input'
+                type='file'
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
+              />
+          </div>
+              {imageData && (
+                <img
+                  src={imageData}
+                  alt='Uploaded image'
+                />
+              )} */}
+
+            <div className='field'>
+              <label className='checkbox'>
+                <input
+                  type='checkbox'
+                  checked={forSale}
+                  onChange={() => setForSale(!forSale)}
+                />
+                For Sale
+              </label>
+            </div>
         {forSale && (
           <div className='field'>
             <label className='label'>Sale Price</label>

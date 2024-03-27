@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+// const bodyParser = require('body-parser');
 
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -27,9 +28,10 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  // apply graphql for route handling
+  // Apply custom body parser with 7MB limit for GraphQL route handling
   app.use(
     '/graphql',
+    // bodyParser.urlencoded({ limit: '7mb', extended: true }),
     expressMiddleware(server, {
       context: authMiddleware,
     }),
@@ -57,4 +59,3 @@ const startApolloServer = async () => {
 };
 
 startApolloServer();
-
