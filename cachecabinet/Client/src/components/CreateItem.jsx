@@ -69,15 +69,23 @@ const CreateItem = ({ onAddItem }) => {
     }
   };
 
-  const handleImageUpload = () => {
-    // Logic to handle image upload
-    // Assuming imageData is the URL provided
-    if (imageData) {
-      console.log('Image URL:', imageData);
-      // Set the state with the image URL
-      setImageData(imageData);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      // Logic to handle image upload
+      // Assuming imageData is the URL provided
+      const imageData = reader.result; // Assuming imageData is the URL provided
+      if (imageData) {
+        // Set the state with the image URL
+        setImageData(imageData);
+      }
+    };
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
+  
 
   const cardStyle = {
     maxWidth: '400px',
@@ -146,15 +154,14 @@ const CreateItem = ({ onAddItem }) => {
             )}
             <div className='field'>
               <label className='label'>Date Added</label>
-              <div className='control'>
+              {/* <div className='control'>
                 <input
                   className='input'
-                  type='text'
-                  placeholder='Date Added'
+                  type='date'
                   value={dateAdded}
                   onChange={(e) => setDateAdded(e.target.value)}
                 />
-              </div>
+              </div> */}
             </div>
             <div className='field'>
               <label className='checkbox'>
@@ -167,39 +174,25 @@ const CreateItem = ({ onAddItem }) => {
               </label>
             </div>
 
-            {/* <button
-              className='button is-primary block'
-              style={{ backgroundColor: colorPalette.BABYBLUE }}
-              type='button'
-              onClick={handleImageUpload}>
-              Upload Image
-            </button>
-            <input
-              className='input'
-              type='text'
-              placeholder='Enter Image URL'
-              value={imageData}
-              onChange={(e) => setImageData(e.target.value)}
-            /> */}
-            {/* Display the image */}
-            {imageData && (
-              <img
-                src={imageData}
-                alt='Uploaded image'
+            {/* <div>
+              <label htmlFor="upload-input" className='button is-primary block' style={{ backgroundColor: colorPalette.BABYBLUE }}>
+                Upload Image
+              </label>
+              <input
+                id="upload-input"
+                className='input'
+                type='file'
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
               />
-            )}
-            <div className='field'>
-              <label className='label'>Image URL</label>
-              <div className='control'>
-                <input
-                  className='input'
-                  type='text'
-                  placeholder='Enter Image URL'
-                  value={imageData}
-                  onChange={(e) => setImageData(e.target.value)}
-                />
-              </div>
             </div>
+              {imageData && (
+                <img
+                  src={imageData}
+                  alt='Uploaded image'
+                />
+              )} */}
+
 
             <div className='field'>
               <div className='control'>

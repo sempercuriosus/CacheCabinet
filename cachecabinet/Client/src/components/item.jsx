@@ -162,7 +162,7 @@ function Item() {
 
       {/* Columns */}
       <div className='columns is-multiline is-centered'>
-        {/* Itterate over the items */}
+        {/* Iterate over the items */}
         {items.map((item) => (
           // Column Definition
           <div
@@ -184,18 +184,16 @@ function Item() {
                 <h2 className='card-header-title title is-5'>{item.name}</h2>
               </header>
 
-              {/* Image */}
-              <div className='card-image'>
-                <figure className='image is-1by4'>
-                  <img
-                    src={
-                      item.imageData ||
-                      'https://bulma.io/images/placeholders/1280x960.png'
-                    }
+             {/* Image */}
+                {/* <div className='card-image'>
+                  <figure className='image is-1by4'>
+                    {/* Display image from base64 encoded data */}
+                    {/* <img
+                    src={item.imageData ? `data:image/jpeg;base64, ${item.imageData}` : 'https://bulma.io/images/placeholders/1280x960.png'}
                     alt='Item Image Preview'
-                  />
-                </figure>
-              </div>
+                    />
+                  </figure>
+                </div> */}
 
               {/* Card Content */}
               <div
@@ -210,7 +208,7 @@ function Item() {
                   {/* Description */}
 
                   {/* Date Added*/}
-                  <p>{`Date Added: ${item.dateAdded}`}</p>
+                  {/* <p>{`Date Added: ${item.dateAdded}`}</p> */}
 
                   {/* Purchase Price */}
                   <p>{`Purchase Price: $ ${item.purchasePrice}`}</p>
