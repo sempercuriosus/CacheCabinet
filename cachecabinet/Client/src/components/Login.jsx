@@ -67,17 +67,23 @@ function Login(props) {
           <div className='control'>
             <button
               type='submit'
-              className='button is-success'>
+              className='button is-success mb-2'>
               <Link
                 to='/main'
                 className='has-text-white'>
                 Login
               </Link>
             </button>
-            
           </div>
         </div>
       </form>
+      <div>
+      <Link
+        to='/register'
+        className='has-text-white is-size-4 ' style={{ textDecoration: 'underline' }}>
+        Register
+      </Link>
+      </div>
     </div>
   );
 }
