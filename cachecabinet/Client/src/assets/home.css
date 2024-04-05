@@ -7,6 +7,10 @@ body {
     align-items: center;
 }
 
+div.hero-body {
+  padding: 0px;
+}
+
 .footer {
   position: relative;
   bottom: 0;
@@ -17,7 +21,7 @@ body {
 
 img.leftdesign {
   position: relative;
-  bottom: 110px;
+  bottom: 100px;
   left: 80px;
   width: 250px;
   height: 443.89px;
@@ -25,14 +29,13 @@ img.leftdesign {
 
 img.rightdesign {
   position: relative;
-  left: 10px;
+  left: 25px;
   width: 250px;
   height: 338.07px;
 }
 
 footer.footer {
-  padding: 48px 24px 20px;
-  position: relative;
+  padding: 0px 24px 20px;
 }
 
 /* Add this to your existing CSS file or create a new one */
@@ -45,7 +48,7 @@ footer.footer {
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {
   h1.title.is-1 {
     font-size: 40px;
   }
@@ -132,13 +135,98 @@ footer.footer {
   }
 }
 
-@media screen and (min-width: 1280px) and (min-height: 900px) {
+@media screen and (min-width: 1024px) and (min-height: 900px) {
   form.register {
     position: relative;
     top: 200px;
     margin-bottom: 200px;
   }
+  a.has-text-white.is-size-4 {
+    position: relative;
+    left: 50px;
+    top: 20px
+  }
+  form.login {
+    position: relative;
+    top: 20px;
+    width: 300px;
+  }
 }
+
+@media screen and (min-width: 900px) and (min-height: 1300px) {
+  form.login {
+    position: relative;
+    top: 200px;
+    width: 300px;
+  }
+  .footer {
+    position: relative;
+    top: 300px;
+  }
+  a.has-text-white.is-size-4 {
+    position: relative;
+    left: 0px;
+    top: 200px
+  }
+  form.register {
+    position: relative;
+    left: 225px;
+  }
+}
+
+@media screen and (min-width: 1300px) and (min-height: 1024px) {
+  form.register {
+    position: relative;
+    left: 315px;
+  }
+}
+
+@media screen and (min-width: 1360px) and (max-height: 915px) {
+  a.has-text-white.is-size-4 {
+    position: relative;
+    left: 55px;
+  }
+  form.login {
+    position: relative;
+    left: 55px;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-height: 1180px) and (max-width: 850px) {
+  form.login {
+    position: relative;
+    top: 80px;
+    width: 400px;
+  }
+  form.register {
+    position: relative;
+    left: 195px;
+  }
+  a.has-text-white.is-size-4 {
+    position: relative;
+    top: 80px;
+    left: 0;
+  }
+  .footer {
+    position: relative;
+    top: 200px;
+  }
+}
+
+@media screen and (min-width: 1100px) and (max-height: 830px) {
+  form.register {
+    position: relative;
+    top: 100px;
+    left: 0;
+  }
+  .footer {
+    position: relative;
+    top: 80px;
+  }
+}
+
+
+
 
 
 
