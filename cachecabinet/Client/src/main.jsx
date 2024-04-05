@@ -11,6 +11,7 @@ import CreateItem from './components/CreateItem.jsx';
 import EditItem from './components/EditItem.jsx';
 import EditCollection from './components/EditCollection.jsx';
 import DeleteItem from './components/DeleteItem.jsx'; //added
+import Register from './components/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/main',
         element: <CabinetPage />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
       },
       {
         path: '/item/new',

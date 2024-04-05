@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Login from '../../components/Login';
 import Register from '../../components/Register';
 import '../../assets/home.css';
@@ -18,12 +19,8 @@ export default function Home() {
           <div className='column is-mobile-full is-half'>
             <Login />
           </div>
-          <div className='column is-mobile-full is-half'>
-            <Register />
-          </div>
         </div>
       </div>
     </div>
   );
 }
-

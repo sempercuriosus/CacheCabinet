@@ -7,9 +7,8 @@ body {
     align-items: center;
 }
 
-.hero-body {
-  margin-top: 2%;  
-}
+
+
 
 .footer {
   position: relative;
@@ -21,17 +20,28 @@ body {
 
 footer.footer {
   padding: 48px 24px 20px;
+  position: relative;
 }
 
 
 /* Add this to your existing CSS file or create a new one */
 /* Add this to your existing CSS file or create a new one */
+@media screen and (min-width: 1000px) {
+  form.register {
+    width: 500px;
+  }
+}
+
 @media screen and (max-width: 800px) {
   h1.title.is-1 {
     font-size: 40px;
   }
  p.subtitle.is-3 {
     font-size: 25px; /* Decrease font size by 10% */
+  }
+  footer {
+    position: relative;
+    top: 250px;
   }
 }
 
@@ -70,6 +80,11 @@ footer.footer {
   }
   .footer {
     position: relative;
+    top: 100px;
+  }
+  form.register {
+    margin-left: 25px;
+    width: 300px;
   }
   .subtitle.has-text-centered {
     font-size: 15px;

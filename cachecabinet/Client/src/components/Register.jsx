@@ -31,8 +31,13 @@ function Register(props) {
     });
   };
 
+  const goBack = () => {
+    window.history.back(); // Go back to the previous page
+  };
+
   return (
     <div className=''>
+      <div className='columns is-centered'>
       <form
         className='register'
         onSubmit={handleFormSubmit}>
@@ -76,10 +81,20 @@ function Register(props) {
             </button>
           </div>
         </div>
+        <div className='field'>
+          <div className='control'>
+            <button
+              type='button'
+              className='button is-info'
+              onClick={goBack}>
+              Go back
+            </button>
+          </div>
+        </div>
       </form>
+      </div>
     </div>
   );
 }
 
 export default Register;
-
