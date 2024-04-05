@@ -7,9 +7,6 @@ body {
     align-items: center;
 }
 
-
-
-
 .footer {
   position: relative;
   bottom: 0;
@@ -22,7 +19,6 @@ footer.footer {
   padding: 48px 24px 20px;
   position: relative;
 }
-
 
 /* Add this to your existing CSS file or create a new one */
 /* Add this to your existing CSS file or create a new one */
@@ -55,6 +51,10 @@ footer.footer {
     top: 100px;
     margin-bottom: 40px;
     padding-bottom: 30px;
+  }
+  a.has-text-white.is-size-4 {
+    position: relative;
+    top: 20px;
   }
 }
 

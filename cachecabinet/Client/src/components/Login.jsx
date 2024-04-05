@@ -80,7 +80,7 @@ function Login(props) {
       <div>
       <Link
         to='/register'
-        className='has-text-white is-size-4 ' style={{ textDecoration: 'underline' }}>
+        className='has-text-white is-size-4' style={{ textDecoration: 'underline' }}>
         Register
       </Link>
       </div>
