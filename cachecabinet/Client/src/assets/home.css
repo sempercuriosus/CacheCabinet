@@ -130,10 +130,6 @@ footer.footer {
     position: relative;
     left: 166px;
   }
-  .footer {
-    position: relative;
-    top: 150px;
-  }
 }
 
 @media screen and (min-width: 1280px) and (min-height: 900px) {
