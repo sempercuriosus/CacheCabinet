@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Login from '../../components/Login';
-import Register from '../../components/Register';
+import leftDesign from '../../assets/leftdesign.png'; // Import left image
+import rightDesign from '../../assets/rightdesign.png'; // Import right image
 import '../../assets/home.css';
 
 export default function Home() {
@@ -16,8 +16,16 @@ export default function Home() {
 
       <div className='hero-body'>
         <div className='columns is-centered'>
-          <div className='column is-mobile-full is-half'>
+          <div className='column'>
+            <img src={leftDesign} alt='Left Image' className='leftdesign'/>
+          </div>
+          
+          <div className='column is-mobile-full'>
             <Login />
+          </div>
+
+          <div className='column'>
+            <img src={rightDesign} alt='Right Image' className='rightdesign'/>
           </div>
         </div>
       </div>

@@ -15,6 +15,21 @@ body {
   width: 100%;
 }
 
+img.leftdesign {
+  position: relative;
+  bottom: 110px;
+  left: 80px;
+  width: 250px;
+  height: 443.89px;
+}
+
+img.rightdesign {
+  position: relative;
+  left: 10px;
+  width: 250px;
+  height: 338.07px;
+}
+
 footer.footer {
   padding: 48px 24px 20px;
   position: relative;
@@ -22,28 +37,31 @@ footer.footer {
 
 /* Add this to your existing CSS file or create a new one */
 /* Add this to your existing CSS file or create a new one */
-@media screen and (min-width: 1000px) {
-  form.register {
-    width: 500px;
+/* Apply styles only when the screen width is 1024px or less */
+@media screen and (min-width: 1025px) {
+  img.leftdesign {
+    position: relative;
+    left: 130px;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1024px) {
   h1.title.is-1 {
     font-size: 40px;
   }
- p.subtitle.is-3 {
+  p.subtitle.is-3 {
     font-size: 25px; /* Decrease font size by 10% */
   }
-  footer {
-    position: relative;
-    top: 250px;
+  img.rightdesign,
+  img.leftdesign {
+    display: none;
   }
 }
 
-@media screen and (max-width: 400px) {
-  .title.is-1 {
-    display: none;
+/* Apply styles only when the screen width is 400px or less */
+@media (max-width: 400px) {
+  h1.title.is-1 {
+    display: none; /* Hide title on small screens */
   }
   p.subtitle.is-3 {
     font-size: 18px; /* Decrease font size by 10% */
@@ -56,31 +74,23 @@ footer.footer {
     position: relative;
     top: 20px;
   }
-}
-
-/* Apply styles only when the screen width is 400px or less */
-@media (max-width: 400px) {
   .columns.is-centered.is-mobile {
     flex-direction: column;
     align-items: center;
     position: relative;
   }
-
   .column.is-5.is-mobile {
     width: 100%;
     text-align: center;
   }
-
-  .column {
+  .column,
+  .footer {
     margin-top: 5px; /* Adjust the value based on your design */
   }
   form.login {
     position: relative;
     top: 15px;
-  }
-  .footer {
-    position: relative;
-    top: 100px;
+    margin-right: 15px;
   }
   form.register {
     margin-left: 25px;
@@ -89,9 +99,50 @@ footer.footer {
   .subtitle.has-text-centered {
     font-size: 15px;
   }
+  img.rightdesign,
+  img.leftdesign {
+    display: none;
+  }
 }
 
+@media screen and (min-width: 1024px) and (min-height: 700px) {
+  form.login,
+  form.register {
+    width: 400px;
+  }
+}
 
+@media screen and (min-width: 768px) and (min-height: 1024px) {
+  form.login,
+  form.register {
+    width: 400px;
+    position: relative;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+  }
+  form.register {
+    position: relative;
+    top: 200px;
+  }
+  .has-text-white.is-size-4 {
+    position: relative;
+    left: 166px;
+  }
+  .footer {
+    position: relative;
+    top: 250px;
+  }
+}
+
+@media screen and (min-width: 1280px) and (min-height: 900px) {
+  form.register {
+    position: relative;
+    top: 200px;
+    margin-bottom: 200px;
+  }
+}
 
 
 
