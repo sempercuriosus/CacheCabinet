@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/client';
 import colorPalette from '../utils/colorPalette';
 import DeleteItem from './DeleteItem';
 import { GET_COLLECTION } from '../utils/queries';
+import '../../src/assets/home.css';
 
 function Item() {
   const navigate = useNavigate();
@@ -111,7 +112,7 @@ function Item() {
 
   // Header Card Style
   const headerCardStyle = {
-    maxWidth: '400px',
+    maxWidth: '250px',
     border: 'solid black thin',
   };
 
@@ -127,7 +128,7 @@ function Item() {
 
   // Footer Style
   const deleteButtonStyle = {
-    backgroundColor: colorPalette.DUSTYROSE,
+    backgroundColor: colorPalette.IVORY,
     border: 'solid black thin',
     borderRadius: '6px',
     color: 'black',

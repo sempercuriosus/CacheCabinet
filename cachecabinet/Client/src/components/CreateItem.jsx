@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_ITEM } from '../utils/mutations';
 import { useNavigate } from 'react-router-dom';
 
+
 const CreateItem = ({ onAddItem }) => {
   // State variables for the form fields
   const [name, setName] = useState('');

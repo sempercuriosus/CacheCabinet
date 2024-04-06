@@ -34,6 +34,7 @@ img.rightdesign {
   height: 338.07px;
 }
 
+
 footer.footer {
   padding: 0px 24px 20px;
 }
@@ -106,6 +107,10 @@ footer.footer {
   img.leftdesign {
     display: none;
   }
+  .container.box.has-text-centered {
+    position: relative;
+    right: 35px;
+  }
 }
 
 @media screen and (min-width: 1024px) and (min-height: 700px) {
@@ -161,7 +166,7 @@ footer.footer {
   }
   .footer {
     position: relative;
-    top: 300px;
+    top: 200px;
   }
   a.has-text-white.is-size-4 {
     position: relative;
@@ -218,7 +223,7 @@ footer.footer {
   }
   .footer {
     position: relative;
-    top: 200px;
+    top: 20px;
   }
 }
 
@@ -254,9 +259,13 @@ footer.footer {
     position: relative;
     left: 30px;
   }
+  img.rightdesign {
+    position: relative;
+    left: 60px;
+  }
   img.leftdesign {
     position: relative;
-    left: 190px;
+    left: 200px;
   }
 }
 
