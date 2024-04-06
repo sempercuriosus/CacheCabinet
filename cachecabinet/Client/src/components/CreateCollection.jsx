@@ -37,7 +37,7 @@ const CreateCollection = ({ onAddCollection }) => {
 
   // Header Card Style
   const headerCardStyle = {
-    maxWidth: '400px',
+    maxWidth: '250px',
     border: 'solid black thin',
     marginTop: '10px'
   };

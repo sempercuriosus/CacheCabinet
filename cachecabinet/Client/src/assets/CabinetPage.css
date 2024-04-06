@@ -14,10 +14,26 @@ body {
     font-size: 50px;
   }
 
-  .card-footer-item.button:hover {
-    filter: brightness(70%);
+  footer.card-footer {
+    justify-content: center;
   }
-  
+
+  .card-footer-item.button:hover {
+    filter: brightness(80%);
+  }
+
+  .card-footer-item.button {
+    padding: 25px;
+  }
+
+  .card-footer-item {
+    max-width: 150px;
+  }
+
+  .column.is-half-desktop:hover {
+    filter: saturate(3);
+  }
+
   @media screen and (max-width: 400px) {
     .is-half-desktop {
       margin-right: 0.7em;

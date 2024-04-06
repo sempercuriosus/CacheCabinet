@@ -131,8 +131,8 @@ const Collection = ({ userCollections }) => {
                   backgroundColor: colorPalette.BABYBLUE,
                   color: 'black',
                   border: 'thin black solid',
-                  marginLeft: '0.55rem',
-                  marginRight: '0.55rem',
+                  marginLeft: '0.60rem',
+                  marginRight: '0.60rem',
                 }}
                 onClick={() => handleViewClick(collection._id)}>
                 View
@@ -144,8 +144,8 @@ const Collection = ({ userCollections }) => {
                   backgroundColor: colorPalette.SAGE,
                   color: 'black',
                   border: 'thin black solid',
-                  marginLeft: '0.55rem',
-                  marginRight: '0.55rem',
+                  marginLeft: '0.60rem',
+                  marginRight: '0.60rem',
                 }}
                 onClick={() => handleEditClick(collection)}>
                 Edit
@@ -157,8 +157,8 @@ const Collection = ({ userCollections }) => {
                   backgroundColor: colorPalette.IVORY,
                   color: 'black',
                   border: 'thin black solid',
-                  marginLeft: '0.55rem',
-                  marginRight: '0.55rem',
+                  marginLeft: '0.60rem',
+                  marginRight: '0.60rem',
                 }}
                 onClick={() => handleDeleteClick(collection._id)}>
                 Delete
