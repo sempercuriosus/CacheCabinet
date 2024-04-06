@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import '../../src/assets/item.css';
+import '../../src/assets/CabinetPage.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import colorPalette from '../utils/colorPalette';
