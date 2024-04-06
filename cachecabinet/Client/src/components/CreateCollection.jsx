@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_COLLECTION } from '../utils/mutations';
 import colorPalette from '../utils/colorPalette';
+import '../../src/assets/home.css';
 
 const CreateCollection = ({ onAddCollection }) => {
   const [showForm, setShowForm] = useState(false);
